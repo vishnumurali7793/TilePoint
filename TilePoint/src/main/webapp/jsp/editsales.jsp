@@ -76,6 +76,9 @@
 	function deleteSales(purid) {
 		location.href = "deleteSales?salesDetails.salesDetailsId=" + purid;
 	}
+	function goback(){
+		location.href ="goback";
+		}
 </script>
 <style type="text/css">
 body {
@@ -145,10 +148,15 @@ th {
 	<div class="container-fluid">
 		<div class="row"></div>
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-6">
 				<s:hidden name="salesBaseBean.salesId" />
 				<button type="button" class="btn btn-primary" data-toggle="modal"
 					onclick="getProductList()">Add products</button>
+			</div>
+			<div class="col-md-6">
+				<s:hidden name="salesBaseBean.salesId" />
+				<button type="button" class="btn btn-primary" data-toggle="modal" allign="right"
+					onclick="goback()">BACK</button>
 			</div>
 		</div>
 

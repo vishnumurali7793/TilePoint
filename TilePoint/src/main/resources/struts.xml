@@ -96,7 +96,13 @@
 			<result name="success">/jsp/customer.jsp</result>
 		</action>
 		<!-- sales page finished -->
+		
 		<!-- ********sales page************* -->
+		<action name="goback" class="com.tilepoint.SalesAction"
+			method="goToSales">
+			<result name="success">/jsp/sales.jsp</result>
+		</action>
+		
 		<action name="goToSales" class="com.tilepoint.SalesAction"
 			method="goToSales">
 			<result name="success">/jsp/sales.jsp</result>
