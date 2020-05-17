@@ -189,6 +189,7 @@ td, th {
 													<td><s:property value="purchaseDate" /></td>
 													<td>
 													<a href="editsalesdetails?salesBaseBean.salesId=<s:property value="salesId" />" src="tessaract/src/main/webapp/images/edit.png">EDIT</a>
+													<button class="btn-xs btn-warning"> <span class="glyphicon glyphicon-print" /></button>
 													</td>
 													
 
@@ -215,7 +216,7 @@ td, th {
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
-					</button>
+					
 					<h4 class="modal-title" align="center">
 						<span style="color: white;" class="" id="modalTitle"></span>
 					</h4>
