@@ -99,6 +99,7 @@ td, th {
 						<li class="active"><a href="goToCategory">Category</a></li>
 						<li><a href="goToProduct">Product</a></li>
 						<li><a href="goToCustomer">Customer</a></li>
+						<li><a href="goToSales">Sales</a></li>
 						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
 				<li><a href="#">Page 2</a></li>

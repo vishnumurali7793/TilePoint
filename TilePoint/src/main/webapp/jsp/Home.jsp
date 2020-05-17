@@ -37,16 +37,11 @@ body {
 						<li><a href="goToCategory">Category</a></li>
 						<li><a href="goToProduct">Product</a></li>
 						<li><a href="goToCustomer">Customer</a></li>
+						<li><a href="goToSales">Sales</a></li>
 						<li><a href="#">Page 1-2</a></li>
 						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Transanctions <span
-						class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="goToPurchase">Purchase</a></li>
-
-					</ul></li>
+				
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<%-- <li><a href="#"><span class="glyphicon glyphicon-user"></span>
