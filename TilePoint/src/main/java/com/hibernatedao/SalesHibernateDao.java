@@ -22,7 +22,7 @@ public class SalesHibernateDao {
 		session.beginTransaction();
 
 		try {
-			return session.createQuery("from SalesBaseBean").list();
+			return session.createQuery("from SalesBaseBean as bk order by bk.salesId desc").list();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
