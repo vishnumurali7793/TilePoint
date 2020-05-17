@@ -2,7 +2,6 @@ package com.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,11 +16,11 @@ public class SalesDetailsBean {
 	@Column(name = "sales_details_id")
 	private Integer salesDetailsId;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name="salesId")
 	private SalesBaseBean salesId;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name="productId")
 	private ProductBean productId;
 	

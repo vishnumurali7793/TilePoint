@@ -144,16 +144,16 @@
 			</result>
 		</action>
 
-		<action name="deleteSales" class="com.tilepoint.SalesAction"
-			method="deleteSales">
+		<action name="savesaleDetails"
+			class="com.tilepoint.SalesAction" method="savesaleDetails">
 			<result name="success" type="redirectAction">
 				<param name="actionName">editsalesdetails</param>
 				<param name="salesBaseBean.salesId">${salesBaseBean.salesId}</param>
 			</result>
 		</action>
 
-		<action name="savesaleDetails"
-			class="com.tilepoint.SalesAction" method="savesaleDetails">
+		<action name="removeProductFromSales"
+			class="com.tilepoint.SalesAction" method="removeProductFromSales">
 			<result name="success" type="redirectAction">
 				<param name="actionName">editsalesdetails</param>
 				<param name="salesBaseBean.salesId">${salesBaseBean.salesId}</param>

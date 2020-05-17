@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html>
@@ -47,34 +47,31 @@
 		var quantity = document.getElementById('quantity' + index).value;
 		var rate = document.getElementById('rate' + index).value;
 		var netamt = parseFloat(quantity * rate);
-		document.getElementById('totalamount' + index).value=Math.round(netamt);
+		document.getElementById('totalamount' + index).value = Math
+				.round(netamt);
 		totamt += Math.round(netamt);
-		alert(totamt);
 		netamttot();
 	}
 
 	function netamttot() {
 		document.getElementById('grossamount').value = totamt;
 		var CGST = parseFloat(document.getElementById('cgst').value);
-		var SGST =parseFloat(document.getElementById('sgst').value);
+		var SGST = parseFloat(document.getElementById('sgst').value);
 		var IGST = parseFloat(document.getElementById('igst').value);
-        var taxamt=0;
-		if(CGST >0 ||  SGST>0){
-			taxamt=(totamt*(parseFloat(CGST+SGST)))/100;
-			}else{
-				taxamt=(totamt*IGST)/100;
-				}
-		document.getElementById('ccgst').innerHTML =taxamt/2;
-		document.getElementById('ssgst').innerHTML =taxamt/2;
-		if(IGST >0){
-		document.getElementById('iigst').innerHTML =taxamt;
-		}else{
-			document.getElementById('iigst').innerHTML =0;
-			}
-		document.getElementById('netamount').value = totamt-taxamt;
-	}
-	function deleteSales(purid) {
-		location.href = "deleteSales?salesDetails.salesDetailsId=" + purid;
+		var taxamt = 0;
+		if (CGST > 0 || SGST > 0) {
+			taxamt = (totamt * (parseFloat(CGST + SGST))) / 100;
+		} else {
+			taxamt = (totamt * IGST) / 100;
+		}
+		document.getElementById('ccgst').innerHTML = taxamt / 2;
+		document.getElementById('ssgst').innerHTML = taxamt / 2;
+		if (IGST > 0) {
+			document.getElementById('iigst').innerHTML = taxamt;
+		} else {
+			document.getElementById('iigst').innerHTML = 0;
+		}
+		document.getElementById('netamount').value = totamt - taxamt;
 	}
 	function goback(){
 		location.href ="goback";
@@ -119,31 +116,31 @@ th {
 }
 </style>
 <body>
-<nav class="navbar navbar-inverse bar">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="goToHome">Tesseract</a>
-		</div>
-		<ul class="nav navbar-nav">
-			<li><a href="goToHome">Home</a></li>
-			<li class="dropdown"><a class="dropdown-toggle"
-				data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li><a href="goToCategory">Category</a></li>
-					<li><a href="goToProduct">Product</a></li>
-					<li  class="active"><a href="goToSales">Sales</a></li>
-					<li><a href="#">Page 1-2</a></li>
-					<li><a href="#">Page 1-3</a></li>
-				</ul></li>
-			<li><a href="#">Page 2</a></li>
-		</ul>
-		<ul class="nav navbar-nav navbar-right">
-			<%-- <li><a href="#"><span class="glyphicon glyphicon-user"></span>
+	<nav class="navbar navbar-inverse bar">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="goToHome">Tesseract</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="goToHome">Home</a></li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="goToCategory">Category</a></li>
+						<li><a href="goToProduct">Product</a></li>
+						<li class="active"><a href="goToSales">Sales</a></li>
+						<li><a href="#">Page 1-2</a></li>
+						<li><a href="#">Page 1-3</a></li>
+					</ul></li>
+				<li><a href="#">Page 2</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<%-- <li><a href="#"><span class="glyphicon glyphicon-user"></span>
 						Sign Up</a></li> --%>
-			<li><a href="logout"><span
-					class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-		</ul>
-	</div>
+				<li><a href="logout"><span
+						class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+			</ul>
+		</div>
 	</nav>
 	<div class="container-fluid">
 		<div class="row"></div>
@@ -163,7 +160,7 @@ th {
 		<div class="row">
 			<form action="savesaleDetails">
 				<s:hidden name="salesBaseBean.salesId" />
-				<s:hidden name="salesAmountBean.salesAmountId" /> 
+				<s:hidden name="salesAmountBean.salesAmountId" />
 				<div class="col-xs-12">
 
 					<table class="table">
@@ -185,39 +182,39 @@ th {
 										<td><s:property value="#row.count" /></td>
 										<td><s:property value="productId.category.categoryName" /></br>
 											<s:property value="productId.productName" /></td>
-											
+
 										<td><input class="form-control" type="text"
 											name="salDetList[<s:property value="#row.index"/>].hsnCode"
 											value='<s:property value="hsnCode"/>' /></td>
-											
+
 										<td><input class="form-control" type="text"
 											name="salDetList[<s:property value="#row.index"/>].quantity"
 											id="quantity<s:property value="#row.index" />"
 											value="<s:property value="quantity"/>"
 											onchange="calculateamount('<s:property value="#row.index" />')" /></td>
-											
+
 										<td><input class="form-control" type="text"
 											name="salDetList[<s:property value="#row.index"/>].rate"
 											value="<s:property value="rate"/>"
 											id="rate<s:property value="#row.index" />"
 											onchange="calculateamount('<s:property value="#row.index" />')" /></td>
-											
+
 										<td><input class="form-control" type="text"
 											name="salDetList[<s:property value="#row.index"/>].totalamount"
 											value="<s:property value="totalamount"/>"
 											id="totalamount<s:property value="#row.index" />"
 											onchange="calculateamount('<s:property value="#row.index" />')" /></td>
-											
-										<td><button class="btn-xs btn-link"
-															onclick="deleteSales('<s:property value="salesDetailsId"/>')">[DELETE]</button></td>
+										<td><a
+											href="removeProductFromSales?salesDetails.salesDetailsId=<s:property value="salesDetailsId" />
+											&salesBaseBean.salesId=<s:property value="salesBaseBean.salesId" />">DELETE</a></td>
 									</tr>
 								</s:iterator>
 							</s:if>
 							<s:else>no product added</s:else>
 							<tr>
 								<td colspan="5" align="right"><label>Net amount</label></td>
-								<td colspan="1"><input class="form-control" id="grossamount"
-									type="text" name="salesAmountBean.grossamount"
+								<td colspan="1"><input class="form-control"
+									id="grossamount" type="text" name="salesAmountBean.grossamount"
 									value="<s:property value="salesAmountBean.grossamount"/>" /></td>
 							</tr>
 							<tr>
@@ -226,7 +223,7 @@ th {
 									type="text" name="salesAmountBean.cgst"
 									value="<s:property value="salesAmountBean.cgst"/>"
 									onchange="netamttot()" /></td>
-									<td colspan="1" align="left"><label id="ccgst"></label></td>
+								<td colspan="1" align="left"><label id="ccgst"></label></td>
 							</tr>
 							<tr>
 								<td colspan="5" align="right"><label>Sgst</label></td>
@@ -234,7 +231,7 @@ th {
 									type="text" name="salesAmountBean.sgst"
 									value="<s:property value="salesAmountBean.sgst"/>"
 									onchange="netamttot()" /></td>
-									<td colspan="1" align="left"><label id="ssgst"></label></td>
+								<td colspan="1" align="left"><label id="ssgst"></label></td>
 							</tr>
 							<tr>
 								<td colspan="5" align="right"><label>Igst</label></td>
@@ -242,7 +239,7 @@ th {
 									type="text" name="salesAmountBean.igst"
 									value="<s:property value="salesAmountBean.igst"/>"
 									onchange="netamttot()" /></td>
-									<td colspan="1" align="left"><label id="iigst"></label></td>
+								<td colspan="1" align="left"><label id="iigst"></label></td>
 							</tr>
 							<tr>
 								<td colspan="5" align="right"><label>Total Net
@@ -252,19 +249,22 @@ th {
 									value="<s:property value="salesAmountBean.netamount"/>" /></td>
 							</tr>
 							<div class="row">
-							<tr>
-								<td colspan="4" align="right"><label>Vehicle details
-										</label></td>
-								<td colspan="1"><input class="form-control" id="vehicleno"
-									type="text" name="salesAmountBean.vehicleno" placeholder="vehicle no"
-									value="<s:property value="salesAmountBean.vehicleno"/>" /></td>
-									
-								<td colspan="1"><input class="form-control" id="vehicleamount"
-									type="text" name="salesAmountBean.vehicleamount" placeholder="vehicle amount"
-									value="<s:property value="salesAmountBean.vehicleamount"/>" /></td>
-							</tr>
+								<tr>
+									<td colspan="4" align="right"><label>Vehicle
+											details </label></td>
+									<td colspan="1"><input class="form-control" id="vehicleno"
+										type="text" name="salesAmountBean.vehicleno"
+										placeholder="vehicle no"
+										value="<s:property value="salesAmountBean.vehicleno"/>" /></td>
+
+									<td colspan="1"><input class="form-control"
+										id="vehicleamount" type="text"
+										name="salesAmountBean.vehicleamount"
+										placeholder="vehicle amount"
+										value="<s:property value="salesAmountBean.vehicleamount"/>" /></td>
+								</tr>
 							</div>
-							
+
 						</tbody>
 
 
