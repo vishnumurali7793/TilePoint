@@ -15,6 +15,146 @@
 		<action name="redirect" class="com.tilepoint.TestAction">
 			<result name="success">/jsp/login.jsp</result>
 		</action>
+		<action name="login" class="com.tilepoint.LoginAction"
+			method="authenticateUser">
+			<result name="success">/jsp/Home.jsp</result>
+			<result name="input">/jsp/login.jsp</result>
+		</action>
+
+		<action name="goToHome" class="com.tilepoint.MasterAction"
+			method="goToHome">
+			<result name="success">/jsp/Home.jsp</result>
+		</action>
+
+		<action name="logout" class="com.tilepoint.LoginAction"
+			method="logoutUser">
+			<result name="success">/jsp/login.jsp</result>
+		</action>
+		<!-- ********category page************* -->
+		<action name="goToCategory"
+			class="com.tilepoint.CategoryAction" method="goToCategory">
+			<result name="success">/jsp/category.jsp</result>
+		</action>
+
+		<action name="saveCategory" class="com.tilepoint.MasterAction"
+			method="saveCategory">
+			<result name="success" type="redirectAction">goToCategory</result>
+			<result name="input" type="redirectAction">redir</result>
+		</action>
+
+		<action name="deleteCategory"
+			class="com.tilepoint.MasterAction" method="deleteCategory">
+			<result name="success" type="redirectAction">goToCategory</result>
+		</action>
+
+		<action name="editCategory" class="com.tilepoint.MasterAction"
+			method="editCategory">
+			<result name="success">/jsp/category.jsp</result>
+		</action>
+		<!-- category page finished -->
+		<!-- ********product page************* -->
+		<action name="goToProduct" class="com.tilepoint.ProductAction"
+			method="goToProduct">
+			<result name="success">/jsp/product.jsp</result>
+		</action>
+
+		<action name="saveProduct" class="com.tilepoint.MasterAction"
+			method="saveProduct">
+			<result name="success" type="redirectAction">goToProduct</result>
+			<result name="input" type="redirectAction">redir</result>
+		</action>
+
+		<action name="deleteProduct" class="com.tilepoint.MasterAction"
+			method="deleteProduct">
+			<result name="success" type="redirectAction">goToProduct</result>
+		</action>
+
+		<action name="editProduct" class="com.tilepoint.MasterAction"
+			method="editProduct">
+			<result name="success">/jsp/product.jsp</result>
+		</action>
+		<!-- product page finished -->
+		<!-- ********customer page************* -->
+		<action name="goToCustomer"
+			class="com.tilepoint.CustomerAction" method="goToCustomer">
+			<result name="success">/jsp/customer.jsp</result>
+		</action>
+
+		<action name="saveCustomer" class="com.tilepoint.MasterAction"
+			method="saveCustomer">
+			<result name="success" type="redirectAction">goToCustomer</result>
+			<result name="input" type="redirectAction">redir</result>
+		</action>
+
+		<action name="deleteCustomer"
+			class="com.tilepoint.MasterAction" method="deleteCustomer">
+			<result name="success" type="redirectAction">goToCustomer</result>
+		</action>
+
+		<action name="editCustomer" class="com.tilepoint.MasterAction"
+			method="editCustomer">
+			<result name="success">/jsp/customer.jsp</result>
+		</action>
+		<!-- sales page finished -->
+		<!-- ********sales page************* -->
+		<action name="goToSales" class="com.tilepoint.SalesAction"
+			method="goToSales">
+			<result name="success">/jsp/sales.jsp</result>
+		</action>
+
+		<action name="getmodalForSales"
+			class="com.tilepoint.SalesAction" method="getmodalForSales">
+			<result name="success">/jsp/addnewsales.jsp</result>
+		</action>
+
+		<action name="getCusDetails" class="com.tilepoint.SalesAction"
+			method="getCusDetails">
+			<result type="json">
+				<param name="root">cusList</param>
+			</result>
+		</action>
+
+		<action name="saveSalesBase" class="com.tilepoint.SalesAction"
+			method="saveSalesBase">
+			<result name="success" type="redirectAction">goToSales</result>
+			<result name="input" type="redirectAction">redir</result>
+		</action>
+
+		<action name="editsalesdetails"
+			class="com.tilepoint.SalesAction" method="editsalesdetails">
+			<result name="success">/jsp/editsales.jsp</result>
+		</action>
+
+		<action name="getProductListForSales"
+			class="com.tilepoint.SalesAction" method="getProductListForSales">
+			<result name="success">/jsp/productListForSales.jsp</result>
+		</action>
+
+		<action name="savesalesform" class="com.tilepoint.SalesAction"
+			method="savesalesform">
+			<result name="success" type="redirectAction">
+				<param name="actionName">editsalesdetails</param>
+				<param name="salesBaseBean.salesId">${salesBaseBean.salesId}</param>
+			</result>
+		</action>
+
+		<action name="deleteSales" class="com.tilepoint.SalesAction"
+			method="deleteSales">
+			<result name="success" type="redirectAction">
+				<param name="actionName">editsalesdetails</param>
+				<param name="salesBaseBean.salesId">${salesBaseBean.salesId}</param>
+			</result>
+		</action>
+
+		<action name="savesaleDetails"
+			class="com.tilepoint.SalesAction" method="savesaleDetails">
+			<result name="success" type="redirectAction">
+				<param name="actionName">editsalesdetails</param>
+				<param name="salesBaseBean.salesId">${salesBaseBean.salesId}</param>
+			</result>
+		</action>
+		<!-- sales page finished -->
 	</package>
+
 
 </struts>

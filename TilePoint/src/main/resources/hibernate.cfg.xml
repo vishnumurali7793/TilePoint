@@ -16,7 +16,7 @@
         <!-- Database connection settings -->
 <!--         <property name="connection.driver_class">com.mysql.jdbc.Driver</property> for older versions -->
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost/tesseract</property>
+        <property name="connection.url">jdbc:mysql://localhost/tilespoint</property>
         <property name="connection.username">root</property>
         <property name="connection.password">pass</property>
 
@@ -40,7 +40,13 @@
 <!--         <mapping class="com.happy.entities.AccountHeadBean"/> -->
 <!--         <mapping class="com.happy.entities.SalesBean"/> -->
 <!--         <mapping class="com.happy.entities.SalesProductMappingBean"/> -->
-
+             <mapping class="com.entities.LoginBean"/>
+             <mapping class="com.entities.CategoryBean"/>
+             <mapping class="com.entities.ProductBean"/>
+             <mapping class="com.entities.CustomerBean"/>
+             <mapping class="com.entities.SalesBaseBean"/>
+             <mapping class="com.entities.SalesDetailsBean"/>
+             <mapping class="com.entities.SalesAmountBean"/>
     </session-factory>
 
 </hibernate-configuration>
