@@ -103,6 +103,9 @@ td, th {
 		$('#productModal').modal('show');
 		return false;
 	}
+	function generatereport(salid){
+		location.href = "generateSalesReport?salesBaseBean.salesId=" + salid;
+		}
 </script>
 <body>
 <nav class="navbar navbar-inverse bar">
@@ -189,7 +192,7 @@ td, th {
 													<td><s:property value="purchaseDate" /></td>
 													<td>
 													<a href="editsalesdetails?salesBaseBean.salesId=<s:property value="salesId" />" src="tessaract/src/main/webapp/images/edit.png">EDIT</a>
-													<button class="btn-xs btn-warning"> <span class="glyphicon glyphicon-print" /></button>
+													<button class="btn-xs btn-warning"> <span class="glyphicon glyphicon-print" onclick="generatereport('<s:property value="salesId" />')"/></button>
 													</td>
 													
 

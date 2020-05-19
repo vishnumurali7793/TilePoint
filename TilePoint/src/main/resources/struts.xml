@@ -159,6 +159,15 @@
 				<param name="salesBaseBean.salesId">${salesBaseBean.salesId}</param>
 			</result>
 		</action>
+		
+		<action name="generateSalesReport"
+			class="com.report.ReportAction" method="generateSalesReport">
+			<result name="success" >
+			<!-- <result name="success" type="stream"> -->
+			<param name="salesBaseBean.salesId">${salesBaseBean.salesId}</param>
+			<!-- <param name="bufferSize">1024</param> -->
+			</result>
+		</action>
 		<!-- sales page finished -->
 	</package>
 

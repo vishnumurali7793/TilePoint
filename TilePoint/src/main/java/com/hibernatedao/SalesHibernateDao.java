@@ -190,4 +190,22 @@ public class SalesHibernateDao {
 			sessionFactory.close();
 		}
 	}
+	
+	public SalesBaseBean getsalesbase(Integer salesid) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		try {
+			return (SalesBaseBean) session.createQuery("from SalesBaseBean where salesId=:salesid")
+					.setParameter("salesid", salesid).uniqueResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+			sessionFactory.close();
+		}
+
+	}
 }
