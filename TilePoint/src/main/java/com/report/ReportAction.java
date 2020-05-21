@@ -3,19 +3,13 @@ package com.report;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.ServletContext;
-import javax.swing.plaf.basic.BasicBorders.MarginBorder;
 
 import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.components.Text;
-import org.hibernate.mapping.Table;
 
 import com.entities.SalesAmountBean;
 import com.entities.SalesBaseBean;
@@ -34,7 +28,6 @@ import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.text.pdf.Pfm2afm;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ReportAction extends ActionSupport {
@@ -44,10 +37,10 @@ public class ReportAction extends ActionSupport {
 	private List<SalesDetailsBean> saldetList;
 	private SalesAmountBean samtbean;
 	private SalesHibernateDao salesHibernateDao = new SalesHibernateDao();
-	String despath = "./WEB-INF/downloads/pdf/";
 	String documentContentType;
 	String documentFormat;
 	String fileName;
+	FileInputStream fileInputStream;
 
 	public String getFileName() {
 		return fileName;
@@ -64,7 +57,6 @@ public class ReportAction extends ActionSupport {
 		File destination;
 		ByteArrayOutputStream baos = null;
 		FileOutputStream fos = null;
-		FileInputStream fileInputStream;
 		String temp = "";
 
 		if (salesBaseBean.getSalesId() != null) {
@@ -92,8 +84,6 @@ public class ReportAction extends ActionSupport {
 				document.open();
 				document.newPage();
 				document.setMargins(5, 5, 5, 5);
-				
-				Rectangle rectangle;
 				
 				Chunk chunk;
 				PdfPTable table;
@@ -144,76 +134,6 @@ public class ReportAction extends ActionSupport {
 				paragraph.add(chunk);
 				document.add(paragraph);
 				
-				
-//				paragraph = new Paragraph();
-//				temp = "Kurumkutty, Parassala P.O.-695122";
-//				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
-//				paragraph.setAlignment(Element.ALIGN_CENTER);
-////				paragraph.setSpacingBefore(10);
-//				paragraph.add(chunk);
-//				document.add(paragraph);
-//				new Phrase("#", new Font(FontFamily.HELVETICA, 10, Element.ALIGN_CENTER))
-				
-//				paragraph = new Paragraph();
-//				temp = "GSTIN : 32BRVPR2150KIZE";
-//				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 10, Font.NORMAL));
-//				paragraph.setAlignment(Element.ALIGN_LEFT);
-//				paragraph.setSpacingBefore(12);
-//				paragraph.add(chunk);
-//				document.add(paragraph);
-//				
-//				paragraph = new Paragraph();
-//				temp = "Cell : 6383087919 \n8089004800 \n9486421383";
-//				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 10, Font.NORMAL));
-//				paragraph.setAlignment(Element.ALIGN_RIGHT);
-//				paragraph.setSpacingBefore(12);
-//				paragraph.add(chunk);
-//				document.add(paragraph);
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-//				table = new PdfPTable(3);
-//				table.setWidths(new int[] {40,25,35 });
-//				table.setTotalWidth(100);
-//				
-//				cell = new PdfPCell(new Paragraph("GSTIN:32BRVPR2150K1ZC"));
-//				//cell.setColspan(1);
-//				cell.setBorder(0);
-//				table.addCell(cell);
-//
-//				cell = new PdfPCell(new Paragraph("TAX INVOICE"));
-//				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-//				//cell.setColspan(2);
-//				cell.setBorder(0);
-//				table.addCell(cell);
-//
-//				cell = new PdfPCell(
-//						new Paragraph("CONTACT:6383087919" + "\n" + "                  8089004800" + "\n" + "                  9486421383"));
-//				//cell.setColspan(3);
-//				cell.setBorder(0);
-//				table.addCell(cell);
-//
-//				document.add(table);
 				document.close();
 				fos = new FileOutputStream(destinationPath);
 				fos.write(baos.toByteArray());
