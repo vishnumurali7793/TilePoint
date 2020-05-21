@@ -33,6 +33,7 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.Pfm2afm;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ReportAction extends ActionSupport {
@@ -97,29 +98,119 @@ public class ReportAction extends ActionSupport {
 				Phrase phrase;
 				
 				Font font=new Font(FontFamily.HELVETICA, 8);
-				Paragraph paragraph = new Paragraph();
-				table = new PdfPTable(3);
-				table.setWidths(new int[] {40,25,35 });
-				table.setTotalWidth(100);
+				Paragraph paragraph;
 				
-				cell = new PdfPCell(new Paragraph("GSTIN:32BRVPR2150K1ZC"));
-				//cell.setColspan(1);
+				paragraph = new Paragraph();
+				temp = "TAX INVOICE";
+				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 12, Font.UNDERLINE));
+				paragraph.setAlignment(Element.ALIGN_CENTER);
+				paragraph.setSpacingBefore(10);
+				paragraph.add(chunk);
+				document.add(paragraph);
+				
+				table = new PdfPTable(3);
+				table.setWidths(new int[] {30, 50, 20});
+				table.setWidthPercentage(100);
+				
+				cell = new PdfPCell(new Phrase("GSTIN : 32BRVPR2150KIZE", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
+				cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+				cell.setPaddingTop(15);
 				cell.setBorder(0);
 				table.addCell(cell);
-
-				cell = new PdfPCell(new Paragraph("TAX INVOICE"));
-				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				//cell.setColspan(2);
+				
+				phrase = new Phrase(new Chunk("TILE POINT", new Font(FontFamily.TIMES_ROMAN, 25, Element.ALIGN_CENTER)));
+				cell.addElement(phrase);
+				phrase = new Phrase(new Chunk("Kurumkutty, Parassala P.O.-695122", new Font(FontFamily.TIMES_ROMAN, 10, Element.ALIGN_LEFT)));
+				cell.addElement(phrase);
+				cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+				cell.setPaddingLeft(30);
 				cell.setBorder(0);
 				table.addCell(cell);
-
-				cell = new PdfPCell(
-						new Paragraph("CONTACT:6383087919" + "\n" + "                  8089004800" + "\n" + "                  9486421383"));
-				//cell.setColspan(3);
+				
+				cell = new PdfPCell(new Phrase("Cell : 6383087919 \n8089004800 \n9486421383", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
+				cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+				cell.setPaddingTop(15);
 				cell.setBorder(0);
 				table.addCell(cell);
-
 				document.add(table);
+				
+				paragraph = new Paragraph();
+				temp = "Date : ..............";
+				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
+				paragraph.setAlignment(Element.ALIGN_RIGHT);
+				paragraph.add(chunk);
+				document.add(paragraph);
+				
+				
+//				paragraph = new Paragraph();
+//				temp = "Kurumkutty, Parassala P.O.-695122";
+//				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
+//				paragraph.setAlignment(Element.ALIGN_CENTER);
+////				paragraph.setSpacingBefore(10);
+//				paragraph.add(chunk);
+//				document.add(paragraph);
+//				new Phrase("#", new Font(FontFamily.HELVETICA, 10, Element.ALIGN_CENTER))
+				
+//				paragraph = new Paragraph();
+//				temp = "GSTIN : 32BRVPR2150KIZE";
+//				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 10, Font.NORMAL));
+//				paragraph.setAlignment(Element.ALIGN_LEFT);
+//				paragraph.setSpacingBefore(12);
+//				paragraph.add(chunk);
+//				document.add(paragraph);
+//				
+//				paragraph = new Paragraph();
+//				temp = "Cell : 6383087919 \n8089004800 \n9486421383";
+//				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 10, Font.NORMAL));
+//				paragraph.setAlignment(Element.ALIGN_RIGHT);
+//				paragraph.setSpacingBefore(12);
+//				paragraph.add(chunk);
+//				document.add(paragraph);
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+//				table = new PdfPTable(3);
+//				table.setWidths(new int[] {40,25,35 });
+//				table.setTotalWidth(100);
+//				
+//				cell = new PdfPCell(new Paragraph("GSTIN:32BRVPR2150K1ZC"));
+//				//cell.setColspan(1);
+//				cell.setBorder(0);
+//				table.addCell(cell);
+//
+//				cell = new PdfPCell(new Paragraph("TAX INVOICE"));
+//				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+//				//cell.setColspan(2);
+//				cell.setBorder(0);
+//				table.addCell(cell);
+//
+//				cell = new PdfPCell(
+//						new Paragraph("CONTACT:6383087919" + "\n" + "                  8089004800" + "\n" + "                  9486421383"));
+//				//cell.setColspan(3);
+//				cell.setBorder(0);
+//				table.addCell(cell);
+//
+//				document.add(table);
 				document.close();
 				fos = new FileOutputStream(destinationPath);
 				fos.write(baos.toByteArray());
