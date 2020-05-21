@@ -30,6 +30,7 @@ import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -91,6 +92,8 @@ public class ReportAction extends ActionSupport {
 				document.open();
 				document.newPage();
 				document.setMargins(5, 5, 5, 5);
+				
+				Rectangle rectangle;
 				
 				Chunk chunk;
 				PdfPTable table;
