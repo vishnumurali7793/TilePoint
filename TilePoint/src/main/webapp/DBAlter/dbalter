@@ -100,4 +100,14 @@ CREATE TABLE `tilespoint`.`salesBase` (
   `grossamount` DOUBLE NULL,
   `netamount` DOUBLE NULL,
   PRIMARY KEY (`sales_amount_id`));
+  
+  ALTER TABLE `tilespoint`.`salesamount` 
+ADD COLUMN `cgstamt` DOUBLE NULL AFTER `netamount`,
+ADD COLUMN `sgstamt` DOUBLE NULL AFTER `cgstamt`,
+ADD COLUMN `igstamt` DOUBLE NULL AFTER `sgstamt`,
+ADD COLUMN `loadingcharge` DOUBLE NULL AFTER `igstamt`;
+ 
+ ALTER TABLE `tilespoint`.`salesdetails` 
+CHANGE COLUMN `hsn_code` `hsn_code` VARCHAR(45) NULL DEFAULT NULL ;
+  
     

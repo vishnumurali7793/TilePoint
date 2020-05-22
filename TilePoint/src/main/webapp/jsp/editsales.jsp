@@ -223,7 +223,10 @@ th {
 									type="text" name="salesAmountBean.cgst"
 									value="<s:property value="salesAmountBean.cgst"/>"
 									onchange="netamttot()" /></td>
-								<td colspan="1" align="left"><label id="ccgst"></label></td>
+								<td colspan="1" align="left"><label id="ccgst">&#x20B9;
+								<input class="form-control" id="igst" readonly="false"
+									type="text" name="salesAmountBean.cgstamt" style="width:10px"
+									value="<s:property value="salesAmountBean.cgstamt"/>"/></label></td>
 							</tr>
 							<tr>
 								<td colspan="5" align="right"><label>Sgst</label></td>
@@ -231,7 +234,10 @@ th {
 									type="text" name="salesAmountBean.sgst"
 									value="<s:property value="salesAmountBean.sgst"/>"
 									onchange="netamttot()" /></td>
-								<td colspan="1" align="left"><label id="ssgst"></label></td>
+								<td colspan="1" align="left"><label id="ssgst">&#x20B9;
+								<input class="form-control" id="igst" readonly="false"
+									type="text" name="salesAmountBean.sgstamt" style="width:10px"
+									value="<s:property value="salesAmountBean.sgstamt"/>"/></label></td>
 							</tr>
 							<tr>
 								<td colspan="5" align="right"><label>Igst</label></td>
@@ -239,16 +245,15 @@ th {
 									type="text" name="salesAmountBean.igst"
 									value="<s:property value="salesAmountBean.igst"/>"
 									onchange="netamttot()" /></td>
-								<td colspan="1" align="left"><label id="iigst"></label></td>
+								<td colspan="1" align="left">
+								<label id="iigst">&#x20B9;
+								<input class="form-control" id="igst" readonly="false"
+									type="text" name="salesAmountBean.igstamt" style="width:10px"
+									value="<s:property value="salesAmountBean.igstamt"/>"/>
+								</label></td>
 							</tr>
-							<tr>
-								<td colspan="5" align="right"><label>Total Net
-										amount</label></td>
-								<td colspan="1"><input class="form-control" id="netamount"
-									type="text" name="salesAmountBean.netamount"
-									value="<s:property value="salesAmountBean.netamount"/>" /></td>
-							</tr>
-							<div class="row">
+							
+						<!-- 	<div class="row"> -->
 								<tr>
 									<td colspan="4" align="right"><label>Vehicle
 											details </label></td>
@@ -263,7 +268,21 @@ th {
 										placeholder="vehicle amount"
 										value="<s:property value="salesAmountBean.vehicleamount"/>" /></td>
 								</tr>
-							</div>
+								<tr>
+									<td colspan="5" align="right"><label>Loading charge </label></td>
+									<td colspan="1"><input class="form-control" id="vehicleno"
+										type="text" name="salesAmountBean.loadingcharge"
+										placeholder="loading charge"
+										value="<s:property value="salesAmountBean.loadingcharge"/>" /></td>
+								</tr>
+								<tr>
+								<td colspan="5" align="right"><label>Total Net
+										amount</label></td>
+								<td colspan="1"><input class="form-control" id="netamount"
+									type="text" name="salesAmountBean.netamount"
+									value="<s:property value="salesAmountBean.netamount"/>" /></td>
+							</tr>
+							<!-- </div> -->
 
 						</tbody>
 

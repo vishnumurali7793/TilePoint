@@ -42,6 +42,50 @@ public class SalesAmountBean {
 	
 	@Column(name = "netamount")
 	private Double netamount;
+	
+	@Column(name = "cgstamt")
+	private Double cgstamt=0.00;
+	
+	@Column(name = "sgstamt")
+	private Double sgstamt=0.00;
+	
+	@Column(name = "igstamt")
+	private Double igstamt=0.00;
+	
+	@Column(name = "loadingcharge")
+	private Double loadingcharge=0.00;
+
+	public Double getLoadingcharge() {
+		return loadingcharge;
+	}
+
+	public void setLoadingcharge(Double loadingcharge) {
+		this.loadingcharge = loadingcharge;
+	}
+
+	public Double getCgstamt() {
+		return cgstamt;
+	}
+
+	public void setCgstamt(Double cgstamt) {
+		this.cgstamt = cgstamt;
+	}
+
+	public Double getSgstamt() {
+		return sgstamt;
+	}
+
+	public void setSgstamt(Double sgstamt) {
+		this.sgstamt = sgstamt;
+	}
+
+	public Double getIgstamt() {
+		return igstamt;
+	}
+
+	public void setIgstamt(Double igstamt) {
+		this.igstamt = igstamt;
+	}
 
 	public Integer getSalesAmountId() {
 		return salesAmountId;
