@@ -281,43 +281,43 @@ public class ReportAction extends ActionSupport {
 				for(SalesDetailsBean sb : saldetList) {
 					
 					cell = new PdfPCell(new Phrase(String.valueOf(slNo), new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 					cell.setBorder(Rectangle.RIGHT|Rectangle.LEFT);
 					cell.setPaddingTop(5);
 					table.addCell(cell);
 					
 					cell = new PdfPCell(new Phrase(sb.getProductId().getProductName(), new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 					cell.setBorder(Rectangle.RIGHT|Rectangle.LEFT);
 					cell.setPaddingTop(5);
 					table.addCell(cell);
 					
 					cell = new PdfPCell(new Phrase(sb.getHsnCode().toString(), new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 					cell.setBorder(Rectangle.RIGHT|Rectangle.LEFT);
 					cell.setPaddingTop(5);
 					table.addCell(cell);
 					
 					cell = new PdfPCell(new Phrase(sb.getQuantity().toString(), new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 					cell.setBorder(Rectangle.RIGHT|Rectangle.LEFT);
 					cell.setPaddingTop(5);
 					table.addCell(cell);
 					
 					cell = new PdfPCell(new Phrase(sb.getRate().toString(), new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 					cell.setBorder(Rectangle.RIGHT|Rectangle.LEFT);
 					cell.setPaddingTop(5);
 					table.addCell(cell);
 					
 					cell = new PdfPCell(new Phrase(sb.getTotalamount().toString(), new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 					cell.setBorder(Rectangle.RIGHT|Rectangle.LEFT);
 					cell.setPaddingTop(5);
 					table.addCell(cell);
 					
 					cell = new PdfPCell(new Phrase(sb.getTotalamount().toString(), new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 					cell.setBorder(Rectangle.RIGHT|Rectangle.LEFT);
 					cell.setPaddingTop(5);
 					table.addCell(cell);
@@ -329,43 +329,43 @@ public class ReportAction extends ActionSupport {
 				cell = new PdfPCell(new Phrase(" ", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setBorder(Rectangle.RIGHT|Rectangle.LEFT|Rectangle.BOTTOM);
-				cell.setPaddingTop(7);
+				cell.setPaddingTop(200);
 				table.addCell(cell);
 
 				cell = new PdfPCell(new Phrase(" ", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setBorder(Rectangle.RIGHT|Rectangle.LEFT|Rectangle.BOTTOM);
-				cell.setPaddingTop(7);
+				cell.setPaddingTop(200);
 				table.addCell(cell);
 
 				cell = new PdfPCell(new Phrase(" ", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setBorder(Rectangle.RIGHT|Rectangle.LEFT|Rectangle.BOTTOM);
-				cell.setPaddingTop(7);
+				cell.setPaddingTop(200);
 				table.addCell(cell);
 
 				cell = new PdfPCell(new Phrase(" ", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setBorder(Rectangle.RIGHT|Rectangle.LEFT|Rectangle.BOTTOM);
-				cell.setPaddingTop(7);
+				cell.setPaddingTop(200);
 				table.addCell(cell);
 
 				cell = new PdfPCell(new Phrase(" ", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setBorder(Rectangle.RIGHT|Rectangle.LEFT|Rectangle.BOTTOM);
-				cell.setPaddingTop(7);
+				cell.setPaddingTop(200);
 				table.addCell(cell);
 
 				cell = new PdfPCell(new Phrase(" ", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setBorder(Rectangle.RIGHT|Rectangle.LEFT|Rectangle.BOTTOM);
-				cell.setPaddingTop(7);
+				cell.setPaddingTop(200);
 				table.addCell(cell);
 
 				cell = new PdfPCell(new Phrase(" ", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setBorder(Rectangle.RIGHT|Rectangle.LEFT|Rectangle.BOTTOM);
-				cell.setPaddingTop(7);
+				cell.setPaddingTop(200);
 				table.addCell(cell);
 				
 				cell = new PdfPCell();
@@ -599,12 +599,7 @@ public class ReportAction extends ActionSupport {
 				signatureCell.setPaddingLeft(60);
 				signatureCell.setBorder(0);
 				signatureTable.addCell(signatureCell);
-				
-				
-				
 				cell.addElement(signatureTable);
-				
-				
 				table.addCell(cell);
 				
 				document.add(table);
