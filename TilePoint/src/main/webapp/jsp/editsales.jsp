@@ -150,7 +150,6 @@ th {
 		</div>
 	</nav>
 	<div class="container-fluid">
-		<div class="row"></div>
 		<div class="row">
 			<div class="col-md-6">
 				<s:hidden name="salesBaseBean.salesId" />
