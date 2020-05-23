@@ -5,9 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript" src="resources/jquery/jquery-3.5.0.min.js"></script>
-<link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css">
-<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="resources/jquery/jquery-3.5.0.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="resources/bootstrap/css/bootstrap.min.css">
+<script type="text/javascript"
+	src="resources/bootstrap/js/bootstrap.min.js"></script>
 <title>tessaract</title>
 </head>
 <style type="text/css">
@@ -99,10 +102,13 @@ td, th {
 						<li><a href="goToCategory">Category</a></li>
 						<li><a href="goToProduct">Product</a></li>
 						<li class="active"><a href="goToCustomer">Customer</a></li>
-						<li><a href="goToSales">Sales</a></li>
-						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
-				<li><a href="#">Page 2</a></li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">Transactions <span
+						class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="goToSales">Sales</a></li>
+					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<%-- <li><a href="#"><span class="glyphicon glyphicon-user"></span>
@@ -130,72 +136,58 @@ td, th {
 									<div class="row">
 										<div class=" col s12">
 											<s:hidden name="customerBean.customerId" />
-											
+
 											<label>Customer Code</label> <input
 												name="customerBean.customerCode" type="text"
 												value="<s:property value="customerBean.customerCode"/>"
-												class="validate" placeholder="customerCode">
-												
-											<label>Customer Name</label> <input
-												name="customerBean.customerName" type="text"
+												class="validate" placeholder="customerCode"> <label>Customer
+												Name</label> <input name="customerBean.customerName" type="text"
 												value="<s:property value="customerBean.customerName"/>"
-												class="validate" placeholder="customerName">
-												
-												 <label>Category
+												class="validate" placeholder="customerName"> <label>Category
 												Address1</label> <input name="customerBean.address1" type="text"
 												class="validate"
 												value="<s:property value="customerBean.address1"/>"
-												placeholder="address"> 
-												
-												 <label>Customer
+												placeholder="address"> <label>Customer
 												Address2</label> <input name="customerBean.address2" type="text"
 												class="validate"
 												value="<s:property value="customerBean.address2"/>"
-												placeholder="address"> 
-												
-												 <label>Email</label> <input name="customerBean.email" type="text"
-												class="validate"
+												placeholder="address"> <label>Email</label> <input
+												name="customerBean.email" type="text" class="validate"
 												value="<s:property value="customerBean.email"/>"
-												placeholder="email"> 
-												
-												<label>Customer
-												Contact</label> <input name="customerBean.contact" type="text"
+												placeholder="email"> <label>Customer Contact</label>
+											<input name="customerBean.contact" type="text"
 												class="validate"
 												value="<s:property value="customerBean.contact"/>"
-												placeholder="contactNumber">
-												
-												<label>Customer
+												placeholder="contactNumber"> <label>Customer
 												Pin</label> <input name="customerBean.pin" type="text"
 												class="validate"
 												value="<s:property value="customerBean.pin"/>"
-												placeholder="CustomerPin">
-												
-												<label>State</label> <input name="customerBean.state" type="text"
-												class="validate"
+												placeholder="CustomerPin"> <label>State</label> <input
+												name="customerBean.state" type="text" class="validate"
 												value="<s:property value="customerBean.state"/>"
 												placeholder="STATE">
-												<%-- 
+											<%-- 
 												<label>Event Date</label> <input
 												name="customerBean.eventDate" type="date" class="validate"
 												value="<s:property value="customerBean.eventDate"/>"
 												required="required"> <i class="fa fa-calendar"
 												style="font-size: 22px; float: right; margin: -46px auto;"></i> --%>
-												
-												<label>Date</label> <input
-												name="customerBean.addedOn" type="date" class="validate"
+
+											<label>Date</label> <input name="customerBean.addedOn"
+												type="date" class="validate"
 												value="<s:property value="customerBean.addedOn"/>"
 												required="required"> <i class="fa fa-calendar"
 												style="font-size: 22px; float: right; margin: -46px auto;"></i>
-												
-												<label>Status</label> <select
+
+											<label>Status</label> <select
 												name="customerBean.activeStatus"
 												value="<s:property value="customerBean.activeStatus"/>"
 												required="required" class="">
 												<option value="Active">Active</option>
 												<option value="Inactive">Inactive</option>
 											</select>&nbsp &nbsp
-												<button class="waves-effect waves-light btn" type="submit">Submit</button>
-											
+											<button class="waves-effect waves-light btn" type="submit">Submit</button>
+
 										</div>
 									</div>
 
@@ -212,8 +204,8 @@ td, th {
 								aria-controls="collapse2" href="#collapse2">Customer Details</a>
 						</h4>
 					</div>
-					<div id="collapse2" class="panel-collapse collapse in" role="tabpanel"
-						aria-labelledby="collapse-two">
+					<div id="collapse2" class="panel-collapse collapse in"
+						role="tabpanel" aria-labelledby="collapse-two">
 						<div class="panel-body">
 							<div class="container">
 								<h2>Customer Table</h2>
@@ -240,12 +232,9 @@ td, th {
 													<td><s:property value="#row.count" /></td>
 													<td><s:property value="customerCode" /></td>
 													<td><s:property value="customerName" /></td>
-													<td>
-													<s:property value="address1" /></br>
-													<s:property value="address2" /></br>
-													<s:property value="email" /></br>
-													<s:property value="pin" />
-													</td>
+													<td><s:property value="address1" /></br> <s:property
+															value="address2" /></br> <s:property value="email" /></br> <s:property
+															value="pin" /></td>
 													<td><s:property value="contact" /></td>
 													<td><s:property value="state" /></td>
 													<td><s:property value="addedOn" /></td>

@@ -73,9 +73,9 @@
 		}
 		document.getElementById('netamount').value = totamt - taxamt;
 	}
-	function goback(){
-		location.href ="goback";
-		}
+	function goback() {
+		location.href = "goToSales";
+	}
 </script>
 <style type="text/css">
 body {
@@ -114,6 +114,10 @@ th {
 #tablecolor {
 	background-color: #563d7c;
 }
+
+.bar {
+	border-radius: 0px;
+}
 </style>
 <body>
 	<nav class="navbar navbar-inverse bar">
@@ -128,11 +132,14 @@ th {
 					<ul class="dropdown-menu">
 						<li><a href="goToCategory">Category</a></li>
 						<li><a href="goToProduct">Product</a></li>
-						<li class="active"><a href="goToSales">Sales</a></li>
-						<li><a href="#">Page 1-2</a></li>
-						<li><a href="#">Page 1-3</a></li>
+						<li><a href="goToCustomer">Customer</a></li>
 					</ul></li>
-				<li><a href="#">Page 2</a></li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">Transactions <span
+						class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="goToSales">Sales</a></li>
+					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<%-- <li><a href="#"><span class="glyphicon glyphicon-user"></span>
@@ -147,13 +154,17 @@ th {
 		<div class="row">
 			<div class="col-md-6">
 				<s:hidden name="salesBaseBean.salesId" />
-				<button type="button" class="btn btn-primary" data-toggle="modal"
-					onclick="getProductList()">Add products</button>
+				<button type="button" class="btn btn-success btn-sm"
+					data-toggle="modal" onclick="getProductList()">
+					<span class="glyphicon glyphicon-th"></span> &nbsp;Add items
+				</button>
 			</div>
 			<div class="col-md-6">
 				<s:hidden name="salesBaseBean.salesId" />
-				<button type="button" class="btn btn-primary" data-toggle="modal" allign="right"
-					onclick="goback()">BACK</button>
+				<button type="button" class="btn btn-danger btn-sm pull-right"
+					data-toggle="modal" onclick="goback()">
+					<span class="glyphicon glyphicon-circle-arrow-left"></span> Back
+				</button>
 			</div>
 		</div>
 
@@ -204,9 +215,10 @@ th {
 											value="<s:property value="totalamount"/>"
 											id="totalamount<s:property value="#row.index" />"
 											onchange="calculateamount('<s:property value="#row.index" />')" /></td>
-										<td><a
+										<td><a role="button" class="btn btn-sm btn-info"
+											title="Remove item from invoice"
 											href="removeProductFromSales?salesDetails.salesDetailsId=<s:property value="salesDetailsId" />
-											&salesBaseBean.salesId=<s:property value="salesBaseBean.salesId" />">DELETE</a></td>
+											&salesBaseBean.salesId=<s:property value="salesBaseBean.salesId" />">D</a></td>
 									</tr>
 								</s:iterator>
 							</s:if>
@@ -224,9 +236,10 @@ th {
 									value="<s:property value="salesAmountBean.cgst"/>"
 									onchange="netamttot()" /></td>
 								<td colspan="1" align="left"><label id="ccgst">&#x20B9;
-								<input class="form-control" id="igst" readonly="false"
-									type="text" name="salesAmountBean.cgstamt" style="width:10px"
-									value="<s:property value="salesAmountBean.cgstamt"/>"/></label></td>
+										<input class="form-control" id="igst" readonly="false"
+										type="text" name="salesAmountBean.cgstamt" style="width: 10px"
+										value="<s:property value="salesAmountBean.cgstamt"/>" />
+								</label></td>
 							</tr>
 							<tr>
 								<td colspan="5" align="right"><label>Sgst</label></td>
@@ -235,9 +248,10 @@ th {
 									value="<s:property value="salesAmountBean.sgst"/>"
 									onchange="netamttot()" /></td>
 								<td colspan="1" align="left"><label id="ssgst">&#x20B9;
-								<input class="form-control" id="igst" readonly="false"
-									type="text" name="salesAmountBean.sgstamt" style="width:10px"
-									value="<s:property value="salesAmountBean.sgstamt"/>"/></label></td>
+										<input class="form-control" id="igst" readonly="false"
+										type="text" name="salesAmountBean.sgstamt" style="width: 10px"
+										value="<s:property value="salesAmountBean.sgstamt"/>" />
+								</label></td>
 							</tr>
 							<tr>
 								<td colspan="5" align="right"><label>Igst</label></td>
@@ -245,37 +259,37 @@ th {
 									type="text" name="salesAmountBean.igst"
 									value="<s:property value="salesAmountBean.igst"/>"
 									onchange="netamttot()" /></td>
-								<td colspan="1" align="left">
-								<label id="iigst">&#x20B9;
-								<input class="form-control" id="igst" readonly="false"
-									type="text" name="salesAmountBean.igstamt" style="width:10px"
-									value="<s:property value="salesAmountBean.igstamt"/>"/>
+								<td colspan="1" align="left"><label id="iigst">&#x20B9;
+										<input class="form-control" id="igst" readonly="false"
+										type="text" name="salesAmountBean.igstamt" style="width: 10px"
+										value="<s:property value="salesAmountBean.igstamt"/>" />
 								</label></td>
 							</tr>
-							
-						<!-- 	<div class="row"> -->
-								<tr>
-									<td colspan="4" align="right"><label>Vehicle
-											details </label></td>
-									<td colspan="1"><input class="form-control" id="vehicleno"
-										type="text" name="salesAmountBean.vehicleno"
-										placeholder="vehicle no"
-										value="<s:property value="salesAmountBean.vehicleno"/>" /></td>
 
-									<td colspan="1"><input class="form-control"
-										id="vehicleamount" type="text"
-										name="salesAmountBean.vehicleamount"
-										placeholder="vehicle amount"
-										value="<s:property value="salesAmountBean.vehicleamount"/>" /></td>
-								</tr>
-								<tr>
-									<td colspan="5" align="right"><label>Loading charge </label></td>
-									<td colspan="1"><input class="form-control" id="vehicleno"
-										type="text" name="salesAmountBean.loadingcharge"
-										placeholder="loading charge"
-										value="<s:property value="salesAmountBean.loadingcharge"/>" /></td>
-								</tr>
-								<tr>
+							<!-- 	<div class="row"> -->
+							<tr>
+								<td colspan="4" align="right"><label>Vehicle
+										details </label></td>
+								<td colspan="1"><input class="form-control" id="vehicleno"
+									type="text" name="salesAmountBean.vehicleno"
+									placeholder="vehicle no"
+									value="<s:property value="salesAmountBean.vehicleno"/>" /></td>
+
+								<td colspan="1"><input class="form-control"
+									id="vehicleamount" type="text"
+									name="salesAmountBean.vehicleamount"
+									placeholder="vehicle amount"
+									value="<s:property value="salesAmountBean.vehicleamount"/>" /></td>
+							</tr>
+							<tr>
+								<td colspan="5" align="right"><label>Loading charge
+								</label></td>
+								<td colspan="1"><input class="form-control" id="vehicleno"
+									type="text" name="salesAmountBean.loadingcharge"
+									placeholder="loading charge"
+									value="<s:property value="salesAmountBean.loadingcharge"/>" /></td>
+							</tr>
+							<tr>
 								<td colspan="5" align="right"><label>Total Net
 										amount</label></td>
 								<td colspan="1"><input class="form-control" id="netamount"
@@ -283,16 +297,12 @@ th {
 									value="<s:property value="salesAmountBean.netamount"/>" /></td>
 							</tr>
 							<!-- </div> -->
-
 						</tbody>
-
-
 					</table>
-
 					<div class="row">
 						<div align="center">
 							<s:if test="salDetList != null">
-								<s:submit class="btn btn-primary" value="save"></s:submit>
+								<s:submit class="btn btn-primary" value="Save"></s:submit>
 							</s:if>
 							<s:else>-- no products added</s:else>
 						</div>
@@ -301,9 +311,6 @@ th {
 			</form>
 		</div>
 	</div>
-
-
-
 	<div class="modal fade" id="productModal" role="dialog">
 		<div class="modal-dialog modal-lg modal-xl">
 			<div class="modal-content">

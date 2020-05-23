@@ -5,9 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Welcome</title>
-<script type="text/javascript" src="resources/jquery/jquery-3.5.0.min.js"></script>
-<link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css">
-<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="resources/jquery/jquery-3.5.0.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="resources/bootstrap/css/bootstrap.min.css">
+<script type="text/javascript"
+	src="resources/bootstrap/js/bootstrap.min.js"></script>
 <style type="text/css">
 body {
 	margin: 0;
@@ -37,11 +40,13 @@ body {
 						<li><a href="goToCategory">Category</a></li>
 						<li><a href="goToProduct">Product</a></li>
 						<li><a href="goToCustomer">Customer</a></li>
-						<li><a href="goToSales">Sales</a></li>
-						<li><a href="#">Page 1-2</a></li>
-						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
-				
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">Transactions <span
+						class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="goToSales">Sales</a></li>
+					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<%-- <li><a href="#"><span class="glyphicon glyphicon-user"></span>
