@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html>
@@ -13,10 +13,13 @@
 
 <link rel="stylesheet" type="text/css"
 	href="resources/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="resources/jquery-ui/jquery-ui.css">
-<link rel="stylesheet" type="text/css" href="resources/jquery-ui/jquery-ui.structure.css">
-<link rel="stylesheet" type="text/css" href="resources/jquery-ui/jquery-ui.theme.css">
-<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="resources/jquery-ui/jquery-ui.css">
+<link rel="stylesheet" type="text/css"
+	href="resources/jquery-ui/jquery-ui.structure.css">
+<link rel="stylesheet" type="text/css"
+	href="resources/jquery-ui/jquery-ui.theme.css">
+<title>Sales</title>
 </head>
 <style type="text/css">
 body {
@@ -67,13 +70,7 @@ td, th {
 .element {
 	margin-top: 15px;
 }
-/* #submitButton {
-	float: right;
-} */
-/* #statusDropdown {
-	float: right;
-	align-items: left;
-} */
+
 .tax {
 	justify-content: center;
 	align-items: center;
@@ -86,7 +83,6 @@ td, th {
 	function deleteVendor(venid) {
 		location.href = "deleteVendor?vendorBean.vendorId=" + venid;
 	}
-	
 
 	function addSales() {
 		$('#productModal #modalTitle').html("Add items to Sales bill");
@@ -103,12 +99,13 @@ td, th {
 		$('#productModal').modal('show');
 		return false;
 	}
-	function generatereport(salid){
-		location.href = "generateSalesReport?salesBaseBean.salesId=" + salid;
-		}
+
+	function generatereport(salid) {
+		window.open("generateSalesReport?salesBaseBean.salesId=" + salid);
+	}
 </script>
 <body>
-<nav class="navbar navbar-inverse bar">
+	<nav class="navbar navbar-inverse bar">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="goToHome">Tesseract</a>
@@ -121,10 +118,13 @@ td, th {
 						<li><a href="goToCategory">Category</a></li>
 						<li><a href="goToProduct">Product</a></li>
 						<li><a href="goToCustomer">Customer</a></li>
-						<li class="active"><a href="goToSales">Sales</a></li>
-						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
-				<li><a href="#">Page 2</a></li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">Transactions <span
+						class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li class="active"><a href="goToSales">Sales</a></li>
+					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#"><span class="glyphicon glyphicon-user"></span>
@@ -147,18 +147,21 @@ td, th {
 							</h4>
 						</div>
 						<div id="collapse1" class="panel-collapse collapse in">
-							<div class="panel-body ">
-								<s:form action="">
+							<div class="row">
+								<div class="panel-body ">
+									<%-- <s:form action=""> --%>
 									<div class="row">
 										<div class="col-md-12">
-											<button type="button" class="btn btn-primary"
-												data-toggle="modal" onclick="addSales()">Add new bill</button>
+											<button type="button" class="btn btn-sm btn-success"
+												title="Add new sales bill" style="margin: 10px;"
+												data-toggle="modal" onclick="addSales()">
+												<span class="glyphicon glyphicon-plus"></span>
+											</button>
 										</div>
 									</div>
-									
+								</div>
 							</div>
-							
-							
+
 							<div class="row">
 								<table class="table">
 									<thead>
@@ -173,56 +176,55 @@ td, th {
 										</tr>
 									</thead>
 									<!-- ***list name from redirectaction*** -->
-										<s:if test="salbeanList!=null && salbeanList.size()>0">
+									<s:if test="salbeanList!=null && salbeanList.size()>0">
 
-											<s:iterator value="salbeanList" status="row">
-												<tr>
-													<td><s:property value="#row.count" /></td>
-													<td><s:property value="invoiceNo" />&</br>
-													    <s:property value="invoiceDate" />
-													</td>
-													<td><s:property value="customerId.customerName" /></br>
-													    <s:property value="customerId.address1" />,
-													    <s:property value="customerId.address2" />,
-													    <s:property value="customerId.contact" />,
-													    <s:property value="customerId.pin" />
-													</td>
-													<td><s:property value="placeToSupply" /></td>
-													<td><s:property value="stateToSupply" /></td>
-													<td><s:property value="purchaseDate" /></td>
-													<td>
-													<a href="editsalesdetails?salesBaseBean.salesId=<s:property value="salesId" />" src="tessaract/src/main/webapp/images/edit.png">EDIT</a>
-													<button class="btn-xs btn-warning"> <span class="glyphicon glyphicon-print" onclick="generatereport('<s:property value="salesId" />')"/></button>
-													</td>
-													
-
-												</tr>
-											</s:iterator>
-
-
-										</s:if>
+										<s:iterator value="salbeanList" status="row">
+											<tr>
+												<td><s:property value="#row.count" /></td>
+												<td><s:property value="invoiceNo" />&</br> <s:property
+														value="invoiceDate" /></td>
+												<td><s:property value="customerId.customerName" /></br> <s:property
+														value="customerId.address1" />, <s:property
+														value="customerId.address2" />, <s:property
+														value="customerId.contact" />, <s:property
+														value="customerId.pin" /></td>
+												<td><s:property value="placeToSupply" /></td>
+												<td><s:property value="stateToSupply" /></td>
+												<td><s:property value="purchaseDate" /></td>
+												<td><a role="button" class="btn btn-info btn-xs"
+													title="Add/Edit sales bill"
+													href="editsalesdetails?salesBaseBean.salesId=<s:property value="salesId" />"
+													src="tessaract/src/main/webapp/images/edit.png">E</a>
+													<button class="btn-xs btn btn-danger"
+														title="Generate sales invoice">
+														<span class="glyphicon glyphicon-print"
+															onclick="generatereport('<s:property value="salesId" />')"></span>
+													</button></td>
+											</tr>
+										</s:iterator>
+									</s:if>
 								</table>
 							</div>
-							</s:form>
+							<%-- </s:form> --%>
 						</div>
 					</div>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 	</div>
 	<div class="modal fade" id="productModal" role="dialog">
 		<div class="modal-dialog modal-lg modal-xl">
 			<div class="modal-content">
-				<div class="modal-header" style="background-color:  #581845;">
+				<div class="modal-header" style="background-color: #581845;">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
-					
-					<h4 class="modal-title" align="center">
-						<span style="color: white;" class="" id="modalTitle"></span>
-					</h4>
+
+						<h4 class="modal-title" align="center">
+							<span style="color: white;" class="" id="modalTitle"></span>
+						</h4>
 				</div>
 				<div class="modal-body"></div>
 			</div>
