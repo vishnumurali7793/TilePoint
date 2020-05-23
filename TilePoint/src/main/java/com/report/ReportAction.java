@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -46,7 +45,7 @@ public class ReportAction extends ActionSupport {
 	String fileName;
 	FileInputStream fileInputStream;
 	DateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
-	
+
 	public String generateSalesReport() throws DocumentException, IOException {
 		ServletContext servletContext = ServletActionContext.getServletContext();
 		String fileLocation;
@@ -77,7 +76,7 @@ public class ReportAction extends ActionSupport {
 				baos = new ByteArrayOutputStream();
 				Document document = new Document(PageSize.A4);
 				PdfWriter.getInstance(document, baos);
-				document.addTitle("SALES PAGE");
+				document.addTitle("Download invoice " + sbb.getInvoiceNo());
 				document.open();
 				document.newPage();
 				document.setMargins(5, 5, 5, 5);
@@ -136,8 +135,8 @@ public class ReportAction extends ActionSupport {
 				paragraph.setAlignment(Element.ALIGN_RIGHT);
 				document.add(paragraph);
 
-				table = new PdfPTable(7);
-				table.setWidths(new int[] { 10, 35, 15, 10, 10, 10, 10 });
+				table = new PdfPTable(6);
+				table.setWidths(new float[] { 5f, 50f, 10f, 10f, 12.5f, 12.5f });
 				table.setWidthPercentage(100);
 				table.setSpacingBefore(20);
 
@@ -163,14 +162,12 @@ public class ReportAction extends ActionSupport {
 				customerDetailsCell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				customerDetailsCell.setBorder(0);
 				customerDetailsCell.setPaddingLeft(20);
-				customerDetailsCell.setPaddingTop(10);
 				customerDetailsTable.addCell(customerDetailsCell);
 
 				customerDetailsCell = new PdfPCell(
 						new Phrase(":", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
 				customerDetailsCell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				customerDetailsCell.setBorder(0);
-				customerDetailsCell.setPaddingTop(10);
 				customerDetailsTable.addCell(customerDetailsCell);
 
 				temp = sbb.getCustomerId().getCustomerName();
@@ -178,7 +175,6 @@ public class ReportAction extends ActionSupport {
 						new Phrase(temp, new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
 				customerDetailsCell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				customerDetailsCell.setBorder(0);
-				customerDetailsCell.setPaddingTop(10);
 				customerDetailsTable.addCell(customerDetailsCell);
 
 				customerDetailsCell = new PdfPCell(
@@ -246,12 +242,12 @@ public class ReportAction extends ActionSupport {
 
 				cell = new PdfPCell();
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell.setColspan(4);
+				cell.setColspan(3);
 				cell.setFixedHeight(80);
 
 				PdfPTable insideTable = new PdfPTable(3);
 				PdfPCell inlineCell;
-				insideTable.setWidths(new float[] { 45f, 5f, 50f });
+				insideTable.setWidths(new float[] { 40f, 5f, 55f });
 				insideTable.setWidthPercentage(100);
 
 				inlineCell = new PdfPCell(
@@ -261,15 +257,15 @@ public class ReportAction extends ActionSupport {
 				inlineCell.setPaddingTop(5);
 				insideTable.addCell(inlineCell);
 
-				inlineCell = new PdfPCell(new Phrase(" : ", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
-				inlineCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+				inlineCell = new PdfPCell(new Phrase(":", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
+				inlineCell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				inlineCell.setBorder(Rectangle.BOTTOM);
+				inlineCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				inlineCell.setPaddingTop(5);
 				insideTable.addCell(inlineCell);
 
-				temp=sbb.getInvoiceNo();
-				inlineCell = new PdfPCell(
-						new Phrase(temp, new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
+				temp = sbb.getInvoiceNo();
+				inlineCell = new PdfPCell(new Phrase(temp, new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
 				inlineCell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				inlineCell.setBorder(Rectangle.BOTTOM);
 				inlineCell.setPaddingTop(5);
@@ -282,15 +278,14 @@ public class ReportAction extends ActionSupport {
 				inlineCell.setPaddingTop(5);
 				insideTable.addCell(inlineCell);
 
-				inlineCell = new PdfPCell(new Phrase(" : ", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
-				inlineCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+				inlineCell = new PdfPCell(new Phrase(":", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
+				inlineCell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				inlineCell.setBorder(Rectangle.BOTTOM);
 				inlineCell.setPaddingTop(5);
 				insideTable.addCell(inlineCell);
 
-				temp=samtbean.getVehicleno();
-				inlineCell = new PdfPCell(
-						new Phrase(temp, new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
+				temp = samtbean.getVehicleno();
+				inlineCell = new PdfPCell(new Phrase(temp, new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
 				inlineCell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				inlineCell.setBorder(Rectangle.BOTTOM);
 				inlineCell.setPaddingTop(5);
@@ -303,15 +298,14 @@ public class ReportAction extends ActionSupport {
 				inlineCell.setPaddingTop(5);
 				insideTable.addCell(inlineCell);
 
-				inlineCell = new PdfPCell(new Phrase(" : ", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
-				inlineCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+				inlineCell = new PdfPCell(new Phrase(":", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
+				inlineCell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				inlineCell.setBorder(Rectangle.BOTTOM);
 				inlineCell.setPaddingTop(5);
 				insideTable.addCell(inlineCell);
 
-				temp=dateformat.format(sbb.getInvoiceDate());
-				inlineCell = new PdfPCell(
-						new Phrase(temp, new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
+				temp = dateformat.format(sbb.getInvoiceDate());
+				inlineCell = new PdfPCell(new Phrase(temp, new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
 				inlineCell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				inlineCell.setBorder(Rectangle.BOTTOM);
 				inlineCell.setPaddingTop(5);
@@ -324,15 +318,14 @@ public class ReportAction extends ActionSupport {
 				inlineCell.setPaddingTop(5);
 				insideTable.addCell(inlineCell);
 
-				inlineCell = new PdfPCell(new Phrase(" : ", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
-				inlineCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+				inlineCell = new PdfPCell(new Phrase(":", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
+				inlineCell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				inlineCell.setBorder(Rectangle.BOTTOM);
 				inlineCell.setPaddingTop(5);
 				insideTable.addCell(inlineCell);
 
-				temp=sbb.getPlaceToSupply();
-				inlineCell = new PdfPCell(
-						new Phrase(temp, new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
+				temp = sbb.getPlaceToSupply();
+				inlineCell = new PdfPCell(new Phrase(temp, new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
 				inlineCell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				inlineCell.setBorder(Rectangle.BOTTOM);
 				inlineCell.setPaddingTop(6);
@@ -343,26 +336,25 @@ public class ReportAction extends ActionSupport {
 				inlineCell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				inlineCell.setBorder(Rectangle.BOTTOM);
 				inlineCell.setBorder(0);
-				inlineCell.setPaddingTop(3);
+				inlineCell.setPaddingTop(5);
 				insideTable.addCell(inlineCell);
 
-				inlineCell = new PdfPCell(new Phrase(" : ", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
-				inlineCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+				inlineCell = new PdfPCell(new Phrase(":", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
+				inlineCell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				inlineCell.setBorder(0);
 				inlineCell.setPaddingTop(5);
 				insideTable.addCell(inlineCell);
 
-				temp=sbb.getStateToSupply();
-				inlineCell = new PdfPCell(
-						new Phrase(temp, new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
+				temp = sbb.getStateToSupply();
+				inlineCell = new PdfPCell(new Phrase(temp, new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
 				inlineCell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				inlineCell.setBorder(0);
-				inlineCell.setPaddingTop(3);
+				inlineCell.setPaddingTop(5);
 				insideTable.addCell(inlineCell);
 				cell.addElement(insideTable);
 				table.addCell(cell);
 
-				cell = new PdfPCell(new Phrase("Sl. No.", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
+				cell = new PdfPCell(new Phrase("#", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				table.addCell(cell);
 
@@ -384,11 +376,6 @@ public class ReportAction extends ActionSupport {
 				table.addCell(cell);
 
 				cell = new PdfPCell(new Phrase("Amount", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
-				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				table.addCell(cell);
-
-				cell = new PdfPCell(
-						new Phrase("Taxable Amount", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				table.addCell(cell);
 
@@ -438,13 +425,6 @@ public class ReportAction extends ActionSupport {
 					cell.setPaddingTop(5);
 					table.addCell(cell);
 
-					cell = new PdfPCell(new Phrase(sb.getTotalamount().toString(),
-							new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
-					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-					cell.setBorder(Rectangle.RIGHT | Rectangle.LEFT);
-					cell.setPaddingTop(5);
-					table.addCell(cell);
-
 					slNo++;
 				}
 
@@ -452,13 +432,7 @@ public class ReportAction extends ActionSupport {
 				 * adjust cellPadding depending upon the product listSize by setting different
 				 * values for cellTopPadding
 				 */
-				int cellTopPadding = 200;
-
-				cell = new PdfPCell(new Phrase(" ", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
-				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell.setBorder(Rectangle.RIGHT | Rectangle.LEFT | Rectangle.BOTTOM);
-				cell.setPaddingTop(cellTopPadding);
-				table.addCell(cell);
+				int cellTopPadding = (salbeanList!=null && salbeanList.size() > 10) ? 100 : 200;
 
 				cell = new PdfPCell(new Phrase(" ", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -498,24 +472,23 @@ public class ReportAction extends ActionSupport {
 
 				cell = new PdfPCell();
 				cell.setColspan(3);
-				cell.setFixedHeight(85); // for outer cell
+				cell.setFixedHeight(100); // for outer cell
 
-				temp = "Total invoice amount in words";
+				temp = "Total invoice amount in words,";
 				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
 				cell.addElement(chunk);
-				temp=NumtoString.convertAmountToWord(samtbean.getNetamount());
-				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
+				temp = NumtoString.convertAmountToWord(samtbean.getGrossamount());
+				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.BOLDITALIC));
 				cell.addElement(chunk);
 				cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell);
 
 				cell = new PdfPCell();
-				cell.setColspan(4);
-				cell.setFixedHeight(85); // for outer cell
+				cell.setColspan(3);
 
 				PdfPTable amtTable = new PdfPTable(2);
 				amtTable.setWidthPercentage(100);
-				amtTable.setWidths(new int[] { 50, 50 });
+				amtTable.setWidths(new int[] { 70, 30 });
 				PdfPCell amtHeadCell;
 
 				amtHeadCell = new PdfPCell();
@@ -526,7 +499,7 @@ public class ReportAction extends ActionSupport {
 				amtTable.addCell(amtHeadCell);
 
 				amtHeadCell = new PdfPCell();
-				temp=samtbean.getGrossamount().toString();
+				temp = samtbean.getNetamount().toString();
 				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
 				amtHeadCell.addElement(chunk);
 				amtHeadCell.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -541,7 +514,7 @@ public class ReportAction extends ActionSupport {
 				amtTable.addCell(amtHeadCell);
 
 				amtHeadCell = new PdfPCell();
-				temp=samtbean.getCgst().toString();
+				temp = (samtbean.getCgst() != null) ? samtbean.getCgst().toString() : "0.0";
 				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
 				amtHeadCell.addElement(chunk);
 				amtHeadCell.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -556,7 +529,7 @@ public class ReportAction extends ActionSupport {
 				amtTable.addCell(amtHeadCell);
 
 				amtHeadCell = new PdfPCell();
-				temp=samtbean.getSgst().toString();
+				temp = (samtbean.getSgst() != null) ? samtbean.getSgst().toString() : "0.0";
 				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
 				amtHeadCell.addElement(chunk);
 				amtHeadCell.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -564,14 +537,16 @@ public class ReportAction extends ActionSupport {
 				amtTable.addCell(amtHeadCell);
 
 				amtHeadCell = new PdfPCell();
-				chunk = new Chunk("Add: IGST @ %", new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
+				chunk = new Chunk("Add: IGST  @ %", new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
 				amtHeadCell.addElement(chunk);
 				amtHeadCell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				amtHeadCell.setBorder(Rectangle.BOTTOM | Rectangle.RIGHT);
 				amtTable.addCell(amtHeadCell);
 
 				amtHeadCell = new PdfPCell();
-				temp=samtbean.getIgst().toString();
+
+				temp = (samtbean.getIgst() != null) ? samtbean.getIgst().toString() : "0.0";
+
 				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
 				amtHeadCell.addElement(chunk);
 				amtHeadCell.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -579,14 +554,30 @@ public class ReportAction extends ActionSupport {
 				amtTable.addCell(amtHeadCell);
 
 				amtHeadCell = new PdfPCell();
-				chunk = new Chunk("", new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
+				chunk = new Chunk("Vehicle charge", new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
 				amtHeadCell.addElement(chunk);
 				amtHeadCell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				amtHeadCell.setBorder(Rectangle.BOTTOM | Rectangle.RIGHT);
 				amtTable.addCell(amtHeadCell);
 
 				amtHeadCell = new PdfPCell();
-				chunk = new Chunk("", new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
+				temp = (samtbean.getVehicleamount() != null) ? samtbean.getVehicleamount().toString() : "0.0";
+				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
+				amtHeadCell.addElement(chunk);
+				amtHeadCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+				amtHeadCell.setBorder(Rectangle.BOTTOM);
+				amtTable.addCell(amtHeadCell);
+
+				amtHeadCell = new PdfPCell();
+				chunk = new Chunk("Loading charge", new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
+				amtHeadCell.addElement(chunk);
+				amtHeadCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+				amtHeadCell.setBorder(Rectangle.BOTTOM | Rectangle.RIGHT);
+				amtTable.addCell(amtHeadCell);
+
+				amtHeadCell = new PdfPCell();
+				temp = (samtbean.getLoadingcharge() != null) ? samtbean.getLoadingcharge().toString() : "0.0";
+				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
 				amtHeadCell.addElement(chunk);
 				amtHeadCell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				amtHeadCell.setBorder(Rectangle.BOTTOM);
@@ -600,7 +591,7 @@ public class ReportAction extends ActionSupport {
 				amtTable.addCell(amtHeadCell);
 
 				amtHeadCell = new PdfPCell();
-				temp=samtbean.getNetamount().toString();
+				temp = samtbean.getGrossamount().toString();
 				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
 				amtHeadCell.addElement(chunk);
 				amtHeadCell.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -611,7 +602,7 @@ public class ReportAction extends ActionSupport {
 
 				cell = new PdfPCell();
 				cell.setColspan(3);
-				cell.setFixedHeight(85); // for outer cell
+				cell.setFixedHeight(85);
 
 				PdfPTable bankDetailTable = new PdfPTable(3);
 				bankDetailTable.setWidthPercentage(100);
@@ -713,7 +704,7 @@ public class ReportAction extends ActionSupport {
 				table.addCell(cell);
 
 				cell = new PdfPCell();
-				cell.setColspan(4);
+				cell.setColspan(3);
 				cell.setFixedHeight(60);
 
 				PdfPTable signatureTable = new PdfPTable(1);
@@ -726,7 +717,7 @@ public class ReportAction extends ActionSupport {
 						.addElement(new Chunk("For Tile Point,", new Font(FontFamily.HELVETICA, 8, Font.BOLDITALIC)));
 				signatureCell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				signatureCell.setBorder(0);
-				signatureCell.setPaddingLeft(70);
+				signatureCell.setPaddingLeft(60);
 				signatureTable.addCell(signatureCell);
 
 				signatureCell = new PdfPCell();
@@ -734,7 +725,7 @@ public class ReportAction extends ActionSupport {
 						.addElement(new Chunk("Authorized Signatory", new Font(FontFamily.HELVETICA, 8, Font.BOLD)));
 				signatureCell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				signatureCell.setPaddingTop(40);
-				signatureCell.setPaddingLeft(60);
+				signatureCell.setPaddingLeft(50);
 				signatureCell.setBorder(0);
 				signatureTable.addCell(signatureCell);
 				cell.addElement(signatureTable);
@@ -805,13 +796,21 @@ public class ReportAction extends ActionSupport {
 	public void setSamtbean(SalesAmountBean samtbean) {
 		this.samtbean = samtbean;
 	}
-	
+
 	public String getFileName() {
 		return fileName;
 	}
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+
+	public FileInputStream getFileInputStream() {
+		return fileInputStream;
+	}
+
+	public void setFileInputStream(FileInputStream fileInputStream) {
+		this.fileInputStream = fileInputStream;
 	}
 
 }
