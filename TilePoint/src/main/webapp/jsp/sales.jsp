@@ -163,47 +163,49 @@ td, th {
 							</div>
 
 							<div class="row">
-								<table class="table">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>INVOICE NO & DATE</th>
-											<th>CUSTOMER DETAILS</th>
-											<th>PLACE TO SUPPLY</th>
-											<th>STATE TO SUPPLY</th>
-											<th>DATE OF PURCHASE</th>
-											<th>ACTIONS</th>
-										</tr>
-									</thead>
-									<!-- ***list name from redirectaction*** -->
-									<s:if test="salbeanList!=null && salbeanList.size()>0">
-
-										<s:iterator value="salbeanList" status="row">
+								<div class="col-md-12">
+									<table class="table">
+										<thead>
 											<tr>
-												<td><s:property value="#row.count" /></td>
-												<td><s:property value="invoiceNo" />&</br> <s:property
-														value="invoiceDate" /></td>
-												<td><s:property value="customerId.customerName" /></br> <s:property
-														value="customerId.address1" />, <s:property
-														value="customerId.address2" />, <s:property
-														value="customerId.contact" />, <s:property
-														value="customerId.pin" /></td>
-												<td><s:property value="placeToSupply" /></td>
-												<td><s:property value="stateToSupply" /></td>
-												<td><s:property value="purchaseDate" /></td>
-												<td><a role="button" class="btn btn-info btn-xs"
-													title="Add/Edit sales bill"
-													href="editsalesdetails?salesBaseBean.salesId=<s:property value="salesId" />"
-													src="tessaract/src/main/webapp/images/edit.png">E</a>
-													<button class="btn-xs btn btn-danger"
-														title="Generate sales invoice">
-														<span class="glyphicon glyphicon-print"
-															onclick="generatereport('<s:property value="salesId" />')"></span>
-													</button></td>
+												<th>#</th>
+												<th>INVOICE NO & DATE</th>
+												<th>CUSTOMER DETAILS</th>
+												<th>PLACE TO SUPPLY</th>
+												<th>STATE TO SUPPLY</th>
+												<th>DATE OF PURCHASE</th>
+												<th>ACTIONS</th>
 											</tr>
-										</s:iterator>
-									</s:if>
-								</table>
+										</thead>
+										<!-- ***list name from redirectaction*** -->
+										<s:if test="salbeanList!=null && salbeanList.size()>0">
+
+											<s:iterator value="salbeanList" status="row">
+												<tr>
+													<td><s:property value="#row.count" /></td>
+													<td><s:property value="invoiceNo" />&</br> <s:property
+															value="invoiceDate" /></td>
+													<td><s:property value="customerId.customerName" /></br> <s:property
+															value="customerId.address1" />, <s:property
+															value="customerId.address2" />, <s:property
+															value="customerId.contact" />, <s:property
+															value="customerId.pin" /></td>
+													<td><s:property value="placeToSupply" /></td>
+													<td><s:property value="stateToSupply" /></td>
+													<td><s:property value="purchaseDate" /></td>
+													<td><a role="button" class="btn btn-info btn-xs"
+														title="Add/Edit sales bill"
+														href="editsalesdetails?salesBaseBean.salesId=<s:property value="salesId" />"
+														src="tessaract/src/main/webapp/images/edit.png">E</a>
+														<button class="btn-xs btn btn-danger"
+															title="Generate sales invoice">
+															<span class="glyphicon glyphicon-print"
+																onclick="generatereport('<s:property value="salesId" />')"></span>
+														</button></td>
+												</tr>
+											</s:iterator>
+										</s:if>
+									</table>
+								</div>
 							</div>
 							<%-- </s:form> --%>
 						</div>
