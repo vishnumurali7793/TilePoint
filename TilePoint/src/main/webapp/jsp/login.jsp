@@ -9,7 +9,7 @@
 <script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css">
 <link href="css/style.css" rel="stylesheet" type="text/css">
-<title>tessaract</title>
+<title>LOGIN</title>
 </head>
 <style type="text/css">
 body {
@@ -68,7 +68,7 @@ input{background-color: #f0ad4e}
 <div id="body-sub">
 	<!-- 	<h3 align="center">Tesseract</h3> -->
 	 <div id="header">
-		<h3>Welcome to Tesseract</h3>
+		<h3>Welcome to Tiles Point</h3>
 	</div> 
 	<div class="container-fluid">
 		<div class="row">

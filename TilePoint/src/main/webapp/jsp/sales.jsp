@@ -108,7 +108,7 @@ td, th {
 	<nav class="navbar navbar-inverse bar">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="goToHome">Tesseract</a>
+				<a class="navbar-brand" href="goToHome">HOME</a>
 			</div>
 			<ul class="nav navbar-nav">
 				<li><a href="goToHome">Home</a></li>
