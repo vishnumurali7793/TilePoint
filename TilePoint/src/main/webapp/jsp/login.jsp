@@ -18,7 +18,7 @@ body {
 	background: rgb(196, 85, 42);
 	background: linear-gradient(90deg, rgba(196, 85, 42, 1) 10%,
 		rgba(195, 12, 157, 1) 100%);
-		background-image:url("resources/images/Bg.jpg");
+		background-image:url("resources/images/log.jpg");
 	color: white;
 }
 #body-sub{
@@ -35,7 +35,7 @@ body {
 }
 .container-fluid{padding-top:100px;}
 #loginPane {
-	border: 4px solid #fe905b;
+	border: 4px solid #2267a9;
 	padding: 0 10px;
 	margin-right: 50px;
 	margin-left: 50px;
@@ -47,11 +47,13 @@ input{background-color: #f0ad4e}
 	margin: 0px;
 }
 
-#header {
+#header h3 {
 	margin-left: 0px;
 	height: 70px;
 	font-weight: bold;
 	text-align:center;
+	padding-top: 20px;
+	font-size: 32px;
 }
 
 .form-group {
@@ -59,7 +61,7 @@ input{background-color: #f0ad4e}
 }
 
 #label {
-	color: #fe905b;
+	color: #fefffc;
 }
 </style>
 <body>
@@ -75,9 +77,9 @@ input{background-color: #f0ad4e}
 				<s:form action="login">
 
 					<div id="loginPane" align="center">
-						<!-- <h3 align="center" class="header">Login</h3> -->
-						<img src="resources/images/logo.png" alt="logo" height="100" width="200">
-						<div class="input-group form-group">
+						<!-- <h3 align="center" class="header">Login</h3> --><br>
+						<img src="resources/images/logo.jpg" alt="logo" height="60" width="150">
+						<div class="input-group form-group"><br>
 							<label id="label">Username</label>&emsp;<input type="text"
 								name="loginBean.userName" id="name" />
 						</div>

@@ -5,24 +5,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript"
-	src="resources/jquery/jquery-3.5.0.min.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="resources/bootstrap/css/bootstrap.min.css">
-<script type="text/javascript"
-	src="resources/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="resources/jquery/jquery-3.5.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css">
+<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
 <title>category</title>
 </head>
 <style type="text/css">
 body {
-	margin: 0;
+	margin-left: 30px;
+	margin-right: 30px;
 	padding: 0;
+	background-color: #e7e6b8;
 }
 
 table {
 	font-family: arial, sans-serif;
 	border-collapse: collapse;
 	width: 100%;
+	border-top: 2px solid #dddddd;
 }
 
 td, th {
@@ -71,6 +71,24 @@ td, th {
 	justify-content: center;
 	align-items: center;
 }
+.panel-body label{
+padding-right: 10px;
+padding-left: 20px;
+}
+.btn{
+color: #ffffff;
+background-color: #337ab7;
+}
+.panel-body {
+text-align: center;}
+.panel h2{
+color:#337ab7;}
+
+.dropdown-menu>li>a {
+color: #dcf1cf;
+}
+.navbar-nav>li>.dropdown-menu{
+background-color: #222222;}
 </style>
 <script type="text/javascript">
 	function editCategory(catid) {
@@ -102,13 +120,10 @@ td, th {
 						<li class="active"><a href="goToCategory">Category</a></li>
 						<li><a href="goToProduct">Product</a></li>
 						<li><a href="goToCustomer">Customer</a></li>
-					</ul></li>
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Transactions <span
-						class="caret"></span></a>
-					<ul class="dropdown-menu">
 						<li><a href="goToSales">Sales</a></li>
+						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
+				<li><a href="#">Page 2</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<%-- <li><a href="#"><span class="glyphicon glyphicon-user"></span>
@@ -121,7 +136,7 @@ td, th {
 	<div class="container-fluid">
 		<div class="row">
 			<div class="panel">
-				<h2>CATEGORY</h2>
+				<h2 align="center" color="#337ab7">CATEGORY</h2>
 				<div class="panel-group" id="accordion">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
@@ -150,8 +165,8 @@ td, th {
 												<option value="Active">Active</option>
 												<option value="Inactive">Inactive</option>
 											</select>&nbsp &nbsp
-											<button class="waves-effect waves-light btn" type="submit">Submit</button>
-
+												<button class="waves-effect waves-light btn" type="submit">Submit</button>
+											
 										</div>
 									</div>
 
@@ -168,8 +183,8 @@ td, th {
 								aria-controls="collapse2" href="#collapse2">Category Details</a>
 						</h4>
 					</div>
-					<div id="collapse2" class="panel-collapse collapse in"
-						role="tabpanel" aria-labelledby="collapse-two">
+					<div id="collapse2" class="panel-collapse collapse in" role="tabpanel"
+						aria-labelledby="collapse-two">
 						<div class="panel-body">
 							<div class="container">
 								<h2>Category Table</h2>
@@ -193,10 +208,10 @@ td, th {
 													<td><s:property value="categoryCode" /></td>
 													<td><s:property value="categoryName" /></td>
 													<td><s:property value="activeStatus" /></td>
-													<td><button class="btn-xs btn-link"
-															onclick="editCategory('<s:property value="categoryId"/>')">[EDIT]</button>
-														<button class="btn-xs btn-link"
-															onclick="deleteCategory('<s:property value="categoryId"/>')">[DELETE]</button></td>
+													<td><button class="btn-xs btn-link btn"
+															onclick="editCategory('<s:property value="categoryId"/>')">EDIT</button>
+														<button class="btn-xs btn-link btn"
+															onclick="deleteCategory('<s:property value="categoryId"/>')">DELETE</button></td>
 												</tr>
 											</s:iterator>
 
