@@ -17,12 +17,12 @@
 		<form action="saveSalesBase" id="addCustomer">
 			<div class="row">
 				<div class="col-xs-3">
-				<label class="form-group" for="invoice-no"
+					<label class="form-group" for="invoice-no"
 						value="salesBaseBean.invoice">INVOICE NO</label>
 					<s:textfield name="salesBaseBean.invoiceNo" type="text"
 						value="%{salesBaseBean.invoiceNo}" id="invoice-no"
 						class="form-control" placeholder="" readonly="true" />
-				
+
 				</div>
 				<div class="col-xs-3">
 					<label class="form-group" for="invoice-date">INVOICE DATE</label> <input
@@ -33,23 +33,23 @@
 						style="font-size: 22px; float: right; margin: -46px auto;"></i>
 				</div>
 				<div class="col-xs-3">
-				<label class="form-group" for="Customer-code">Customer Code</label>
-					<s:textfield name="salesBaseBean.customerId.customerCode" type="text"
-						id="Customer-code" value="" class="form-control"
+					<label class="form-group" for="Customer-code">Customer Code</label>
+					<s:textfield name="salesBaseBean.customerId.customerCode"
+						type="text" id="Customer-code" value="" class="form-control"
 						onkeyup="getValue(this)" placeholder="CustomerCode" />
-				
+
 				</div>
 				<div class="col-xs-3">
-				<label class="form-group" for="gst-code">STATE TO SUPPLY</label>
-					<s:textfield name="salesBaseBean.stateToSupply" type="text" value=""
-						id="gst-code" class="form-control" placeholder="GSTCODE" />
+					<label class="form-group" for="gst-code">STATE TO SUPPLY</label>
+					<s:textfield name="salesBaseBean.stateToSupply" type="text"
+						value="" id="gst-code" class="form-control" placeholder="state to supply" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-xs-3">
 					<label class="form-group" for="gst-code">PLACE TO SUPPLY</label>
-					<s:textfield name="salesBaseBean.placeToSupply" type="text" value=""
-						id="gst-code" class="form-control" placeholder="GSTCODE" />
+					<s:textfield name="salesBaseBean.placeToSupply" type="text"
+						value="" id="gst-code" class="form-control" placeholder="place to supply" />
 				</div>
 				<div class="col-xs-3">
 					<label class="form-group" for="purch-date">PURCHASE DATE</label> <input
@@ -59,37 +59,23 @@
 						required="required"> <i class="fa fa-calendar"
 						style="font-size: 22px; float: right; margin: -46px auto;"></i>
 				</div>
-				<div class="col-xs-3">
-					
-				</div>
+				<div class="col-xs-3"></div>
 				<div class="col-xs-3">
 					<button class="btn btn-sm btn-success" type="submit"
-						id="submit-btn">Submit</button>
+						id="submit-btn" onclick="return validate()">Submit</button>
 				</div>
 			</div>
 			<hr>
 			<div class="row">
-				<div class="col-xs-3">
-					
-				</div>
-				<div class="col-xs-3">
-					
-				</div>
-				<div class="col-xs-3">
-					
-				</div>
-				<div class="col-xs-3">
-					
-				</div>
+				<div class="col-xs-3"></div>
+				<div class="col-xs-3"></div>
+				<div class="col-xs-3"></div>
+				<div class="col-xs-3"></div>
 			</div>
 			<hr>
 			<div class="row">
-				<div class="col-xs-6">
-					
-				</div>
-				<div class="col-xs-6">
-					
-				</div>
+				<div class="col-xs-6"></div>
+				<div class="col-xs-6"></div>
 			</div>
 		</form>
 	</div>
@@ -125,6 +111,36 @@
 				delay : 100
 			});
 		});
+
+
+		function validate(){
+			if ($("input[name='salesBaseBean.invoiceDate']").val() == '' 
+				|| $("input[name='salesBaseBean.invoiceDate']").val() == 0) {
+				alert('Provide invoice date')
+				return false; 
+			}
+			if ($("input[name='salesBaseBean.customerId.customerCode']").val() == '' 
+				|| $("input[name='salesBaseBean.customerId.customerCode']").val() == 0) {
+				alert('Provide customer code')
+				return false;
+			}
+			if ($("input[name='salesBaseBean.stateToSupply']").val() == '' 
+				|| $("input[name='salesBaseBean.stateToSupply']").val() == 0) {
+				alert('Provide state to supply')
+				return false;
+			}
+			if ($("input[name='salesBaseBean.placeToSupply']").val() == '' 
+				|| $("input[name='salesBaseBean.placeToSupply']").val() == 0) {
+				alert('Provide place to supply')
+				return false;
+			}
+			if ($("input[name='salesBaseBean.purchaseDate']").val() == '' 
+				|| $("input[name='salesBaseBean.purchaseDate']").val() == 0) {
+				alert('Provide purchase date')
+				return false;
+			}
+	      return true;
+		}
 	</script>
 </body>
 </html>

@@ -97,12 +97,30 @@ background-color: #222222;}
 	function deleteCategory(productid) {
 		location.href = "deleteProduct?productBean.productId=" + productid;
 	}
+	function validate(){
+		if ($("input[name='productBean.category.categoryId']").val() == '' 
+			|| $("input[name='productBean.category.categoryId']").val() == 0) {
+			alert('SELECT CATEGORY')
+			return false; 
+		}
+		if ($("input[name='productBean.productCode']").val() == '' 
+			|| $("input[name='productBean.productCode']").val() == 0) {
+			alert('Provide PRODUCT code')
+			return false;
+		}
+		if ($("input[name='productBean.productName']").val() == '' 
+			|| $("input[name='productBean.productName']").val() == 0) {
+			alert('Provide PRODUCT NAME')
+			return false;
+		}
+      return true;
+	}
 </script>
 <body>
 	<nav class="navbar navbar-inverse bar">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="goToHome">Tesseract</a>
+				<a class="navbar-brand" href="goToHome">Tiles Point</a>
 			</div>
 			<ul class="nav navbar-nav">
 				<li><a href="goToHome">Home</a></li>
@@ -170,7 +188,7 @@ background-color: #222222;}
 												<option value="Active">Active</option>
 												<option value="Inactive">Inactive</option>
 											</select>&nbsp &nbsp
-											<button class="waves-effect waves-light btn" type="submit">Submit</button>
+											<button class="waves-effect waves-light btn" type="submit" onclick="return validate()">Submit</button>
 
 										</div>
 									</div>

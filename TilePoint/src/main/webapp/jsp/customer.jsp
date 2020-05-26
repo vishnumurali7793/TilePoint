@@ -11,18 +11,21 @@
 	href="resources/bootstrap/css/bootstrap.min.css">
 <script type="text/javascript"
 	src="resources/bootstrap/js/bootstrap.min.js"></script>
-<title>tessaract</title>
+<title>CUSTOMER PAGE</title>
 </head>
 <style type="text/css">
 body {
-	margin: 0;
+	margin-left: 30px;
+	margin-right: 30px;
 	padding: 0;
+	background-color: #e7e6b8;
 }
 
 table {
 	font-family: arial, sans-serif;
 	border-collapse: collapse;
 	width: 100%;
+	border-top: 2px solid #dddddd;
 }
 
 td, th {
@@ -71,6 +74,32 @@ td, th {
 	justify-content: center;
 	align-items: center;
 }
+
+.panel h2 {
+	color: #337ab7;
+}
+
+.panel-body label {
+	padding-right: 10px;
+	padding-left: 20px;
+}
+
+.btn {
+	color: #ffffff;
+	background-color: #337ab7;
+}
+
+.panel-body {
+	text-align: center;
+}
+
+.dropdown-menu>li>a {
+	color: #dcf1cf;
+}
+
+.navbar-nav>li>.dropdown-menu {
+	background-color: #222222;
+}
 </style>
 <script type="text/javascript">
 	function editCustomer(custid) {
@@ -79,6 +108,44 @@ td, th {
 
 	function deleteCustomer(custid) {
 		location.href = "deleteCustomer?customerBean.customerId=" + custid;
+	}
+	function validate() {
+		if ($("input[name='customerBean.customerCode']").val() == ''
+				|| $("input[name='customerBean.customerCode']").val() == 0) {
+			alert('Provide customer code')
+			return false;
+		}
+		if ($("input[name='customerBean.customerName']").val() == ''
+				|| $("input[name='customerBean.customerName']").val() == 0) {
+			alert('Provide customer name')
+			return false;
+		}
+		if ($("input[name='customerBean.address1']").val() == ''
+				|| $("input[name='customerBean.address1']").val() == 0) {
+			alert('Provide customer address1')
+			return false;
+		}
+		if ($("input[name='customerBean.address2']").val() == ''
+				|| $("input[name='customerBean.address2']").val() == 0) {
+			alert('Provide customer address2')
+			return false;
+		}
+		if ($("input[name='customerBean.contact']").val() == ''
+				|| $("input[name='customerBean.contact']").val() == 0) {
+			alert('Provide customer contact')
+			return false;
+		}
+		if ($("input[name='customerBean.pin']").val() == ''
+				|| $("input[name='customerBean.pin']").val() == 0) {
+			alert('Provide customer pincode')
+			return false;
+		}
+		if ($("input[name='customerBean.state']").val() == ''
+				|| $("input[name='customerBean.state']").val() == 0) {
+			alert('Provide customer state')
+			return false;
+		}
+		return true;
 	}
 </script>
 
@@ -92,7 +159,7 @@ td, th {
 	<nav class="navbar navbar-inverse bar">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="goToHome">Tesseract</a>
+				<a class="navbar-brand" href="goToHome">Tiles Point</a>
 			</div>
 			<ul class="nav navbar-nav">
 				<li><a href="goToHome">Home</a></li>
@@ -103,18 +170,15 @@ td, th {
 						<li><a href="goToCategory">Category</a></li>
 						<li><a href="goToProduct">Product</a></li>
 						<li class="active"><a href="goToCustomer">Customer</a></li>
-					</ul></li>
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Transactions <span
-						class="caret"></span></a>
-					<ul class="dropdown-menu">
 						<li><a href="goToSales">Sales</a></li>
+						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
+				<li><a href="#">Page 2</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<%-- <li><a href="#"><span class="glyphicon glyphicon-user"></span>
 						Sign Up</a></li> --%>
-				<li><a href="logout"><span
+				<li><a href="logout" class=" btn-A"><span
 						class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 			</ul>
 		</div>
@@ -122,7 +186,7 @@ td, th {
 	<div class="container-fluid">
 		<div class="row">
 			<div class="panel">
-				<h2>CUSTOMER</h2>
+				<h2 align="center">CUSTOMER</h2>
 				<div class="panel-group" id="accordion">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
@@ -144,7 +208,7 @@ td, th {
 												class="validate" placeholder="customerCode"> <label>Customer
 												Name</label> <input name="customerBean.customerName" type="text"
 												value="<s:property value="customerBean.customerName"/>"
-												class="validate" placeholder="customerName"> <label>Category
+												class="validate" placeholder="customerName"> <label>Customer
 												Address1</label> <input name="customerBean.address1" type="text"
 												class="validate"
 												value="<s:property value="customerBean.address1"/>"
@@ -152,8 +216,8 @@ td, th {
 												Address2</label> <input name="customerBean.address2" type="text"
 												class="validate"
 												value="<s:property value="customerBean.address2"/>"
-												placeholder="address"> <label>Email</label> <input
-												name="customerBean.email" type="text" class="validate"
+												placeholder="address"> <br> <br> <label>Email</label>
+											<input name="customerBean.email" type="text" class="validate"
 												value="<s:property value="customerBean.email"/>"
 												placeholder="email"> <label>Customer Contact</label>
 											<input name="customerBean.contact" type="text"
@@ -179,15 +243,15 @@ td, th {
 												value="<s:property value="customerBean.addedOn"/>"
 												required="required"> <i class="fa fa-calendar"
 												style="font-size: 22px; float: right; margin: -46px auto;"></i>
-
-											<label>Status</label> <select
+											<br> <br> <label>Status</label> <select
 												name="customerBean.activeStatus"
 												value="<s:property value="customerBean.activeStatus"/>"
 												required="required" class="">
 												<option value="Active">Active</option>
 												<option value="Inactive">Inactive</option>
 											</select>&nbsp &nbsp
-											<button class="waves-effect waves-light btn" type="submit">Submit</button>
+											<button class="waves-effect waves-light btn" type="submit"
+												onclick="return validate()">Submit</button>
 
 										</div>
 									</div>
@@ -240,10 +304,10 @@ td, th {
 													<td><s:property value="state" /></td>
 													<td><s:property value="addedOn" /></td>
 													<td><s:property value="activeStatus" /></td>
-													<td><button class="btn-xs btn-link"
-															onclick="editCustomer('<s:property value="customerId"/>')">[EDIT]</button>
-														<button class="btn-xs btn-link"
-															onclick="deleteCustomer('<s:property value="customerId"/>')">[DELETE]</button></td>
+													<td><button class="btn-xs btn-link btn"
+															onclick="editCustomer('<s:property value="customerId"/>')">EDIT</button>
+														<button class="btn-xs btn-link btn"
+															onclick="deleteCustomer('<s:property value="customerId"/>')">DELETE</button></td>
 												</tr>
 											</s:iterator>
 
