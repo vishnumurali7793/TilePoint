@@ -24,6 +24,14 @@ body {
 .bar {
 	border-radius: 0px;
 }
+
+.dropdown-menu>li>a {
+	color: #dcf1cf;
+}
+
+.navbar-nav>li>.dropdown-menu {
+	background-color: #222222;
+}
 </style>
 </head>
 <body>
