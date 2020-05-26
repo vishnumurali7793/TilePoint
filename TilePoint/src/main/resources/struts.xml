@@ -25,6 +25,11 @@
 			method="goToHome">
 			<result name="success">/jsp/Home.jsp</result>
 		</action>
+		
+		<action name="goToDashBoard" class="com.tilepoint.TestAction"
+			method="goToDashBoard">
+			<result name="success">/jsp/Dashboard.jsp</result>
+		</action>
 
 		<action name="logout" class="com.tilepoint.LoginAction"
 			method="logoutUser">
@@ -167,6 +172,13 @@
 				<param name="contentType">${documentContentType}</param>
 				<param name="inputName">fileInputStream</param>
 				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		
+		<action name="getSalesDetails" class="com.tilepoint.TestAction"
+			method="getSalesDetails">
+			<result type="json">
+				<param name="root">salesDetailsList</param>
 			</result>
 		</action>
 		<!-- sales page finished -->

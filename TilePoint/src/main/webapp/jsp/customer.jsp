@@ -96,6 +96,7 @@ td, th {
 			</div>
 			<ul class="nav navbar-nav">
 				<li><a href="goToHome">Home</a></li>
+				<li class=""><a href="goToDashBoard">Dashboard</a></li>
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
 					<ul class="dropdown-menu">

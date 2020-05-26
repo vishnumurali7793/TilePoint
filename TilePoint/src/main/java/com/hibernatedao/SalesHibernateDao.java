@@ -190,7 +190,7 @@ public class SalesHibernateDao {
 			sessionFactory.close();
 		}
 	}
-	
+
 	public SalesBaseBean getsalesbase(Integer salesid) {
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 		Session session = sessionFactory.openSession();
@@ -207,5 +207,25 @@ public class SalesHibernateDao {
 			sessionFactory.close();
 		}
 
+	}
+
+	public Collection<Object> getSalesCountByDate(String startDate, String endDate) {
+
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+//		String queryString = "SELECT count(*), SUBSTRING(invoiceDate, 1, 10) FROM SalesBaseBean WHERE invoiceDate BETWEEN " + "'"
+//				+ startDate + "'" + " AND " + "'" + endDate + "'" + " GROUP BY invoiceDate";
+		String queryString = "SELECT count(*), SUBSTRING(invoiceDate, 1, 10) FROM SalesBaseBean GROUP BY invoiceDate";
+
+		try {
+			return session.createQuery(queryString).list();
+		} catch (Exception e) {
+			return null;
+		} finally {
+			session.close();
+			sessionFactory.close();
+		}
 	}
 }

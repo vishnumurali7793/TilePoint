@@ -31,13 +31,13 @@
 		<div class="row" style="margin-top: 100px; text-align: center;">
 			<div class="col-xs-12">
 				<span class="icon glyphicon glyphicon-thumbs-down"
-					style="font-size: 750%; color: #013872;"></span>
+					style="font-size: 750%; color: #eb4034;"></span>
 			</div>
 		</div>
 		<div class="row" style="margin-top: 50px; text-align: center;">
 			<div class="col-xs-12">
 				<label
-					style="font-size: 450%; color: #013872; font-family: cursive;">Some
+					style="font-size: 450%; color: #eb4034; font-family: sans-serif;">Some
 					error occured :(</label>
 			</div>
 		</div>

@@ -5,9 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript" src="resources/jquery/jquery-3.5.0.min.js"></script>
-<link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css">
-<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="resources/jquery/jquery-3.5.0.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="resources/bootstrap/css/bootstrap.min.css">
+<script type="text/javascript"
+	src="resources/bootstrap/js/bootstrap.min.js"></script>
 <title>category</title>
 </head>
 <style type="text/css">
@@ -71,24 +74,36 @@ td, th {
 	justify-content: center;
 	align-items: center;
 }
-.panel-body label{
-padding-right: 10px;
-padding-left: 20px;
+
+.panel-body label {
+	padding-right: 10px;
+	padding-left: 20px;
 }
-.btn{
-color: #ffffff;
-background-color: #337ab7;
+
+.btn {
+	color: #ffffff;
+	background-color: #337ab7;
 }
+
 .panel-body {
-text-align: center;}
-.panel h2{
-color:#337ab7;}
+	text-align: center;
+}
+
+.panel h2 {
+	color: #337ab7;
+}
 
 .dropdown-menu>li>a {
-color: #dcf1cf;
+	color: #dcf1cf;
 }
-.navbar-nav>li>.dropdown-menu{
-background-color: #222222;}
+
+.navbar-nav>li>.dropdown-menu {
+	background-color: #222222;
+}
+
+.navbar {
+	margin: 0px;
+}
 </style>
 <script type="text/javascript">
 	function editCategory(catid) {
@@ -114,6 +129,7 @@ background-color: #222222;}
 			</div>
 			<ul class="nav navbar-nav">
 				<li><a href="goToHome">Home</a></li>
+				<li class=""><a href="goToDashBoard">Dashboard</a></li>
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
 					<ul class="dropdown-menu">
@@ -121,7 +137,6 @@ background-color: #222222;}
 						<li><a href="goToProduct">Product</a></li>
 						<li><a href="goToCustomer">Customer</a></li>
 						<li><a href="goToSales">Sales</a></li>
-						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
 				<li><a href="#">Page 2</a></li>
 			</ul>
@@ -165,8 +180,8 @@ background-color: #222222;}
 												<option value="Active">Active</option>
 												<option value="Inactive">Inactive</option>
 											</select>&nbsp &nbsp
-												<button class="waves-effect waves-light btn" type="submit">Submit</button>
-											
+											<button class="waves-effect waves-light btn" type="submit">Submit</button>
+
 										</div>
 									</div>
 
@@ -183,8 +198,8 @@ background-color: #222222;}
 								aria-controls="collapse2" href="#collapse2">Category Details</a>
 						</h4>
 					</div>
-					<div id="collapse2" class="panel-collapse collapse in" role="tabpanel"
-						aria-labelledby="collapse-two">
+					<div id="collapse2" class="panel-collapse collapse in"
+						role="tabpanel" aria-labelledby="collapse-two">
 						<div class="panel-body">
 							<div class="container">
 								<h2>Category Table</h2>
