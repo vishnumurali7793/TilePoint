@@ -201,62 +201,76 @@ td, th {
 						<div id="collapse1" class="panel-collapse collapse in">
 							<div class="panel-body ">
 								<s:form action="saveCustomer">
+								<div class="container">
 									<div class="row">
+									<div class="col-md-12">
 										<div class=" col s12">
 											<s:hidden name="customerBean.customerId" />
-
-											<label>Customer Code</label> <input
+											<div class="col-md-4">
+											<label>Customer Code</label><br> <input
 												name="customerBean.customerCode" type="text"
 												value="<s:property value="customerBean.customerCode"/>"
-												class="validate" placeholder="customerCode"> <label>Customer
-												Name</label> <input name="customerBean.customerName" type="text"
-												value="<s:property value="customerBean.customerName"/>"
-												class="validate" placeholder="customerName"> <label>Customer
-												Address1</label> <input name="customerBean.address1" type="text"
-												class="validate"
-												value="<s:property value="customerBean.address1"/>"
-												placeholder="address"> <label>Customer
-												Address2</label> <input name="customerBean.address2" type="text"
+												class="validate" placeholder="customerCode"> <br><br>
+												 <label>Customer
+												Address2</label> <br><input name="customerBean.address2" type="text"
 												class="validate"
 												value="<s:property value="customerBean.address2"/>"
-												placeholder="address"> <br> <br> <label>Email</label>
-											<input name="customerBean.email" type="text" class="validate"
-												value="<s:property value="customerBean.email"/>"
-												placeholder="email"> <label>Customer Contact</label>
-											<input name="customerBean.contact" type="text"
-												class="validate"
-												value="<s:property value="customerBean.contact"/>"
-												placeholder="contactNumber"> <label>Customer
-												Pin</label> <input name="customerBean.pin" type="text"
+												placeholder="address"><br><br>
+												<label>Customer
+												Pin</label> <br><input name="customerBean.pin" type="text"
 												class="validate"
 												value="<s:property value="customerBean.pin"/>"
-												placeholder="CustomerPin"> <label>State</label> <input
-												name="customerBean.state" type="text" class="validate"
-												value="<s:property value="customerBean.state"/>"
-												placeholder="STATE">
-											<%-- 
-												<label>Event Date</label> <input
-												name="customerBean.eventDate" type="date" class="validate"
-												value="<s:property value="customerBean.eventDate"/>"
-												required="required"> <i class="fa fa-calendar"
-												style="font-size: 22px; float: right; margin: -46px auto;"></i> --%>
-
-											<label>Date</label> <input name="customerBean.addedOn"
-												type="date" class="validate"
-												value="<s:property value="customerBean.addedOn"/>"
-												required="required"> <i class="fa fa-calendar"
-												style="font-size: 22px; float: right; margin: -46px auto;"></i>
-											<br> <br> <label>Status</label> <select
+												placeholder="CustomerPin"> 
+												<br> <br> <label>Status</label><br> <select
 												name="customerBean.activeStatus"
 												value="<s:property value="customerBean.activeStatus"/>"
 												required="required" class="">
 												<option value="Active">Active</option>
 												<option value="Inactive">Inactive</option>
 											</select>&nbsp &nbsp
-											<button class="waves-effect waves-light btn" type="submit"
+											</div>
+											<div class="col-md-4">
+												<label>Customer
+												Name</label> <br><input name="customerBean.customerName" type="text"
+												value="<s:property value="customerBean.customerName"/>"
+												class="validate" placeholder="customerName"><br></br>
+												<label>Email</label><br>
+											<input name="customerBean.email" type="text" class="validate"
+												value="<s:property value="customerBean.email"/>"
+												placeholder="email">
+												<br> <br>  <label>State</label> <br><input
+												name="customerBean.state" type="text" class="validate"
+												value="<s:property value="customerBean.state"/>"
+												placeholder="STATE"><br><br>
+												<button class="waves-effect waves-light btn" type="submit"
 												onclick="return validate()">Submit</button>
-
+												</div>
+												<div class="col-md-4">
+												 <label>Customer
+												Address1</label> </br><input name="customerBean.address1" type="text"
+												class="validate"
+												value="<s:property value="customerBean.address1"/>"
+												placeholder="address"><br><br>
+												 <label>Customer Contact</label><br>
+											<input name="customerBean.contact" type="text"
+												class="validate"
+												value="<s:property value="customerBean.contact"/>"
+												placeholder="contactNumber"><br><br>
+												<label>Date</label> <br><input name="customerBean.addedOn"
+												type="date" class="validate"
+												value="<s:property value="customerBean.addedOn"/>"
+												required="required"> <i class="fa fa-calendar"
+												style="font-size: 22px; float: right; margin: -46px auto;"></i>
+												</div>
+											<%-- 
+												<label>Event Date</label> <input
+												name="customerBean.eventDate" type="date" class="validate"
+												value="<s:property value="customerBean.eventDate"/>"
+												required="required"> <i class="fa fa-calendar"
+												style="font-size: 22px; float: right; margin: -46px auto;"></i> --%>
 										</div>
+									</div>
+									</div>
 									</div>
 
 								</s:form>

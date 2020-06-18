@@ -19,11 +19,25 @@ body {
 	background: linear-gradient(90deg, rgba(196, 85, 42, 1) 10%,
 		rgba(195, 12, 157, 1) 100%);
 	color: white;
+	/* margin-left: 30px;
+	margin-right: 30px;
+	padding: 0; */
+	/* background-color: #e7e6b8; */
 }
 
 .bar {
 	border-radius: 0px;
 }
+.panel-body label{
+padding-right: 10px;
+padding-left: 20px;
+}
+.btn{
+color: #ffffff;
+background-color: #337ab7;
+}
+.panel h2{
+color:#337ab7;}
 
 .dropdown-menu>li>a {
 	color: #dcf1cf;
@@ -31,6 +45,20 @@ body {
 
 .navbar-nav>li>.dropdown-menu {
 	background-color: #222222;
+}
+.dropdown-menu>li>a:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: #337ab7;
+    outline: 0;
+}
+.slider{
+height: 100% !important;
+width: 100% !important;
+}
+.container{
+height: 100% !important;
+width: 100% !important;
 }
 </style>
 </head>
@@ -65,5 +93,49 @@ body {
 			</ul>
 		</div>
 	</nav>
+	
+	<div class="container">
+	<div class="row">
+		<div class="slider" align="center">
+	<div class="">
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" width="1349" height="450" role="listbox">
+
+      <div class="item active">
+        <img src="resources/images/ss1.jpg" alt="tilesPoint" width="1349" height="450">
+        <div class="carousel-caption">
+		</div>
+	  </div>
+
+      <div class="item">
+       <img src="resources/images/ss2.jpg" alt="tilesPoint" width="1349" height="450">
+        <div class="carousel-caption">
+		</div>
+	  </div>
+    
+      <div class="item">
+       <img src="resources/images/ss3.jpg" alt="tilesPoint" width="1349" height="450">
+        <div class="carousel-caption">
+		 </div>
+	  </div>
+
+  
+  
+    </div>
+
+  </div>
+</div>
+</div>
+
+</div>
+</div>
 </body>
 </html>

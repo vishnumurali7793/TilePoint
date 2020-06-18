@@ -162,11 +162,14 @@ background-color: #222222;}
 						<div id="collapse1" class="panel-collapse collapse in">
 							<div class="panel-body ">
 								<s:form action="saveProduct">
+								<div class="container">
 									<div class="row">
+									<div class="col-md-12"></div>
 										<div class=" col s12">
 											<s:hidden name="categoryBean.categoryId" />
 											<s:hidden name="productBean.productId" />
-											<label>CategoryName</label> <select
+											<div class="col-md-4">
+											<label>CategoryName</label> <br><select
 												class="custom-select custom-select-sm" id="select"
 												value="<s:property value="productBean.category.categoryName" />"
 												name="productBean.category.categoryId">
@@ -174,27 +177,36 @@ background-color: #222222;}
 													<option value="<s:property value='categoryId'/>"><s:property
 															value='categoryName' /></option>
 												</s:iterator>
-											</select> <label>ProductCode</label> <input
-												name="productBean.productCode" type="text"
-												value="<s:property value="productBean.productCode"/>"
-												class="validate" placeholder="ProductCode"> <label>ProductName</label>
-											<input name="productBean.productName" type="text"
-												class="validate"
-												value="<s:property value="productBean.productName"/>"
-												placeholder="ProductName"> <label>Date</label> <input
+											</select> <br><br>
+											<label>Date</label><br> <input
 												name="productBean.addedOn" type="date" class="validate"
 												value="<s:property value="productBean.addedOn"/>"
 												required="required"> <i class="fa fa-calendar"
 												style="font-size: 22px; float: right; margin: -46px auto;"></i>
-											<label>Status</label> <select name="productBean.activeStatus"
+											</div>
+											<div class="col-md-4">
+											<label>ProductCode</label><br> <input
+												name="productBean.productCode" type="text"
+												value="<s:property value="productBean.productCode"/>"
+												class="validate" placeholder="ProductCode"><br><br>
+												<label>Status</label><br> <select name="productBean.activeStatus"
 												value="<s:property value="productBean.activeStatus"/>"
 												required="required" class="">
 												<option value="Active">Active</option>
 												<option value="Inactive">Inactive</option>
 											</select>&nbsp &nbsp
-											<button class="waves-effect waves-light btn" type="submit" onclick="return validate()">Submit</button>
+												</div><div class="col-md-4">
+												 <label>ProductName</label><br>
+											<input name="productBean.productName" type="text"
+												class="validate"
+												value="<s:property value="productBean.productName"/>"
+												placeholder="ProductName"> 
+												<br><br>
+											<button class="waves-effect waves-light btn" type="submit" onclick="return validate()">Submit</button></div>
 
 										</div>
+									</div>
+									</div>
 									</div>
 
 								</s:form>

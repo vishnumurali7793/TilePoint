@@ -167,26 +167,35 @@ td, th {
 						<div id="collapse1" class="panel-collapse collapse in">
 							<div class="panel-body ">
 								<s:form action="saveCategory">
+								<div class="container">
 									<div class="row">
+									<div class="col-md-12">
 										<div class=" col s12">
 											<s:hidden name="categoryBean.categoryId" />
-											<label>Category Code</label> <input
+											<div class="col-md-4">
+											<label>Category Code</label></br> <input
 												name="categoryBean.categoryCode" type="text"
 												value="<s:property value="categoryBean.categoryCode"/>"
-												class="validate" placeholder="CategoryCode"> <label>Category
-												Name</label> <input name="categoryBean.categoryName" type="text"
+												class="validate" placeholder="CategoryCode"> 
+												</div><div class="col-md-4">
+												<label>Category
+												Name</label> <br><input name="categoryBean.categoryName" type="text"
 												class="validate"
 												value="<s:property value="categoryBean.categoryName"/>"
-												placeholder="CategoryName"> <label>Status</label> <select
+												placeholder="CategoryName"> </br><br>
+												<button class="waves-effect waves-light btn" type="submit">Submit</button>
+												</div><div class="col-md-4"><label>Status</label><br> <select
 												name="categoryBean.activeStatus"
 												value="<s:property value="categoryBean.activeStatus"/>"
 												required="required" class="">
 												<option value="Active">Active</option>
 												<option value="Inactive">Inactive</option>
-											</select>&nbsp &nbsp
-											<button class="waves-effect waves-light btn" type="submit">Submit</button>
+											</select>&nbsp &nbsp</div>
+											
 
 										</div>
+									</div>
+									</div>
 									</div>
 
 								</s:form>
