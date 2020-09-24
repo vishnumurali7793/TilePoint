@@ -181,7 +181,22 @@
 				<param name="root">salesDetailsList</param>
 			</result>
 		</action>
-		<!-- sales page finished -->
+		<action name="gotToQuickSales" class="com.tilepoint.SalesAction"
+			method="initiateSales">
+			<result name="success">/jsp/AddSales.jsp</result>
+		</action>
+		<action name="getStateSetupList" class="com.tilepoint.SalesAction"
+			method="getStateSetupList">
+			<result type="json">
+				<param name="root">stateList</param>
+			</result>
+		</action>
+		<action name="getItemAutoCompleteForSales" class="com.tilepoint.SalesAction"
+			method="getItemAutoCompleteForSales">
+			<result type="json">
+				<param name="root">itemList</param>
+			</result>
+		</action>
 	</package>
 
 

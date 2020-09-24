@@ -29,6 +29,9 @@ public class SalesAction extends ActionSupport {
 	private List<ProductBean> prodList;
 	private SalesAmountBean salesAmountBean;
 	private List<SalesAmountBean> salamtList;
+	private Collection<Object> stateList;
+	private String autoCompleteSTR;
+	private Collection<ProductBean> itemList;
 
 	public List<ProductBean> getProdList() {
 		return prodList;
@@ -44,23 +47,11 @@ public class SalesAction extends ActionSupport {
 	}
 
 	public String getmodalForSales() {
-		String newInvc = null;
-		int year = 0;
-		Integer invoival = salesHibernateDao.invoiceSales();
-		int abc = 0;
-		if (invoival != null) {
-			abc = invoival + 1;
-			Date dt = new Date();
-			year = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(dt)).getYear();
-			newInvc = "SS/" + abc + "/" + year;
-		} else {
-			newInvc = "SS/" + "1" + "/" + year;
-		}
+		String invoiceNumber = generateSalesInvoiceNumber();
 		try {
 			salesBaseBean = new SalesBaseBean();
-			salesBaseBean.setInvoiceNo(newInvc);
+			salesBaseBean.setInvoiceNo(invoiceNumber);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return SUCCESS;
@@ -149,6 +140,47 @@ public class SalesAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
+	
+	public String initiateSales() {
+		salesBaseBean = new SalesBaseBean();
+		String invoiceNumber = generateSalesInvoiceNumber();
+		salesBaseBean.setInvoiceNo(invoiceNumber);
+		salesBaseBean.setInvoiceDate(new Date());
+		return SUCCESS;
+	}
+	
+	public String generateSalesInvoiceNumber() {
+		String newInvoiceNumber = null;
+		int year = 0;
+		Integer invoiceCount = salesHibernateDao.invoiceSales();
+		int newInvoiceCount = 0;
+		if (invoiceCount != null && invoiceCount > 0) {
+			newInvoiceCount = invoiceCount + 1;
+			Date dt = new Date();
+			year = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(dt)).getYear();
+			newInvoiceNumber = "SS/" + newInvoiceCount + "/" + year;
+		} else {
+			newInvoiceNumber = "SS/" + "1" + "/" + year;
+		}
+
+		return newInvoiceNumber;
+	}
+	
+	public String getStateSetupList() {
+		if(!autoCompleteSTR.isEmpty() && null != autoCompleteSTR) {
+			stateList = new ArrayList<>();
+			stateList = salesHibernateDao.getStateSetupAutoComplete(autoCompleteSTR);
+		}
+		return SUCCESS;
+	}
+	
+	public String getItemAutoCompleteForSales() {
+		if(!autoCompleteSTR.isEmpty() && null != autoCompleteSTR) {
+			itemList = new ArrayList<>();
+			itemList = salesHibernateDao.getItemAutoCompleteForSales(autoCompleteSTR);
+		}
+		return SUCCESS;
+	}
 
 	public SalesBaseBean getSalesBaseBean() {
 		return salesBaseBean;
@@ -212,6 +244,30 @@ public class SalesAction extends ActionSupport {
 
 	public void setSalesDetails(SalesDetailsBean salesDetails) {
 		this.salesDetails = salesDetails;
+	}
+
+	public Collection<Object> getStateList() {
+		return stateList;
+	}
+
+	public void setStateList(Collection<Object> stateList) {
+		this.stateList = stateList;
+	}
+
+	public Collection<ProductBean> getItemList() {
+		return itemList;
+	}
+
+	public void setItemList(Collection<ProductBean> itemList) {
+		this.itemList = itemList;
+	}
+
+	public String getAutoCompleteSTR() {
+		return autoCompleteSTR;
+	}
+
+	public void setAutoCompleteSTR(String autoCompleteSTR) {
+		this.autoCompleteSTR = autoCompleteSTR;
 	}
 
 }

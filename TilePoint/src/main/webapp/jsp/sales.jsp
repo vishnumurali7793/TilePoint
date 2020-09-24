@@ -198,9 +198,8 @@ td, th {
 														href="editsalesdetails?salesBaseBean.salesId=<s:property value="salesId" />"
 														src="tessaract/src/main/webapp/images/edit.png">E</a>
 														<button class="btn-xs btn btn-danger"
-															title="Generate sales invoice">
-															<span class="glyphicon glyphicon-print"
-																onclick="generatereport('<s:property value="salesId" />')"></span>
+															title="Generate sales invoice" onclick="generatereport('<s:property value="salesId" />')">
+															<span class="glyphicon glyphicon-print"></span>
 														</button></td>
 												</tr>
 											</s:iterator>

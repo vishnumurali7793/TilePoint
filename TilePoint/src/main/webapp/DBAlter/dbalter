@@ -109,5 +109,14 @@ ADD COLUMN `loadingcharge` DOUBLE NULL AFTER `igstamt`;
  
  ALTER TABLE `tilespoint`.`salesdetails` 
 CHANGE COLUMN `hsn_code` `hsn_code` VARCHAR(45) NULL DEFAULT NULL ;
+
+*************** 24-09-2020 ********************************************
+
+CREATE TABLE `tilespoint`.`state_setup` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `state_name` VARCHAR(255) NULL,
+  `state_code_numeric` VARCHAR(5) NULL,
+  `state_code_alpha` VARCHAR(5) NULL,
+  PRIMARY KEY (`id`));
   
     

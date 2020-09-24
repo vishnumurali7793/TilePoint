@@ -84,6 +84,8 @@ width: 100% !important;
 					<ul class="dropdown-menu">
 						<li><a href="goToSales">Sales</a></li>
 					</ul></li>
+				<li class="quick-sales"><a href="gotToQuickSales"><span
+						class="glyphicon glyphicon-piggy-bank"></span>&nbsp;&nbsp;Quick Sales</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<%-- <li><a href="#"><span class="glyphicon glyphicon-user"></span>
