@@ -32,6 +32,11 @@ public class SalesAction extends ActionSupport {
 	private Collection<Object> stateList;
 	private String autoCompleteSTR;
 	private Collection<ProductBean> itemList;
+	private SalesBaseBean itemsBase;
+	private List<SalesDetailsBean> itemsDetails;
+	private SalesAmountBean invoiceAmount;
+	
+	private String processFlag;
 
 	public List<ProductBean> getProdList() {
 		return prodList;
@@ -142,10 +147,9 @@ public class SalesAction extends ActionSupport {
 	}
 	
 	public String initiateSales() {
-		salesBaseBean = new SalesBaseBean();
 		String invoiceNumber = generateSalesInvoiceNumber();
-		salesBaseBean.setInvoiceNo(invoiceNumber);
-		salesBaseBean.setInvoiceDate(new Date());
+		itemsBase = new SalesBaseBean();
+		itemsBase.setInvoiceNo(invoiceNumber);
 		return SUCCESS;
 	}
 	
@@ -178,6 +182,31 @@ public class SalesAction extends ActionSupport {
 		if(!autoCompleteSTR.isEmpty() && null != autoCompleteSTR) {
 			itemList = new ArrayList<>();
 			itemList = salesHibernateDao.getItemAutoCompleteForSales(autoCompleteSTR);
+		}
+		return SUCCESS;
+	}
+	
+	public String saveAndGenerateSalesInvoice() {
+		if(itemsBase != null && itemsDetails != null && invoiceAmount != null) {
+			SalesBaseBean tempItemBase = new SalesBaseBean();
+			Integer customerId = salesHibernateDao.getCusDetails(itemsBase.getCustomerId().getCustomerCode());
+			itemsBase.getCustomerId().setCustomerId(customerId);
+			itemsBase.setMonth(String.valueOf(LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(new Date())).getMonthValue()));
+			itemsBase.setYear(String.valueOf(LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(new Date())).getYear()));
+			tempItemBase = salesHibernateDao.saveInvoiceBasicDetails(itemsBase);
+			
+			if(tempItemBase.getSalesId() != null) {
+				for(SalesDetailsBean itemDetail : itemsDetails) {
+					if(itemDetail != null && itemDetail.getProductId().getProductId() != null) {
+						itemDetail.setSalesId(new SalesBaseBean());
+						itemDetail.getSalesId().setSalesId(tempItemBase.getSalesId());
+						salesHibernateDao.savesalesdetails(itemDetail);
+					}
+				}
+			}
+			setProcessFlag("SUCCESS");
+		}else {
+			setProcessFlag("FAILED");
 		}
 		return SUCCESS;
 	}
@@ -268,6 +297,38 @@ public class SalesAction extends ActionSupport {
 
 	public void setAutoCompleteSTR(String autoCompleteSTR) {
 		this.autoCompleteSTR = autoCompleteSTR;
+	}
+
+	public SalesBaseBean getItemsBase() {
+		return itemsBase;
+	}
+
+	public void setItemsBase(SalesBaseBean itemsBase) {
+		this.itemsBase = itemsBase;
+	}
+
+	public List<SalesDetailsBean> getItemsDetails() {
+		return itemsDetails;
+	}
+
+	public void setItemsDetails(List<SalesDetailsBean> itemsDetails) {
+		this.itemsDetails = itemsDetails;
+	}
+
+	public SalesAmountBean getInvoiceAmount() {
+		return invoiceAmount;
+	}
+
+	public void setInvoiceAmount(SalesAmountBean invoiceAmount) {
+		this.invoiceAmount = invoiceAmount;
+	}
+
+	public String getProcessFlag() {
+		return processFlag;
+	}
+
+	public void setProcessFlag(String processFlag) {
+		this.processFlag = processFlag;
 	}
 
 }

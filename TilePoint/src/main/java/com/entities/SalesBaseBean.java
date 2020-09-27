@@ -46,8 +46,6 @@ public class SalesBaseBean {
 	@Column(name = "year")
 	private String year;
 
-	
-
 	public Integer getSalesId() {
 		return salesId;
 	}
@@ -119,6 +117,5 @@ public class SalesBaseBean {
 	public void setYear(String year) {
 		this.year = year;
 	}
-	
 	
 }

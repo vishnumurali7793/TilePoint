@@ -139,6 +139,10 @@ body {
 	margin-right: 30px;
 }
 
+.mr-40 {
+	margin-right: 40px;
+}
+
 .ml-10 {
 	margin-left: 10px;
 }
@@ -236,4 +240,12 @@ table.borderless td, table.borderless th {
 
 .capsule:hover {
 	background-color: #005cc0;
+}
+
+.mandatory {
+	color: red;
+}
+
+.icon-small {
+	font-size: 10px;
 }

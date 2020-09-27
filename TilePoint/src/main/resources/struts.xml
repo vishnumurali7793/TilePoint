@@ -6,7 +6,7 @@
 <struts>
 	<constant name="struts.enable.DynamicMethodInvocation"
 		value="false" />
-	<constant name="struts.devMode" value="false" />
+	<constant name="struts.devMode" value="true" />
 	<constant name="struts.custom.i18n.resources"
 		value="ApplicationResources" />
 
@@ -137,12 +137,12 @@
 		</action>
 
 		<action name="getProductListForSales"
-			class="com.tilepoint.SalesAction" method="getProductListForSales">
+				class="com.tilepoint.SalesAction" method="getProductListForSales">
 			<result name="success">/jsp/productListForSales.jsp</result>
 		</action>
 
 		<action name="savesalesform" class="com.tilepoint.SalesAction"
-			method="savesalesform">
+				method="savesalesform">
 			<result name="success" type="redirectAction">
 				<param name="actionName">editsalesdetails</param>
 				<param name="salesBaseBean.salesId">${salesBaseBean.salesId}</param>
@@ -150,7 +150,7 @@
 		</action>
 
 		<action name="savesaleDetails"
-			class="com.tilepoint.SalesAction" method="savesaleDetails">
+				class="com.tilepoint.SalesAction" method="savesaleDetails">
 			<result name="success" type="redirectAction">
 				<param name="actionName">editsalesdetails</param>
 				<param name="salesBaseBean.salesId">${salesBaseBean.salesId}</param>
@@ -158,7 +158,7 @@
 		</action>
 
 		<action name="removeProductFromSales"
-			class="com.tilepoint.SalesAction" method="removeProductFromSales">
+				class="com.tilepoint.SalesAction" method="removeProductFromSales">
 			<result name="success" type="redirectAction">
 				<param name="actionName">editsalesdetails</param>
 				<param name="salesBaseBean.salesId">${salesBaseBean.salesId}</param>
@@ -166,7 +166,7 @@
 		</action>
 
 		<action name="generateSalesReport"
-			class="com.report.ReportAction" method="generateSalesReport">
+				class="com.report.ReportAction" method="generateSalesReport">
 			<result name="success" type="stream">
 				<param name="contentDisposition">inline;filename=${fileName}</param>
 				<param name="contentType">${documentContentType}</param>
@@ -176,25 +176,32 @@
 		</action>
 		
 		<action name="getSalesDetails" class="com.tilepoint.TestAction"
-			method="getSalesDetails">
+				method="getSalesDetails">
 			<result type="json">
 				<param name="root">salesDetailsList</param>
 			</result>
 		</action>
 		<action name="gotToQuickSales" class="com.tilepoint.SalesAction"
-			method="initiateSales">
+				method="initiateSales">
 			<result name="success">/jsp/AddSales.jsp</result>
 		</action>
 		<action name="getStateSetupList" class="com.tilepoint.SalesAction"
-			method="getStateSetupList">
+				method="getStateSetupList">
 			<result type="json">
 				<param name="root">stateList</param>
 			</result>
 		</action>
 		<action name="getItemAutoCompleteForSales" class="com.tilepoint.SalesAction"
-			method="getItemAutoCompleteForSales">
+				method="getItemAutoCompleteForSales">
 			<result type="json">
 				<param name="root">itemList</param>
+			</result>
+		</action>
+		
+		<action name="saveAndGenerateSalesInvoice" class="com.tilepoint.SalesAction" 
+				method="saveAndGenerateSalesInvoice">
+			<result type="json">
+				<param name="root">processFlag</param>
 			</result>
 		</action>
 	</package>

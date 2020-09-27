@@ -267,4 +267,22 @@ public class SalesHibernateDao {
 			sessionFactory.close();
 		}
 	}
+
+	public SalesBaseBean saveInvoiceBasicDetails(SalesBaseBean itemsBase) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+
+		try {
+			session.saveOrUpdate(itemsBase);
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+			sessionFactory.close();
+		}
+		return itemsBase;
+		
+	}
 }

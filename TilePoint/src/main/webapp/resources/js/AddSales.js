@@ -7,18 +7,8 @@ $(document).ready(function() {
 	$('#taxGroup').show();
 	$('#datetimepicker1').datetimepicker({
 		minView: 2,
-		pickTime: true,
+		pickTime: false,
 		autoclose: true,
-		icons: {
-			time: "fa fa-clock-o",
-			date: "fa fa-calendar",
-			up: "fa fa-arrow-up",
-			down: "fa fa-arrow-down",
-			previous: "fa fa-chevron-left",
-			next: "fa fa-chevron-right",
-			today: "fa fa-clock-o",
-			clear: "fa fa-trash-o"
-		}
 	});
 	$('#enableTax').click(function() {
 		if ($('#enableTax').prop('checked')) {
@@ -79,19 +69,24 @@ function addNewRow(tableId) {
 	cell1.appendChild(serialNumber);
 
 	var cell2 = row.insertCell(1);
+	var itemId = document.createElement('input');
+	itemId.type = 'hidden';
+	itemId.classList = "itemId";
+	itemId.name = "itemsDetails[" + (rowCount - 1) + "].productId.productId";
+	cell2.appendChild(itemId);
 	var itemName = document.createElement('input');
 	itemName.type = 'text';
 	itemName.classList = "items_table itemName ui-autocomplete-input";
 	itemName.placeholder = "Item Name";
 	itemName.id = "itemName" + rowCount;
-	itemName.onkeypress =
-		cell2.appendChild(itemName);
+	itemName.onkeypress = cell2.appendChild(itemName);
 
 	var cell3 = row.insertCell(2);
 	var hsnCode = document.createElement('input');
 	hsnCode.type = 'text';
 	hsnCode.classList = "items_table";
 	hsnCode.placeholder = "HSN Code";
+	hsnCode.name = "itemsDetails[" + (rowCount - 1) + "].hsnCode";
 	cell3.appendChild(hsnCode);
 
 	var cell4 = row.insertCell(3);
@@ -99,6 +94,7 @@ function addNewRow(tableId) {
 	quantity.type = 'text';
 	quantity.classList = "items_table";
 	quantity.placeholder = "Quantity";
+	quantity.name = "itemsDetails[" + (rowCount - 1) + "].quantity";
 	cell4.appendChild(quantity);
 
 	var cell5 = row.insertCell(4);
@@ -106,6 +102,7 @@ function addNewRow(tableId) {
 	rate.type = 'text';
 	rate.classList = "items_table";
 	rate.placeholder = "Rate";
+	rate.name = "itemsDetails[" + (rowCount - 1) + "].rate";
 	cell5.appendChild(rate);
 
 	var cell6 = row.insertCell(5);
@@ -113,6 +110,7 @@ function addNewRow(tableId) {
 	grossAmount.type = 'text';
 	grossAmount.classList = "items_table";
 	grossAmount.placeholder = "Gross Amount";
+	rate.name = "itemsDetails[" + (rowCount - 1) + "].totalamount";
 	cell6.appendChild(grossAmount);
 
 	var cell7 = row.insertCell(6);
@@ -181,13 +179,41 @@ $(document).on("keypress", ".itemName", function() {
 				},
 			});
 		},
+		select: function(event, ui) {
+			event.preventDefault();
+			$(this).val(ui.item.label);
+//			$(".itemId").val(ui.item.value);
+			$(this).parent().find("input:hidden:first").val(ui.item.value);
+		},
 		appendTo: '#addSales',
 		autoFocus: true,
 		delay: 100,
-		select: function(event, ui){
-			debugger;
-			$(this).val(ui.item.label);
-			$(".itemId").val(ui.item.value);
-		}
 	});
 });
+
+function enableGstSplit(element) {
+	if (element.value != "" && element.value != undefined) {
+		var gstSplit = element.value / 2;
+		$('#cgst').attr('hidden', false);
+		$('#label_cgst').attr('hidden', false);
+		$('#cgst').val(gstSplit);
+		$('#sgst').attr('hidden', false);
+		$('#label_sgst').attr('hidden', false);
+		$('#sgst').val(gstSplit);
+	}
+}
+
+function addSalesBill(type) {
+	if(type == "S") {
+		$.ajax({
+				url: 'saveAndGenerateSalesInvoice',
+				data: $('#addSales').serialize(),
+				success: function(data) {
+					alert(data);
+				},
+				error: function() {
+					alert('Error occured');
+				}
+			});
+	}
+}

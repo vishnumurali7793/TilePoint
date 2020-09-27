@@ -13,6 +13,9 @@
 <link rel="stylesheet" type="text/css" href="resources/jquery-ui/jquery-ui.css">
 <script type="text/javascript" src="resources/js/AddSales.js"></script>
 <script type="text/javascript" src="resources/js/bootstrap-datetimepicker.js"></script>
+<link href="resources/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="resources/fontawesome/css/brands.css" rel="stylesheet">
+<link href="resources/fontawesome/css/solid.css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>Add New Sales</title>
 </head>
@@ -51,7 +54,7 @@
 
 
 	<div class="container-fluid">
-		<form action="initiateSales" id="addSales">
+		<form id="addSales" action="saveAndGenerateSalesInvoice">
 			<div class="row">
 				<div class="col-md-12 col-sm-12">
 					<div class="panel panel-default form-panel-primary">
@@ -65,18 +68,17 @@
 			  						<div class="row">
 			  							<div class="col-lg-3 col-md-6 col-sm-12">
 			  								<div class="form-group m-all-15">
-				  								<label for="invoiceNo">Invoice Number</label>
+				  								<label for="invoiceNo">Invoice Number&nbsp;<i class="fas fa-asterisk mandatory icon-small"></i></label>
 				  								<s:textfield id="invoiceNo" placeholder="Invoice Number" 
-				  											class="input-sm form-control" name="salesBaseBean.invoiceNo" />
+				  											class="input-sm form-control" name="itemsBase.invoiceNo" />
 				  							</div>
 			  							</div>
 			  							<div class="col-lg-3 col-md-6 col-sm-12">
 			  								<div class="form-group m-all-15">
-				  								<label for="invoiceDate">Invoice Date</label>
-				  								<%-- <s:textfield id="invoiceDate" placeholder="Invoice Date" 
-				  											 class="input-sm form-control" name="salesBaseBean.invoiceDate" /> --%>
+				  								<label for="invoiceDate">Invoice Date&nbsp;<i class="fas fa-asterisk mandatory icon-small"></i></label>
 				  								<div class='input-group date' id='datetimepicker1'>
-                   					 				<input type='text' class="form-control input-sm" id="invoiceDate" name="salesBaseBean.invoiceDate" />
+                   					 				<input type='text' class="form-control input-sm" id="invoiceDate" 
+                   					 					   name="itemsBase.invoiceDate" />
                     									<span class="input-group-addon">
                         									<span class="glyphicon glyphicon-calendar"></span>
                     									</span>
@@ -85,43 +87,33 @@
 			  							</div>
 			  							<div class="col-lg-3 col-md-6 col-sm-12">
 			  								<div class="form-group m-all-15">
-				  								<label for="customerCode">Customer</label>
+				  								<label for="customerCode">Customer&nbsp;<i class="fas fa-asterisk mandatory icon-small"></i></label>
 				  								<s:textfield id="customerCode" placeholder="Customer Code" 
-				  											 class="input-sm form-control" name="salesBaseBean.customerId.customerCode" />
+				  											 class="input-sm form-control" name="itemsBase.customerId.customerCode" />
 				  							</div>
 			  							</div>
 			  							<div class="col-lg-3 col-md-6 col-sm-12">
 			  								<div class="form-group m-all-15">
-				  								<label for="stateOfSupply">State of Supply</label>
+				  								<label for="stateOfSupply">State of Supply&nbsp;<i class="fas fa-asterisk mandatory icon-small"></i></label>
 				  								<s:textfield id="stateOfSupply" placeholder="State of Supply" 
-				  											 class="input-sm form-control" name="salesBaseBean.stateToSupply" onkeypress="getStateList(this)" />
+				  											 class="input-sm form-control" name="itemsBase.stateToSupply" 
+				  											 onkeypress="getStateList(this)" />
 				  							</div>
 			  							</div>
 			  							<div class="col-lg-3 col-md-6 col-sm-12">
 			  								<div class="form-group m-all-15">
-				  								<label for="placeOfSupply">Place of Supply</label>
+				  								<label for="placeOfSupply">Place of Supply&nbsp;<i class="fas fa-asterisk mandatory icon-small"></i></label>
 				  								<s:textfield id="placeOfSupply" placeholder="Place of Supply" 
-				  											 class="input-sm form-control" name="salesBaseBean.placeToSupply" onkeypress="getStateList(this)" />
+				  											 class="input-sm form-control" name="itemsBase.placeToSupply" />
 				  							</div>
 			  							</div>
 			  							<div class="col-lg-3 col-md-6 col-sm-12">
 			  								<div class="form-group m-all-15">
 				  								<label for="vehiclleNumber">Vehicle Number</label>
 				  								<s:textfield id="vehiclleNumber" placeholder="Vehicle Number" 
-				  											 class="input-sm form-control" name="salesAmountBean.vehicleno" />
+				  											 class="input-sm form-control" name="invoiceAmount.vehicleno" />
 				  							</div>
 			  							</div>
-			  							<%-- <div class="col-lg-3 col-md-6 col-sm-12">
-			  								<div class="form-group m-all-15">
-			  									<label for="invoiceDate">Invoice Date</label>
-                								<div class='input-group date' id='datetimepicker1'>
-                   					 				<input type='text' class="form-control input-sm" id="invoiceDate" />
-                    									<span class="input-group-addon">
-                        									<span class="glyphicon glyphicon-calendar"></span>
-                    									</span>
-               		 							</div>
-				  							</div>
-			  							</div> --%>
 		  							</div>
 		  						</div>
 							</div>
@@ -136,10 +128,10 @@
 				  								<thead>
 				  									<tr>
 				  										<th class="text-center width-4">#</th>
-				  										<th class="text-center">Item</th>
+				  										<th class="text-center">Item&nbsp;<i class="fas fa-asterisk mandatory icon-small"></i></th>
 				  										<th class="text-center">HSN Code</th>
-				  										<th class="text-center">Quantity</th>
-				  										<th class="text-center">Rate</th>
+				  										<th class="text-center">Quantity&nbsp;<i class="fas fa-asterisk mandatory icon-small"></i></th>
+				  										<th class="text-center">Rate&nbsp;<i class="fas fa-asterisk mandatory icon-small"></i></th>
 				  										<th class="text-center">Gross Amount</th>
 				  										<th class="text-center width-10px"></th>
 				  									</tr>
@@ -148,13 +140,13 @@
 				  									<tr>
 				  										<td><label id="serialNumber1">1.</label></td>
 				  										<td>
-				  											<input type="hidden" name="itemName" class="itemId">
-				  											<input type="text" class="items_table itemName" placeholder="Item Name">
+				  											<input type="hidden" name="itemsDetails[0].productId.productId" class="itemId" />
+				  											<input type="text" class="items_table itemName" placeholder="Item Name" />
 				  										</td>
-				  										<td><input type="text" class="items_table" placeholder="HSN Code"></td>
-				  										<td><input type="text" class="items_table" placeholder="Quantity"></td>
-				  										<td><input type="text" class="items_table" placeholder="Rate"></td>
-				  										<td><input type="text" class="items_table" placeholder="Gross Amount"></td>
+				  										<td><input type="text" class="items_table" placeholder="HSN Code" name="itemsDetails[0].hsnCode" /></td>
+				  										<td><input type="text" class="items_table" placeholder="Quantity" name="itemsDetails[0].quantity" /></td>
+				  										<td><input type="text" class="items_table" placeholder="Rate" name="itemsDetails[0].rate" /></td>
+				  										<td><input type="text" class="items_table" placeholder="Gross Amount" name="itemsDetails[0].totalamount" /></td>
 				  										<td>
 				  											<button class="removeRow btn btn-default btn-xs form-btn-danger pull-left">
 				  												<span class='glyphicon glyphicon-remove'></span>
@@ -164,13 +156,13 @@
 				  									<tr>
 				  										<td><label id="serialNumber2">2.</label></td>
 				  										<td>
-				  											<input type="hidden" name="itemName" class="itemId">
-				  											<input type="text" class="items_table itemName" placeholder="Item Name">
+				  											<input type="hidden" name="itemsDetails[1].productId.productId" class="itemId" />
+				  											<input type="text" class="items_table itemName" placeholder="Item Name" />
 				  										</td>
-				  										<td><input type="text" class="items_table" placeholder="HSN Code"></td>
-				  										<td><input type="text" class="items_table" placeholder="Quantity"></td>
-				  										<td><input type="text" class="items_table" placeholder="Rate"></td>
-				  										<td><input type="text" class="items_table" placeholder="Gross Amount"></td>
+				  										<td><input type="text" class="items_table" placeholder="HSN Code" name="itemsDetails[1].hsnCode" /></td>
+				  										<td><input type="text" class="items_table" placeholder="Quantity" name="itemsDetails[1].quantity" /></td>
+				  										<td><input type="text" class="items_table" placeholder="Rate" name="itemsDetails[1].rate" /></td>
+				  										<td><input type="text" class="items_table" placeholder="Gross Amount" name="itemsDetails[1].totalamount" /></td>
 				  										<td>
 				  											<button class="removeRow btn btn-default btn-xs form-btn-danger pull-left">
 				  												<span class='glyphicon glyphicon-remove'></span>
@@ -180,13 +172,13 @@
 				  									<tr>
 				  										<td><label id="serialNumber3">3.</label></td>
 				  										<td>
-				  											<input type="hidden" name="itemName" class="itemId">
-				  											<input type="text" class="items_table itemName" placeholder="Item Name">
+				  											<input type="hidden" name="itemsDetails[2].productId.productId" class="itemId" />
+				  											<input type="text" class="items_table itemName" placeholder="Item Name" />
 				  										</td>
-				  										<td><input type="text" class="items_table" placeholder="HSN Code"></td>
-				  										<td><input type="text" class="items_table" placeholder="Quantity"></td>
-				  										<td><input type="text" class="items_table" placeholder="Rate"></td>
-				  										<td><input type="text" class="items_table" placeholder="Gross Amount"></td>
+				  										<td><input type="text" class="items_table" placeholder="HSN Code" name="itemsDetails[2].hsnCode" /></td>
+				  										<td><input type="text" class="items_table" placeholder="Quantity" name="itemsDetails[2].quantity" /></td>
+				  										<td><input type="text" class="items_table" placeholder="Rate" name="itemsDetails[2].rate" /></td>
+				  										<td><input type="text" class="items_table" placeholder="Gross Amount" name="itemsDetails[2].totalamount" /></td>
 				  										<td>
 				  											<button class="removeRow btn btn-default btn-xs form-btn-danger pull-left">
 				  												<span class='glyphicon glyphicon-remove'></span>
@@ -196,13 +188,13 @@
 				  									<tr>
 				  										<td><label  id="serialNumber4">4.</label></td>
 				  										<td>
-				  											<input type="hidden" name="itemName" class="itemId">
-				  											<input type="text" class="items_table itemName" placeholder="Item Name">
+				  											<input type="hidden" name="itemsDetails[3].productId.productId" class="itemId" />
+				  											<input type="text" class="items_table itemName" placeholder="Item Name" />
 				  										</td>
-				  										<td><input type="text" class="items_table" placeholder="HSN Code"></td>
-				  										<td><input type="text" class="items_table" placeholder="Quantity"></td>
-				  										<td><input type="text" class="items_table" placeholder="Rate"></td>
-				  										<td><input type="text" class="items_table" placeholder="Gross Amount"></td>
+				  										<td><input type="text" class="items_table" placeholder="HSN Code" name="itemsDetails[3].hsnCode" /></td>
+				  										<td><input type="text" class="items_table" placeholder="Quantity" name="itemsDetails[3].quantity" /></td>
+				  										<td><input type="text" class="items_table" placeholder="Rate" name="itemsDetails[3].rate" /></td>
+				  										<td><input type="text" class="items_table" placeholder="Gross Amount" name="itemsDetails[3].totalamount" /></td>
 				  										<td>
 				  											<button class="removeRow btn btn-default btn-xs form-btn-danger pull-left">
 				  												<span class='glyphicon glyphicon-remove'></span>
@@ -212,13 +204,13 @@
 				  									<tr>
 				  										<td><label id="serialNumber5">5.</label></td>
 				  										<td>
-				  											<input type="hidden" name="itemName" class="itemId">
-				  											<input type="text" class="items_table itemName" placeholder="Item Name">
+				  											<input type="hidden" name="itemsDetails[4].productId.productId" class="itemId" />
+				  											<input type="text" class="items_table itemName" placeholder="Item Name" />
 				  										</td>
-				  										<td><input type="text" class="items_table" placeholder="HSN Code"></td>
-				  										<td><input type="text" class="items_table" placeholder="Quantity"></td>
-				  										<td><input type="text" class="items_table" placeholder="Rate"></td>
-				  										<td><input type="text" class="items_table" placeholder="Gross Amount"></td>
+				  										<td><input type="text" class="items_table" placeholder="HSN Code" name="itemsDetails[4].hsnCode" /></td>
+				  										<td><input type="text" class="items_table" placeholder="Quantity" name="itemsDetails[4].quantity" /></td>
+				  										<td><input type="text" class="items_table" placeholder="Rate" name="itemsDetails[4].rate" /></td>
+				  										<td><input type="text" class="items_table" placeholder="Gross Amount" name="itemsDetails[4].totalamount" /></td>
 				  										<td>
 				  											<button class="removeRow btn btn-default btn-xs form-btn-danger pull-left">
 				  												<span class='glyphicon glyphicon-remove'></span>
@@ -229,7 +221,7 @@
 				  							</table>
 											<div class="row">
 												<div
-													class="col-lg-12 col-md-4 col-sm-3 text-center m-all-15 capsule"
+													class="col-lg-10 col-md-4 col-sm-12 text-center m-all-15 capsule"
 													onclick="addNewRow('itemTable')" style="cursor: pointer;">
 													<label style="padding-top: 2px; cursor: pointer;" class="mt-5"> <span
 														class="glyphicon glyphicon-plus"></span>&nbsp;Add Rows
@@ -237,38 +229,90 @@
 												</div>
 											</div>
 										</div>
-			  							<div class="row mt-15">
-			  								<div class="col-md-2 col-lg-2 col-sm-12">
-			  									<label for="enableTax">Enable TAX</label>
-			  									<input type="checkbox" id="enableTax" checked="checked" />
-			  								</div>
-			  								<div id="taxGroup" hidden="true">
-			  									<div class="col-md-2 col-lg-2 col-sm-12">
-			  									<input type="text" class="items_table" placeholder="GST %" />
-			  								</div>
-			  								<div class="col-md-2 col-lg-2 col-sm-12">
-			  									<input type="text" class="items_table" placeholder="IGST %" />
-			  								</div>
-			  								</div>
-			  								<div class="col-md-2 col-lg-2 col-sm-12">
-			  									<input type="text" class="items_table" placeholder="Vehicle Charge" />
-			  								</div>
-			  								<div class="col-md-2 col-lg-2 col-sm-12">
-			  									<input type="text" class="items_table" placeholder="Loading Charge" />
-			  								</div>
-			  								<div class="col-md-2 col-lg-2 col-sm-12">
-			  									<input type="text" class="items_table" placeholder="Net Amount" />
-			  								</div>
-			  							</div>
 			  						</div>
 		  						</div>
 							</div>
+							<div class="panel panel-default">
+								<div class="panel-body inner-panel">
+									<div class="row m-all-15">
+			  							<h4>Amount Details</h4>
+			  						</div>
+			  						<div class="m-all-15">
+			  							<div class="row">
+			  								<div class="col-md-2 col-lg-2 col-sm-12">
+			  									<label for="enableTax">Enable TAX</label>
+			  									<input type="checkbox" id="enableTax" checked="checked" /><br>
+			  									<label for="cgst" hidden="true" id="label_cgst" class="mt-15 mandatory">CGST%</label><br>
+			  									<label for="sgst" hidden="true" id="label_sgst" class="mt-15 mandatory">SGST%</label>
+			  								</div>
+			  								<div id="taxGroup" hidden="true">
+			  									<div class="col-md-2 col-lg-2 col-sm-12">
+			  										<input type="text" class="items_table" 
+			  											   placeholder="GST %" onchange="enableGstSplit(this)"/>
+			  										<div class="form-group">
+			  											<!-- <label for="cgst" hidden="true" id="label_cgst">CGST%</label>&emsp; -->
+			  											<input type="text" class="items_table mt-15" 
+			  											   	   placeholder="CGST %" readonly="readonly" 
+			  											   	   hidden="true" id="cgst" 
+			  											   	   name="invoiceAmount.cgst" />
+			  										</div>
+			  										<div class="form-group">
+				  										<!-- <label for="sgst" hidden="true" id="label_sgst">SGST%</label>&emsp; -->
+				  										<input type="text" class="items_table mt-10" 
+				  											   placeholder="SGST %" readonly="readonly" 
+				  											   hidden="true" id="sgst" 
+				  											   name="invoiceAmount.sgst" />
+			  										</div>
+			  									</div>
+			  								<div class="col-md-2 col-lg-2 col-sm-12">
+			  									<input type="text" class="items_table" placeholder="IGST %" 
+			  										   name="invoiceAmount.igst"/>
+			  								</div>
+			  								</div>
+			  								<div class="col-md-2 col-lg-2 col-sm-12">
+			  									<input type="text" class="items_table" placeholder="CGST Amount" 
+			  										   name="invoiceAmount.cgstamt" />
+			  								</div>
+			  								<div class="col-md-2 col-lg-2 col-sm-12">
+			  									<input type="text" class="items_table" placeholder="SGST Amount"
+			  										   name="invoiceAmount.sgstamt" />
+			  								</div>
+			  								<div class="col-md-2 col-lg-2 col-sm-12">
+			  									<input type="text" class="items_table" placeholder="Total Tax Amount"
+			  										   name="invoiceAmount.grossamount" /><br>
+			  									<input type="text" class="items_table mt-30" placeholder="Vehicle Charge" 
+			  										   name="invoiceAmount.vehicleamount" /><br>
+			  									<input type="text" class="items_table mt-30" placeholder="Loading Charge"
+			  										   name="invoiceAmount.loadingcharge" /><br>
+			  									<input type="text" class="items_table mt-30" placeholder="Net Amount"
+			  										   name="invoiceAmount.netamount" />
+			  								</div>
+			  							</div>
+			  							<!-- <div class="row">
+			  								<div class="col-md-12 col-lg-12 col-sm-12">
+			  									<input type="text" class="items_table" placeholder="Vehicle Charge" 
+			  										   name="invoiceAmount.vehicleamount" />
+			  								</div>
+			  								<div class="col-md-4 col-lg-4 col-sm-12 text-center">
+			  									<input type="text" class="items_table" placeholder="Loading Charge"
+			  										   name="invoiceAmount.loadingcharge" />
+			  								</div>
+			  								<div class="col-md-4 col-lg-4 col-sm-12 text-center">
+			  									<input type="text" class="items_table" placeholder="Net Amount"
+			  										   name="invoiceAmount.netamount" />
+			  								</div>
+			  							</div> -->
+			  						</div>
+								</div>
+							</div>
 							<div class="row">
 								<div class="col-md-12 col-sm-12 col-lg-12 pull-center">
-									<button type="button" class="btn btn-default btn-sm form-btn-success form-btn-large">
-										<span class="glyphicon glyphicon-floppy-save"></span>&nbsp;Add Bill</button> &emsp;
-									<button type="button" class="btn btn-default btn-sm form-btn-danger form-btn-large">
-										<span class="glyphicon glyphicon-print"></span>&nbsp;Generate Invoice</button>
+									<button type="button" class="btn btn-default btn-sm form-btn-success form-btn-large" onclick="addSalesBill('S');">
+										<span class="glyphicon glyphicon-floppy-save"></span>&nbsp;Add Bill
+									</button> &emsp;
+									<button type="button" class="btn btn-default btn-sm form-btn-danger form-btn-large" onclick="addSalesBill('G');">
+										<span class="glyphicon glyphicon-print"></span>&nbsp;Generate Invoice
+									</button>
 								</div>
 							</div>
 						</div>
