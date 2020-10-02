@@ -144,11 +144,11 @@
 				  											<input type="text" class="items_table itemName" placeholder="Item Name" />
 				  										</td>
 				  										<td><input type="text" class="items_table" placeholder="HSN Code" name="itemsDetails[0].hsnCode" /></td>
-				  										<td><input type="text" class="items_table" placeholder="Quantity" name="itemsDetails[0].quantity" /></td>
-				  										<td><input type="text" class="items_table" placeholder="Rate" name="itemsDetails[0].rate" /></td>
-				  										<td><input type="text" class="items_table" placeholder="Gross Amount" name="itemsDetails[0].totalamount" /></td>
+				  										<td><input type="text" class="items_table itemQuantity" placeholder="Quantity" name="itemsDetails[0].quantity" id="quantity_1" onkeyup="calculateItemwiseRate(1);" /></td>
+				  										<td><input type="text" class="items_table itemRate" placeholder="Rate" name="itemsDetails[0].rate" id="rate_1" onkeyup="calculateItemwiseRate(1);" /></td>
+				  										<td><input type="text" class="items_table gross_amount" placeholder="Gross Amount" name="itemsDetails[0].totalamount" id="grossAmount_1" /></td>
 				  										<td>
-				  											<button class="removeRow btn btn-default btn-xs form-btn-danger pull-left">
+				  											<button class="removeRow btn btn-default btn-xs form-btn-danger pull-left" id="remove_1">
 				  												<span class='glyphicon glyphicon-remove'></span>
 				  											</button>
 				  										</td>
@@ -160,11 +160,11 @@
 				  											<input type="text" class="items_table itemName" placeholder="Item Name" />
 				  										</td>
 				  										<td><input type="text" class="items_table" placeholder="HSN Code" name="itemsDetails[1].hsnCode" /></td>
-				  										<td><input type="text" class="items_table" placeholder="Quantity" name="itemsDetails[1].quantity" /></td>
-				  										<td><input type="text" class="items_table" placeholder="Rate" name="itemsDetails[1].rate" /></td>
-				  										<td><input type="text" class="items_table" placeholder="Gross Amount" name="itemsDetails[1].totalamount" /></td>
+				  										<td><input type="text" class="items_table itemQuantity" placeholder="Quantity" name="itemsDetails[1].quantity" id="quantity_2" onkeyup="calculateItemwiseRate(2);"/></td>
+				  										<td><input type="text" class="items_table itemRate" placeholder="Rate" name="itemsDetails[1].rate" id="rate_2" onkeyup="calculateItemwiseRate(2);" /></td>
+				  										<td><input type="text" class="items_table gross_amount" placeholder="Gross Amount" name="itemsDetails[1].totalamount" id="grossAmount_2" /></td>
 				  										<td>
-				  											<button class="removeRow btn btn-default btn-xs form-btn-danger pull-left">
+				  											<button class="removeRow btn btn-default btn-xs form-btn-danger pull-left" id="remove_2">
 				  												<span class='glyphicon glyphicon-remove'></span>
 				  											</button>
 				  										</td>
@@ -176,11 +176,11 @@
 				  											<input type="text" class="items_table itemName" placeholder="Item Name" />
 				  										</td>
 				  										<td><input type="text" class="items_table" placeholder="HSN Code" name="itemsDetails[2].hsnCode" /></td>
-				  										<td><input type="text" class="items_table" placeholder="Quantity" name="itemsDetails[2].quantity" /></td>
-				  										<td><input type="text" class="items_table" placeholder="Rate" name="itemsDetails[2].rate" /></td>
-				  										<td><input type="text" class="items_table" placeholder="Gross Amount" name="itemsDetails[2].totalamount" /></td>
+				  										<td><input type="text" class="items_table itemQuantity" placeholder="Quantity" name="itemsDetails[2].quantity" id="quantity_3" onkeyup="calculateItemwiseRate(3);" /></td>
+				  										<td><input type="text" class="items_table itemRate" placeholder="Rate" name="itemsDetails[2].rate" id="rate_3" onkeyup="calculateItemwiseRate(3);" /></td>
+				  										<td><input type="text" class="items_table gross_amount" placeholder="Gross Amount" name="itemsDetails[2].totalamount" id="grossAmount_3" /></td>
 				  										<td>
-				  											<button class="removeRow btn btn-default btn-xs form-btn-danger pull-left">
+				  											<button class="removeRow btn btn-default btn-xs form-btn-danger pull-left" id="remove_3">
 				  												<span class='glyphicon glyphicon-remove'></span>
 				  											</button>
 				  										</td>
@@ -192,11 +192,11 @@
 				  											<input type="text" class="items_table itemName" placeholder="Item Name" />
 				  										</td>
 				  										<td><input type="text" class="items_table" placeholder="HSN Code" name="itemsDetails[3].hsnCode" /></td>
-				  										<td><input type="text" class="items_table" placeholder="Quantity" name="itemsDetails[3].quantity" /></td>
-				  										<td><input type="text" class="items_table" placeholder="Rate" name="itemsDetails[3].rate" /></td>
-				  										<td><input type="text" class="items_table" placeholder="Gross Amount" name="itemsDetails[3].totalamount" /></td>
+				  										<td><input type="text" class="items_table itemQuantity" placeholder="Quantity" name="itemsDetails[3].quantity" id="quantity_4" onkeyup="calculateItemwiseRate(4);" /></td>
+				  										<td><input type="text" class="items_table itemRate" placeholder="Rate" name="itemsDetails[3].rate" id="rate_4" onkeyup="calculateItemwiseRate(4);" /></td>
+				  										<td><input type="text" class="items_table gross_amount" placeholder="Gross Amount" name="itemsDetails[3].totalamount" id="grossAmount_4" /></td>
 				  										<td>
-				  											<button class="removeRow btn btn-default btn-xs form-btn-danger pull-left">
+				  											<button class="removeRow btn btn-default btn-xs form-btn-danger pull-left" id="remove_4">
 				  												<span class='glyphicon glyphicon-remove'></span>
 				  											</button>
 				  										</td>
@@ -208,28 +208,39 @@
 				  											<input type="text" class="items_table itemName" placeholder="Item Name" />
 				  										</td>
 				  										<td><input type="text" class="items_table" placeholder="HSN Code" name="itemsDetails[4].hsnCode" /></td>
-				  										<td><input type="text" class="items_table" placeholder="Quantity" name="itemsDetails[4].quantity" /></td>
-				  										<td><input type="text" class="items_table" placeholder="Rate" name="itemsDetails[4].rate" /></td>
-				  										<td><input type="text" class="items_table" placeholder="Gross Amount" name="itemsDetails[4].totalamount" /></td>
+				  										<td><input type="text" class="items_table itemQuantity" placeholder="Quantity" name="itemsDetails[4].quantity" id="quantity_5" onkeyup="calculateItemwiseRate(5);" /></td>
+				  										<td><input type="text" class="items_table itemRate" placeholder="Rate" name="itemsDetails[4].rate" id="rate_5" onkeyup="calculateItemwiseRate(5);" /></td>
+				  										<td><input type="text" class="items_table gross_amount" placeholder="Gross Amount" name="itemsDetails[4].totalamount" id="grossAmount_5" /></td>
 				  										<td>
-				  											<button class="removeRow btn btn-default btn-xs form-btn-danger pull-left">
+				  											<button class="removeRow btn btn-default btn-xs form-btn-danger pull-left" id="remove_5">
 				  												<span class='glyphicon glyphicon-remove'></span>
 				  											</button>
 				  										</td>
 				  									</tr>
 				  								</tbody>
 				  							</table>
-											<div class="row">
-												<div
-													class="col-lg-10 col-md-4 col-sm-12 text-center m-all-15 capsule"
-													onclick="addNewRow('itemTable')" style="cursor: pointer;">
-													<label style="padding-top: 2px; cursor: pointer;" class="mt-5"> <span
-														class="glyphicon glyphicon-plus"></span>&nbsp;Add Rows
-													</label>
-												</div>
+										</div>
+										<div class="row">
+											<div class="col-lg-8 col-md-6 col-sm-12 text-center m-all-15 capsule"
+												 onclick="addNewRow('itemTable')" style="cursor: pointer;">
+												<label style="padding-top: 2px; cursor: pointer;"
+													   class="mt-5"> <span class="glyphicon glyphicon-plus"></span>&nbsp;Add Rows
+												</label>
+											</div>
+											<div class="col-lg-2 col-md-3 col-sm-12 text-center pull-right mr-30">
+												<span class="font-25 font-blue">
+													<i class="fas fa-rupee-sign"></i>&nbsp;
+													<label style="padding-top: 2px; cursor: pointer;"
+													   class="mt-5 font-30" id="totalAmount"></label>
+													  <input type="hidden" name="invoiceAmount.grossamount" id="totalAmountHidden">
+												</span>
+											</div>
+											<div class="col-lg-2 col-md-3 col-sm-12 text-right pull-right mr-15">
+													<label style="padding-top: 3px; cursor: pointer;"
+													   class="mt-5 font-20" id="totalAmount">Taxable Amount</label>
 											</div>
 										</div>
-			  						</div>
+									</div>
 		  						</div>
 							</div>
 							<div class="panel panel-default">
@@ -248,7 +259,8 @@
 			  								<div id="taxGroup" hidden="true">
 			  									<div class="col-md-2 col-lg-2 col-sm-12">
 			  										<input type="text" class="items_table" 
-			  											   placeholder="GST %" onchange="enableGstSplit(this)"/>
+			  											   placeholder="GST %" onkeyup="calculateTaxAmount();"
+			  											   id="gstPercentage" />
 			  										<div class="form-group">
 			  											<!-- <label for="cgst" hidden="true" id="label_cgst">CGST%</label>&emsp; -->
 			  											<input type="text" class="items_table mt-15" 
@@ -266,42 +278,33 @@
 			  									</div>
 			  								<div class="col-md-2 col-lg-2 col-sm-12">
 			  									<input type="text" class="items_table" placeholder="IGST %" 
-			  										   name="invoiceAmount.igst"/>
+			  										   name="invoiceAmount.igst" id="igstPercentage"
+			  										   onkeyup="calculateTaxAmount();"/>
 			  								</div>
 			  								</div>
 			  								<div class="col-md-2 col-lg-2 col-sm-12">
 			  									<input type="text" class="items_table" placeholder="CGST Amount" 
-			  										   name="invoiceAmount.cgstamt" />
+			  										   name="invoiceAmount.cgstamt" id="cgstAmount" />
 			  								</div>
 			  								<div class="col-md-2 col-lg-2 col-sm-12">
 			  									<input type="text" class="items_table" placeholder="SGST Amount"
-			  										   name="invoiceAmount.sgstamt" />
-			  								</div>
+			  										   name="invoiceAmount.sgstamt" id="sgstAmount" />
+												<div class="text-right pull-right mt-120">
+													<label style="padding-top: 10px;" class="mt-5 font-20">Net
+														Amount </label>
+												</div>
+											</div>
 			  								<div class="col-md-2 col-lg-2 col-sm-12">
 			  									<input type="text" class="items_table" placeholder="Total Tax Amount"
-			  										   name="invoiceAmount.grossamount" /><br>
+			  										   id="taxAmount" /><br>
 			  									<input type="text" class="items_table mt-30" placeholder="Vehicle Charge" 
-			  										   name="invoiceAmount.vehicleamount" /><br>
+			  										   name="invoiceAmount.vehicleamount" onchange="addExtraCharge(this);" id="vehicleCharge" /><br>
 			  									<input type="text" class="items_table mt-30" placeholder="Loading Charge"
-			  										   name="invoiceAmount.loadingcharge" /><br>
+			  										   name="invoiceAmount.loadingcharge" onchange="addExtraCharge(this);" id="loadingCharge" /><br>
 			  									<input type="text" class="items_table mt-30" placeholder="Net Amount"
-			  										   name="invoiceAmount.netamount" />
-			  								</div>
+			  										   name="invoiceAmount.netamount" id="netAmount" />
+											</div>
 			  							</div>
-			  							<!-- <div class="row">
-			  								<div class="col-md-12 col-lg-12 col-sm-12">
-			  									<input type="text" class="items_table" placeholder="Vehicle Charge" 
-			  										   name="invoiceAmount.vehicleamount" />
-			  								</div>
-			  								<div class="col-md-4 col-lg-4 col-sm-12 text-center">
-			  									<input type="text" class="items_table" placeholder="Loading Charge"
-			  										   name="invoiceAmount.loadingcharge" />
-			  								</div>
-			  								<div class="col-md-4 col-lg-4 col-sm-12 text-center">
-			  									<input type="text" class="items_table" placeholder="Net Amount"
-			  										   name="invoiceAmount.netamount" />
-			  								</div>
-			  							</div> -->
 			  						</div>
 								</div>
 							</div>

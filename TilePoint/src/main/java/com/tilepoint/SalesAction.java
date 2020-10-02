@@ -194,7 +194,6 @@ public class SalesAction extends ActionSupport {
 			itemsBase.setMonth(String.valueOf(LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(new Date())).getMonthValue()));
 			itemsBase.setYear(String.valueOf(LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(new Date())).getYear()));
 			tempItemBase = salesHibernateDao.saveInvoiceBasicDetails(itemsBase);
-			
 			if(tempItemBase.getSalesId() != null) {
 				for(SalesDetailsBean itemDetail : itemsDetails) {
 					if(itemDetail != null && itemDetail.getProductId().getProductId() != null) {
@@ -203,6 +202,9 @@ public class SalesAction extends ActionSupport {
 						salesHibernateDao.savesalesdetails(itemDetail);
 					}
 				}
+				invoiceAmount.setSalesId(new SalesBaseBean());
+				invoiceAmount.getSalesId().setSalesId(tempItemBase.getSalesId());
+				salesHibernateDao.savesalesnetamt(invoiceAmount);
 			}
 			setProcessFlag("SUCCESS");
 		}else {

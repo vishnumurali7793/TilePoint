@@ -123,6 +123,10 @@ body {
 	margin-top: 40px;
 }
 
+.mt-120 {
+	margin-top: 120px;
+}
+
 .mr-10 {
 	margin-right: 10px;
 }
@@ -248,4 +252,20 @@ table.borderless td, table.borderless th {
 
 .icon-small {
 	font-size: 10px;
+}
+
+.font-30{
+	font-size: 30px;
+}
+
+.font-25{
+	font-size: 25px;
+}
+
+.font-20{
+	font-size: 20px;
+}
+
+.font-blue {
+	color: #0169f3;
 }
