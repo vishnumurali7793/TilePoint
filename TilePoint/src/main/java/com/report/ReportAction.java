@@ -477,7 +477,7 @@ public class ReportAction extends ActionSupport {
 				temp = "Total invoice amount in words,";
 				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
 				cell.addElement(chunk);
-				temp = NumtoString.convertAmountToWord(samtbean.getGrossamount());
+				temp = NumtoString.convertAmountToWord(samtbean.getNetamount());
 				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.BOLDITALIC));
 				cell.addElement(chunk);
 				cell.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -499,40 +499,40 @@ public class ReportAction extends ActionSupport {
 				amtTable.addCell(amtHeadCell);
 
 				amtHeadCell = new PdfPCell();
-				temp = samtbean.getNetamount().toString();
+				temp = samtbean.getGrossamount().toString();
 				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
 				amtHeadCell.addElement(chunk);
-				amtHeadCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+				amtHeadCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				amtHeadCell.setBorder(Rectangle.BOTTOM);
 				amtTable.addCell(amtHeadCell);
 
 				amtHeadCell = new PdfPCell();
-				chunk = new Chunk("Add: CGST @ %", new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
+				chunk = new Chunk("Add: CGST @ " + samtbean.getCgst().toString() + "%", new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
 				amtHeadCell.addElement(chunk);
 				amtHeadCell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				amtHeadCell.setBorder(Rectangle.BOTTOM | Rectangle.RIGHT);
 				amtTable.addCell(amtHeadCell);
 
 				amtHeadCell = new PdfPCell();
-				temp = (samtbean.getCgst() != null) ? samtbean.getCgst().toString() : "0.0";
+				temp = (samtbean.getCgst() != null) ? samtbean.getCgstamt().toString() : "0.0";
 				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
 				amtHeadCell.addElement(chunk);
-				amtHeadCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+				amtHeadCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				amtHeadCell.setBorder(Rectangle.BOTTOM);
 				amtTable.addCell(amtHeadCell);
 
 				amtHeadCell = new PdfPCell();
-				chunk = new Chunk("Add: SGST @ %", new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
+				chunk = new Chunk("Add: SGST @ " + samtbean.getSgst().toString() + " %", new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
 				amtHeadCell.addElement(chunk);
 				amtHeadCell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				amtHeadCell.setBorder(Rectangle.BOTTOM | Rectangle.RIGHT);
 				amtTable.addCell(amtHeadCell);
 
 				amtHeadCell = new PdfPCell();
-				temp = (samtbean.getSgst() != null) ? samtbean.getSgst().toString() : "0.0";
+				temp = (samtbean.getSgst() != null) ? samtbean.getSgstamt().toString() : "0.0";
 				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
 				amtHeadCell.addElement(chunk);
-				amtHeadCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+				amtHeadCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				amtHeadCell.setBorder(Rectangle.BOTTOM);
 				amtTable.addCell(amtHeadCell);
 
@@ -549,7 +549,7 @@ public class ReportAction extends ActionSupport {
 
 				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
 				amtHeadCell.addElement(chunk);
-				amtHeadCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+				amtHeadCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				amtHeadCell.setBorder(Rectangle.BOTTOM);
 				amtTable.addCell(amtHeadCell);
 
@@ -564,7 +564,7 @@ public class ReportAction extends ActionSupport {
 				temp = (samtbean.getVehicleamount() != null) ? samtbean.getVehicleamount().toString() : "0.0";
 				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
 				amtHeadCell.addElement(chunk);
-				amtHeadCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+				amtHeadCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				amtHeadCell.setBorder(Rectangle.BOTTOM);
 				amtTable.addCell(amtHeadCell);
 
@@ -579,7 +579,7 @@ public class ReportAction extends ActionSupport {
 				temp = (samtbean.getLoadingcharge() != null) ? samtbean.getLoadingcharge().toString() : "0.0";
 				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
 				amtHeadCell.addElement(chunk);
-				amtHeadCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+				amtHeadCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				amtHeadCell.setBorder(Rectangle.BOTTOM);
 				amtTable.addCell(amtHeadCell);
 
@@ -591,10 +591,10 @@ public class ReportAction extends ActionSupport {
 				amtTable.addCell(amtHeadCell);
 
 				amtHeadCell = new PdfPCell();
-				temp = samtbean.getGrossamount().toString();
+				temp = samtbean.getNetamount().toString();
 				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
 				amtHeadCell.addElement(chunk);
-				amtHeadCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+				amtHeadCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				amtHeadCell.setBorder(0);
 				amtTable.addCell(amtHeadCell);
 				cell.addElement(amtTable);
