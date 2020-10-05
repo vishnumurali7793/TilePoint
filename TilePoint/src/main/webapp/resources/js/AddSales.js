@@ -256,7 +256,7 @@ function calculateTotalAmount() {
 			$('#totalAmount').text(totalAmount.toFixed(3));
 			$('#totalAmountHidden').val(totalAmount.toFixed(3));
 			$('#netAmount').val(totalAmount.toFixed(3));
-		} 
+		}
 	});
 }
 
@@ -268,40 +268,40 @@ function calculateTaxAmount() {
 	var igstPercentage = $('#igstPercentage').val();
 	gstPercentage = parseFloat(gstPercentage);
 	igstPercentage = parseFloat(igstPercentage);
-	
-	if(gstPercentage != undefined && gstPercentage != NaN && gstPercentage > 0){
+
+	if (gstPercentage != undefined && gstPercentage != NaN && gstPercentage > 0) {
 		$('#cgst').attr('hidden', false);
 		$('#label_cgst').attr('hidden', false);
-		$('#cgst').val(gstPercentage/2);
+		$('#cgst').val(gstPercentage / 2);
 		$('#sgst').attr('hidden', false);
 		$('#label_sgst').attr('hidden', false);
-		$('#sgst').val(gstPercentage/2);
+		$('#sgst').val(gstPercentage / 2);
 		$('#igstPercentage').val(0);
-		
+
 		netAmount = $('#netAmount').val();
 		netAmount = parseFloat(netAmount);
 		igstPercentage = 0; //setting valu to zero to double check no previous data is stored in the variable
-		taxAmount = (netAmount * gstPercentage)/100;
-		taxableAmount = netAmount-taxAmount
-		
+		taxAmount = (netAmount * gstPercentage) / 100;
+		taxableAmount = netAmount - taxAmount
+
 		$('#taxAmount').val(taxAmount.toFixed(3));
-		$('#cgstAmount').val(taxAmount/2);
-		$('#sgstAmount').val(taxAmount/2);
+		$('#cgstAmount').val(taxAmount / 2);
+		$('#sgstAmount').val(taxAmount / 2);
 		$('#totalAmount').text(taxableAmount.toFixed(3));
 		$('#totalAmountHidden').val(taxableAmount.toFixed(3));
-	} else if(igstPercentage != undefined && igstPercentage != NaN && igstPercentage > 0) {
+	} else if (igstPercentage != undefined && igstPercentage != NaN && igstPercentage > 0) {
 		$('#gstPercentage').val(0);
 		$('#cgst').attr('hidden', true);
 		$('#label_cgst').attr('hidden', true);
 		$('#sgst').attr('hidden', true);
 		$('#label_sgst').attr('hidden', true);
-		
+
 		netAmount = $('#netAmount').val();
 		netAmount = parseFloat(netAmount);
 		gstPercentage = 0; //setting valu to zero to double check no previous data is stored in the variable
-		taxAmount = (netAmount * igstPercentage)/100;
-		taxableAmount = netAmount-taxAmount;
-		
+		taxAmount = (netAmount * igstPercentage) / 100;
+		taxableAmount = netAmount - taxAmount;
+
 		$('#taxAmount').val(taxAmount.toFixed(3));
 		$('#cgstAmount').val(0);
 		$('#sgstAmount').val(0);
@@ -315,24 +315,24 @@ function addExtraCharge(element) {
 	var netAmount = 0;
 	extraCharge = element.value;
 	extraCharge = extraCharge != "" ? parseFloat(extraCharge) : 0;
-	
-	if(extraCharge != undefined && extraCharge != NaN && extraCharge > 0){
+
+	if (extraCharge != undefined && extraCharge != NaN && extraCharge > 0) {
 		netAmount = $('#netAmount').val();
 		netAmount = netAmount != "" ? parseFloat(netAmount) : 0;
 		netAmount += extraCharge;
-		
+
 		$('#netAmount').val(netAmount.toFixed(3));
 	} else {
 		var taxAmount = 0;
 		var taxableAmount = 0;
 		var vehicleCharge = 0;
 		var loadingCharge = 0;
-		
+
 		vehicleCharge = $('#vehicleCharge').val();
 		loadingCharge = $('#loadingCharge').val();
 		vehicleCharge = vehicleCharge != "" ? parseFloat(vehicleCharge) : 0;
 		loadingCharge = loadingCharge != "" ? parseFloat(loadingCharge) : 0;
-		
+
 		taxAmount = $('#taxAmount').val();
 		taxAmount = parseFloat(taxAmount);
 		taxableAmount = $('#totalAmount').text();
@@ -342,5 +342,24 @@ function addExtraCharge(element) {
 		netAmount = loadingCharge > 0 ? netAmount + loadingCharge : netAmount;
 		$('#netAmount').val(netAmount.toFixed(3));
 	}
-	
+
+}
+
+function validateNullorEmpty(param) {
+	var flag = false;
+	$('.validateImportant').each(function() {
+		debugger;
+		var value = $(this).val();
+		var label = $(this).attr('placeholder');
+		if (value == undefined || value == "") {
+			alert(label + ' is mandatory');
+			flag = false;
+			return false;
+		} else {
+			flag = true;
+		}
+	});
+	if (flag) {
+		addSalesBill(param);
+	}
 }

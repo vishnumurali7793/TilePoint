@@ -70,15 +70,15 @@
 			  								<div class="form-group m-all-15">
 				  								<label for="invoiceNo">Invoice Number&nbsp;<i class="fas fa-asterisk mandatory icon-small"></i></label>
 				  								<s:textfield id="invoiceNo" placeholder="Invoice Number" 
-				  											class="input-sm form-control" name="itemsBase.invoiceNo" />
+				  											class="input-sm form-control validateImportant" name="itemsBase.invoiceNo" />
 				  							</div>
 			  							</div>
 			  							<div class="col-lg-3 col-md-6 col-sm-12">
 			  								<div class="form-group m-all-15">
 				  								<label for="invoiceDate">Invoice Date&nbsp;<i class="fas fa-asterisk mandatory icon-small"></i></label>
 				  								<div class='input-group date' id='datetimepicker1'>
-                   					 				<input type='text' class="form-control input-sm" id="invoiceDate" 
-                   					 					   name="itemsBase.invoiceDate" />
+                   					 				<input type='text' class="form-control input-sm validateImportant" id="invoiceDate" 
+                   					 					   name="itemsBase.invoiceDate" placeholder="Invoice Date" />
                     									<span class="input-group-addon">
                         									<span class="glyphicon glyphicon-calendar"></span>
                     									</span>
@@ -89,14 +89,14 @@
 			  								<div class="form-group m-all-15">
 				  								<label for="customerCode">Customer&nbsp;<i class="fas fa-asterisk mandatory icon-small"></i></label>
 				  								<s:textfield id="customerCode" placeholder="Customer Code" 
-				  											 class="input-sm form-control" name="itemsBase.customerId.customerCode" />
+				  											 class="input-sm form-control validateImportant" name="itemsBase.customerId.customerCode" />
 				  							</div>
 			  							</div>
 			  							<div class="col-lg-3 col-md-6 col-sm-12">
 			  								<div class="form-group m-all-15">
 				  								<label for="stateOfSupply">State of Supply&nbsp;<i class="fas fa-asterisk mandatory icon-small"></i></label>
 				  								<s:textfield id="stateOfSupply" placeholder="State of Supply" 
-				  											 class="input-sm form-control" name="itemsBase.stateToSupply" 
+				  											 class="input-sm form-control validateImportant" name="itemsBase.stateToSupply" 
 				  											 onkeypress="getStateList(this)" />
 				  							</div>
 			  							</div>
@@ -104,7 +104,7 @@
 			  								<div class="form-group m-all-15">
 				  								<label for="placeOfSupply">Place of Supply&nbsp;<i class="fas fa-asterisk mandatory icon-small"></i></label>
 				  								<s:textfield id="placeOfSupply" placeholder="Place of Supply" 
-				  											 class="input-sm form-control" name="itemsBase.placeToSupply" />
+				  											 class="input-sm form-control validateImportant" name="itemsBase.placeToSupply" />
 				  							</div>
 			  							</div>
 			  							<div class="col-lg-3 col-md-6 col-sm-12">
@@ -310,7 +310,7 @@
 							</div>
 							<div class="row">
 								<div class="col-md-12 col-sm-12 col-lg-12 pull-center">
-									<button type="button" class="btn btn-default btn-sm form-btn-success form-btn-large" onclick="addSalesBill('S');">
+									<button type="button" class="btn btn-default btn-sm form-btn-success form-btn-large" onclick="validateNullorEmpty('s');">
 										<span class="glyphicon glyphicon-floppy-save"></span>&nbsp;Add Bill
 									</button> &emsp;
 									<button type="button" class="btn btn-default btn-sm form-btn-danger form-btn-large" onclick="addSalesBill('G');">
