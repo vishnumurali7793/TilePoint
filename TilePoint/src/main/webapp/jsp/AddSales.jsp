@@ -250,26 +250,86 @@
 			  						</div>
 			  						<div class="m-all-15">
 			  							<div class="row">
-			  								<div class="col-md-2 col-lg-2 col-sm-12">
-			  									<label for="enableTax">Enable TAX</label>
-			  									<input type="checkbox" id="enableTax" checked="checked" /><br>
-			  									<label for="cgst" hidden="true" id="label_cgst" class="mt-15 mandatory">CGST%</label><br>
-			  									<label for="sgst" hidden="true" id="label_sgst" class="mt-15 mandatory">SGST%</label>
+			  								<div class="col-md-3 col-lg-3 col-sm-6">
+			  									<label>Tax Type :</label>&emsp;
+			  									<label for="enableGST">GST <span class="font-10 font-italic">(CGST & SGST)</span></label>
+			  									<input type="checkbox" id="enableGST" checked="checked" value="GST" onclick="enableTaxFields(this)" />&emsp;
+			  									<label for="enableIGST">IGST</label>
+			  									<input type="checkbox" id="enableIGST" value="IGST" onclick="enableTaxFields(this)" />
+<!-- 			  									<br> -->
+<!-- 			  									<label for="cgst" hidden="true" id="label_cgst" class="mt-15 mandatory">CGST%</label><br> -->
+<!-- 			  									<label for="sgst" hidden="true" id="label_sgst" class="mt-15 mandatory">SGST%</label> -->
 			  								</div>
-			  								<div id="taxGroup" hidden="true">
+			  								<div class="col-lg-3 pull-center" id="gstDiv">
+				  								<input type="text" class="items_table" placeholder="CGST %" 
+				  									   id="cgst" name="invoiceAmount.cgst" onkeyup="setGstTaxPercentages(this);" />&emsp;
+				  								<input type="text" class="items_table" placeholder="SGST %" 
+				  									   id="sgst" name="invoiceAmount.sgst" onkeyup="setGstTaxPercentages(this);" />
+											</div>
+											<div class="col-lg-3" hidden="true" id="igstDiv">
+				  								<input type="text" class="items_table" placeholder="IGST %" 
+				  									   id="igst" name="invoiceAmount.igst" onkeyup="setGstTaxPercentages(this);"/>&emsp;
+											</div>
+											<div class="col-lg-4">
+				  								<!-- <input type="text" class="items_table" placeholder="IGST %" readonly="readonly" 
+				  									   id="cgst" name="invoiceAmount.igst" />&emsp; -->
+				  									   <div class="col-lg-12 col-md-12 col-sm-12 text-right">
+				  									   		<label for="enableIGST" class="mt-15 igstTaxAmount">IGST Amount</label>
+				  									   </div>
+				  									   <div class="col-lg-12 col-md-12 col-sm-12 text-right">
+				  									   		<label for="enableIGST" class="mt-15 gstTaxAmount">CGST Amount</label>
+				  									   </div>
+				  									   <div class="col-lg-12 col-md-12 col-sm-12 text-right">
+				  									   		<label for="enableIGST" class="mt-15 gstTaxAmount">SGST Amount</label>
+				  									   </div>
+				  									   <div class="col-lg-12 col-md-12 col-sm-12 text-right">
+				  									   		<label for="enableIGST" class="mt-15">Govt. Tax Amount</label>
+				  									   </div>
+				  									   <div class="col-lg-12 col-md-12 col-sm-12 text-right">
+				  									   		<label for="enableIGST" class="mt-15">Net Amount</label>
+				  									   </div>
+				  									   
+											</div>
+											<div class="col-lg-2">
+				  								<!-- <input type="text" class="items_table" placeholder="IGST %" readonly="readonly" 
+				  									   id="cgst" name="invoiceAmount.igst" />&emsp; -->
+				  									   <div class="col-lg-12 col-md-12 col-sm-12 text-right">
+				  									   		<input type="text" class="items_table mt-15 mr-40 igstTaxAmount" placeholder="IGST Amount" 
+			  										   			   name="invoiceAmount.igstAmount" id="igstAmount"
+			  										   			   onkeyup="calculateTaxAmount();"/>
+				  									   </div>
+				  									   <div class="col-lg-12 col-md-12 col-sm-12 text-right">
+				  									   		<input type="text" class="items_table mt-15 mr-40 gstTaxAmount" placeholder="CGST Amount" 
+			  										   			   name="invoiceAmount.cgstamt" id="cgstAmount"/>
+				  									   </div>
+				  									   <div class="col-lg-12 col-md-12 col-sm-12 text-right">
+				  									   		<input type="text" class="items_table mt-15 mr-40 gstTaxAmount" placeholder="SGST Amount"
+			  										               name="invoiceAmount.sgstamt" id="sgstAmount"/>
+				  									   </div>
+				  									   <div class="col-lg-12 col-md-12 col-sm-12 text-right">
+				  									   		<input type="text" class="items_table mt-15 mr-40" placeholder="Govt. Tax"
+			  										               name="" id="govtTax" />
+				  									   </div>
+				  									   <div class="col-lg-12 col-md-12 col-sm-12 text-right">
+				  									   		<input type="text" class="items_table mt-15 mr-40" placeholder="Net Amount"
+			  										   			   name="invoiceAmount.netamount" id="netAmount" />
+				  									   </div>
+				  									   
+											</div>
+			  								<!-- <div id="taxGroup" hidden="true">
 			  									<div class="col-md-2 col-lg-2 col-sm-12">
 			  										<input type="text" class="items_table" 
 			  											   placeholder="GST %" onkeyup="calculateTaxAmount();"
 			  											   id="gstPercentage" />
 			  										<div class="form-group">
-			  											<!-- <label for="cgst" hidden="true" id="label_cgst">CGST%</label>&emsp; -->
+			  											<label for="cgst" hidden="true" id="label_cgst">CGST%</label>&emsp;
 			  											<input type="text" class="items_table mt-15" 
 			  											   	   placeholder="CGST %" readonly="readonly" 
 			  											   	   hidden="true" id="cgst" 
 			  											   	   name="invoiceAmount.cgst" />
 			  										</div>
 			  										<div class="form-group">
-				  										<!-- <label for="sgst" hidden="true" id="label_sgst">SGST%</label>&emsp; -->
+				  										<label for="sgst" hidden="true" id="label_sgst">SGST%</label>&emsp;
 				  										<input type="text" class="items_table mt-10" 
 				  											   placeholder="SGST %" readonly="readonly" 
 				  											   hidden="true" id="sgst" 
@@ -281,20 +341,20 @@
 			  										   name="invoiceAmount.igst" id="igstPercentage"
 			  										   onkeyup="calculateTaxAmount();"/>
 			  								</div>
-			  								</div>
-			  								<div class="col-md-2 col-lg-2 col-sm-12">
+			  								</div> -->
+			  								<!-- <div class="col-md-2 col-lg-2 col-sm-12">
 			  									<input type="text" class="items_table" placeholder="CGST Amount" 
 			  										   name="invoiceAmount.cgstamt" id="cgstAmount" />
-			  								</div>
-			  								<div class="col-md-2 col-lg-2 col-sm-12">
+			  								</div> -->
+			  								<!-- <div class="col-md-2 col-lg-2 col-sm-12">
 			  									<input type="text" class="items_table" placeholder="SGST Amount"
 			  										   name="invoiceAmount.sgstamt" id="sgstAmount" />
 												<div class="text-right pull-right mt-120">
 													<label style="padding-top: 10px;" class="mt-5 font-20">Net
 														Amount </label>
 												</div>
-											</div>
-			  								<div class="col-md-2 col-lg-2 col-sm-12">
+											</div> -->
+			  								<!-- <div class="col-md-2 col-lg-2 col-sm-12">
 			  									<input type="text" class="items_table" placeholder="Total Tax Amount"
 			  										   id="taxAmount" /><br>
 			  									<input type="text" class="items_table mt-30" placeholder="Vehicle Charge" 
@@ -303,7 +363,7 @@
 			  										   name="invoiceAmount.loadingcharge" onchange="addExtraCharge(this);" id="loadingCharge" /><br>
 			  									<input type="text" class="items_table mt-30" placeholder="Net Amount"
 			  										   name="invoiceAmount.netamount" id="netAmount" />
-											</div>
+											</div> -->
 			  							</div>
 			  						</div>
 								</div>

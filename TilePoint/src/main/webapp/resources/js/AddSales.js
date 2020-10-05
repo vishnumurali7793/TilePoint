@@ -3,20 +3,25 @@
  */
 
 $(document).ready(function() {
-	$('#enableTax').prop('checked', true);
-	$('#taxGroup').show();
+	//	$('#enableTax').prop('checked', true);
+	$('#enableGST').prop('checked', true);
+	$('#enableIGST').prop('checked', false);
+	$('#gstDiv').show();
+	$('.igstTaxAmount').hide();
+	$('.gstTaxAmount').show();
+	//	$('#taxGroup').show();
 	$('#datetimepicker1').datetimepicker({
 		minView: 2,
 		pickTime: false,
 		autoclose: true,
 	});
-	$('#enableTax').click(function() {
-		if ($('#enableTax').prop('checked')) {
-			$('#taxGroup').show();
-		} else {
-			$('#taxGroup').hide();
-		}
-	});
+	//	$('#enableTax').click(function() {
+	//		if ($('#enableTax').prop('checked')) {
+	//			$('#taxGroup').show();
+	//		} else {
+	//			$('#taxGroup').hide();
+	//		}
+	//	});
 	$("#itemTable").on('click', '.removeRow', function() {
 		$(this).parent().parent().remove();
 		calculateTotalAmount();
@@ -244,6 +249,8 @@ function calculateItemwiseRate(rowCount) {
 
 function calculateTotalAmount() {
 	var totalAmount = 0;
+	var govtTaxAmount = 0;
+	var netAmount = 0;
 	$('.gross_amount').each(function() {
 		var grossAmount = $(this).val();
 		if (grossAmount != undefined && grossAmount != NaN && grossAmount != "") {
@@ -251,13 +258,18 @@ function calculateTotalAmount() {
 			totalAmount = totalAmount + grossAmount;
 			$('#totalAmount').text(totalAmount.toFixed(3));
 			$('#totalAmountHidden').val(totalAmount.toFixed(3));
-			$('#netAmount').val(totalAmount.toFixed(3));
+			//			$('#netAmount').val(totalAmount.toFixed(3));
 		} else if (grossAmount != "") {
 			$('#totalAmount').text(totalAmount.toFixed(3));
 			$('#totalAmountHidden').val(totalAmount.toFixed(3));
-			$('#netAmount').val(totalAmount.toFixed(3));
+			//			$('#netAmount').val(totalAmount.toFixed(3));
 		}
 	});
+	govtTaxAmount = (totalAmount * 1) / 100;
+	netAmount = totalAmount + govtTaxAmount;
+	govtTaxAmount = parseFloat(govtTaxAmount).toFixed(3);
+	$('#govtTax').val(govtTaxAmount);
+	$('#netAmount').val(netAmount.toFixed(3));
 }
 
 function calculateTaxAmount() {
@@ -348,7 +360,6 @@ function addExtraCharge(element) {
 function validateNullorEmpty(param) {
 	var flag = false;
 	$('.validateImportant').each(function() {
-		debugger;
 		var value = $(this).val();
 		var label = $(this).attr('placeholder');
 		if (value == undefined || value == "") {
@@ -362,4 +373,59 @@ function validateNullorEmpty(param) {
 	if (flag) {
 		addSalesBill(param);
 	}
+}
+
+function enableTaxFields(element) {
+	var value = element.value;
+	if (element.checked == true) {
+		if (value === 'GST') {
+			$('#enableGST').prop('checked', true);
+			$('#enableIGST').prop('checked', false);
+			$('#gstDiv').show();
+			$('#igstDiv').hide();
+			$('.igstTaxAmount').hide();
+			$('.gstTaxAmount').show();
+		} else if (value === 'IGST') {
+			$('#enableGST').prop('checked', false);
+			$('#enableIGST').prop('checked', true);
+			$('#gstDiv').hide();
+			$('#igstDiv').show();
+			$('.igstTaxAmount').show();
+			$('.gstTaxAmount').hide();
+		}
+	}
+}
+
+function setGstTaxPercentages(element) {
+	debugger;
+	var taxPercentage = element.value;
+	var elementId = element.id;
+	var totalGstTaxPercentage = elementId === 'igst' ? Number(taxPercentage) : Number(taxPercentage) * 2;
+	var taxableAmount = $('#totalAmountHidden').val();
+	taxableAmount = parseFloat(taxableAmount);
+	var netAmount = $('#netAmount').val();
+	netAmount = parseFloat(netAmount);
+
+	if (elementId === 'cgst') {
+		$('#sgst').val(taxPercentage);
+	} else if (elementId === 'sgst') {
+		$('#cgst').val(taxPercentage);
+	}
+	if (taxableAmount != "" && taxableAmount > 0) {
+		var taxAmount = (taxableAmount * totalGstTaxPercentage) / 100;
+		if (elementId === 'cgst' || elementId === 'sgst') {
+			$('#cgstAmount').val(taxAmount / 2);
+			$('#sgstAmount').val(taxAmount / 2);
+		} else if (elementId === 'igst') {
+			$('#igstAmount').val(taxAmount);
+		}
+		netAmount += taxAmount;
+		$('#netAmount').val(netAmount.toFixed(3));
+	} else {
+		alert('Taxable amount value is null/empty');
+		$('#sgst').val("");
+		$('#cgst').val("");
+		$('#igst').val("");
+	}
+
 }
