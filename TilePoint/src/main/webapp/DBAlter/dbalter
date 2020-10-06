@@ -1,0 +1,122 @@
+CREATE SCHEMA `tilespoint` DEFAULT CHARACTER SET utf8 ;
+CREATE TABLE `tilespoint`.`user_details` (
+  `user_id` INT NOT NULL AUTO_INCREMENT,
+  `user_name` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`user_id`));
+CREATE TABLE `tilespoint`.`category` (
+  `category_id` INT NOT NULL AUTO_INCREMENT,
+  `category_code` VARCHAR(45) NULL DEFAULT NULL,
+  `category_name` VARCHAR(45) NULL DEFAULT NULL,
+  `active_status` VARCHAR(45) NULL DEFAULT NULL,
+  `delete_status` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`category_id`));
+CREATE TABLE `tilespoint`.`product` (
+  `product_id` INT NOT NULL AUTO_INCREMENT,
+  `product_code` VARCHAR(45) NULL,
+  `product_name` VARCHAR(45) NULL,
+  `category` INT NULL,
+  `active_status` VARCHAR(45) NULL,
+  `delete_status` VARCHAR(45) NULL,
+  `added_on` DATE NULL,
+  PRIMARY KEY (`product_id`));
+ALTER TABLE `tilespoint`.`product` 
+ADD INDEX `category_idx` (`category` ASC) VISIBLE;
+;
+ALTER TABLE `tilespoint`.`product` 
+ADD CONSTRAINT `category`
+  FOREIGN KEY (`category`)
+  REFERENCES `tilespoint`.`category` (`category_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  ALTER TABLE `tilespoint`.`customer` 
+ADD COLUMN `customerCode` VARCHAR(45) NULL AFTER `pin`;
+
+CREATE TABLE `customer` (
+  `customer_id` int NOT NULL AUTO_INCREMENT,
+  `customer_name` varchar(45) DEFAULT NULL,
+  `address1` varchar(100) DEFAULT NULL,
+  `address2` varchar(100) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `contact` varchar(45) DEFAULT NULL,
+  `active_status` varchar(45) DEFAULT NULL,
+  `state` varchar(45) DEFAULT NULL,
+  `added_on` date DEFAULT NULL,
+  `delete_status` varchar(255) DEFAULT NULL,
+  `pin` varchar(255) DEFAULT NULL,
+  `customerCode` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`customer_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  
+CREATE TABLE `tilespoint`.`salesBase` (
+  `sales_id` INT NOT NULL AUTO_INCREMENT,
+  `customer_id` INT NOT NULL,
+  `invoice_no` VARCHAR(45) NULL,
+  `invoice_date` DATE NULL,
+  `state_to_supply` VARCHAR(45) NULL,
+  `place_to_supply` VARCHAR(45) NULL,
+  `purchase_date` DATE NULL,
+  `month` VARCHAR(45) NULL,
+  `year` VARCHAR(45) NULL,
+  PRIMARY KEY (`sales_id`),
+  INDEX `customer_id_idx` (`customer_id` ASC) VISIBLE,
+  CONSTRAINT `customer_id`
+    FOREIGN KEY (`customer_id`)
+    REFERENCES `tilespoint`.`customer` (`customer_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+    
+    CREATE TABLE `tilespoint`.`salesdetails` (
+  `sales_details_id` INT NOT NULL AUTO_INCREMENT,
+  `salesId` INT NOT NULL,
+  `productId` INT NOT NULL,
+  `hsn_code` DOUBLE NULL,
+  `quantity` DOUBLE NULL,
+  `rate` DOUBLE NULL,
+  `totalamount` DOUBLE NULL,
+  `deletestatus` VARCHAR(45) NULL,
+  PRIMARY KEY (`sales_details_id`),
+  INDEX `productId_idx` (`productId` ASC) VISIBLE,
+  INDEX `salesId_idx` (`salesId` ASC) VISIBLE,
+  CONSTRAINT `salesId`
+    FOREIGN KEY (`salesId`)
+    REFERENCES `tilespoint`.`salesBase` (`sales_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `productId`
+    FOREIGN KEY (`productId`)
+    REFERENCES `tilespoint`.`product` (`product_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+    
+    CREATE TABLE `tilespoint`.`salesamount` (
+  `sales_amount_id` INT NOT NULL AUTO_INCREMENT,
+  `salesId` INT NOT NULL,
+  `cgst` DOUBLE NULL,
+  `sgst` DOUBLE NULL,
+  `igst` DOUBLE NULL,
+  `vehicleno` VARCHAR(45) NULL,
+  `vehicleamount` DOUBLE NULL,
+  `grossamount` DOUBLE NULL,
+  `netamount` DOUBLE NULL,
+  PRIMARY KEY (`sales_amount_id`));
+  
+  ALTER TABLE `tilespoint`.`salesamount` 
+ADD COLUMN `cgstamt` DOUBLE NULL AFTER `netamount`,
+ADD COLUMN `sgstamt` DOUBLE NULL AFTER `cgstamt`,
+ADD COLUMN `igstamt` DOUBLE NULL AFTER `sgstamt`,
+ADD COLUMN `loadingcharge` DOUBLE NULL AFTER `igstamt`;
+ 
+ ALTER TABLE `tilespoint`.`salesdetails` 
+CHANGE COLUMN `hsn_code` `hsn_code` VARCHAR(45) NULL DEFAULT NULL ;
+
+*************** 24-09-2020 ********************************************
+
+CREATE TABLE `tilespoint`.`state_setup` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `state_name` VARCHAR(255) NULL,
+  `state_code_numeric` VARCHAR(5) NULL,
+  `state_code_alpha` VARCHAR(5) NULL,
+  PRIMARY KEY (`id`));
+  
+    
