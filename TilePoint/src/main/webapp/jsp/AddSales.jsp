@@ -55,6 +55,7 @@
 
 	<div class="container-fluid">
 		<form id="addSales" action="saveAndGenerateSalesInvoice">
+			<s:hidden name="itemsBase.salesId" id="salesIdHidden" />
 			<div class="row">
 				<div class="col-md-12 col-sm-12">
 					<div class="panel panel-default form-panel-primary">
@@ -295,7 +296,7 @@
 				  									   id="cgst" name="invoiceAmount.igst" />&emsp; -->
 				  									   <div class="col-lg-12 col-md-12 col-sm-12 text-right">
 				  									   		<input type="text" class="items_table mt-15 mr-40 igstTaxAmount" placeholder="IGST Amount" 
-			  										   			   name="invoiceAmount.igstAmount" id="igstAmount"
+			  										   			   name="invoiceAmount.igstamt" id="igstAmount"
 			  										   			   onkeyup="calculateTaxAmount();"/>
 				  									   </div>
 				  									   <div class="col-lg-12 col-md-12 col-sm-12 text-right">
@@ -308,7 +309,7 @@
 				  									   </div>
 				  									   <div class="col-lg-12 col-md-12 col-sm-12 text-right">
 				  									   		<input type="text" class="items_table mt-15 mr-40" placeholder="Govt. Tax"
-			  										               name="" id="govtTax" />
+			  										               name="invoiceAmount.govtTaxAmount" id="govtTax" />
 				  									   </div>
 				  									   <div class="col-lg-12 col-md-12 col-sm-12 text-right">
 				  									   		<input type="text" class="items_table mt-15 mr-40" placeholder="Net Amount"
@@ -370,10 +371,10 @@
 							</div>
 							<div class="row">
 								<div class="col-md-12 col-sm-12 col-lg-12 pull-center">
-									<button type="button" class="btn btn-default btn-sm form-btn-success form-btn-large" onclick="validateNullorEmpty('s');">
+									<button type="button" class="btn btn-default btn-sm form-btn-success form-btn-large" onclick="addSalesBill('S');">
 										<span class="glyphicon glyphicon-floppy-save"></span>&nbsp;Add Bill
 									</button> &emsp;
-									<button type="button" class="btn btn-default btn-sm form-btn-danger form-btn-large" onclick="addSalesBill('G');">
+									<button type="button" class="btn btn-default btn-sm form-btn-danger form-btn-large" disabled="disabled" onclick="addSalesBill('G');">
 										<span class="glyphicon glyphicon-print"></span>&nbsp;Generate Invoice
 									</button>
 								</div>

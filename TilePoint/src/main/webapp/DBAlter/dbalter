@@ -119,4 +119,10 @@ CREATE TABLE `tilespoint`.`state_setup` (
   `state_code_alpha` VARCHAR(5) NULL,
   PRIMARY KEY (`id`));
   
+***************************08/10/2020****************************
+
+ALTER TABLE `tilespoint`.`salesamount` 
+ADD COLUMN `govt_tax` DOUBLE NULL AFTER `igstamt`;
+
+  
     

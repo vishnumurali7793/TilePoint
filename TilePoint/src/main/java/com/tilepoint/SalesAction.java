@@ -1,5 +1,6 @@
 package com.tilepoint;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,13 +15,14 @@ import com.entities.SalesBaseBean;
 import com.entities.SalesDetailsBean;
 import com.hibernatedao.ProductHibernateDao;
 import com.hibernatedao.SalesHibernateDao;
+import com.itextpdf.text.DocumentException;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class SalesAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private ProductHibernateDao prodHibernateDao = new ProductHibernateDao();
 	private SalesHibernateDao salesHibernateDao = new SalesHibernateDao();
-	private SalesBaseBean salesBaseBean;
+	private SalesBaseBean salesBaseBean;	
 	private List<SalesBaseBean> salbeanList;
 	private Collection<Object> cusList;
 	private List<SalesDetailsBean> salDetList;
@@ -36,7 +38,7 @@ public class SalesAction extends ActionSupport {
 	private List<SalesDetailsBean> itemsDetails;
 	private SalesAmountBean invoiceAmount;
 	
-	private String processFlag;
+	private Collection<Object> resultArray;
 
 	public List<ProductBean> getProdList() {
 		return prodList;
@@ -186,29 +188,42 @@ public class SalesAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	public String saveAndGenerateSalesInvoice() {
-		if(itemsBase != null && itemsDetails != null && invoiceAmount != null) {
-			SalesBaseBean tempItemBase = new SalesBaseBean();
-			Integer customerId = salesHibernateDao.getCusDetails(itemsBase.getCustomerId().getCustomerCode());
-			itemsBase.getCustomerId().setCustomerId(customerId);
-			itemsBase.setMonth(String.valueOf(LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(new Date())).getMonthValue()));
-			itemsBase.setYear(String.valueOf(LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(new Date())).getYear()));
-			tempItemBase = salesHibernateDao.saveInvoiceBasicDetails(itemsBase);
-			if(tempItemBase.getSalesId() != null) {
-				for(SalesDetailsBean itemDetail : itemsDetails) {
-					if(itemDetail != null && itemDetail.getProductId().getProductId() != null) {
-						itemDetail.setSalesId(new SalesBaseBean());
-						itemDetail.getSalesId().setSalesId(tempItemBase.getSalesId());
-						salesHibernateDao.savesalesdetails(itemDetail);
+	public String saveAndGenerateSalesInvoice() throws DocumentException, IOException {
+		if (itemsBase != null && itemsDetails != null && invoiceAmount != null) {
+			if (itemsBase.getSalesId() == null) {
+				SalesBaseBean tempItemBase = new SalesBaseBean();
+				Integer customerId = salesHibernateDao.getCusDetails(itemsBase.getCustomerId().getCustomerCode());
+				itemsBase.getCustomerId().setCustomerId(customerId);
+				itemsBase.setMonth(String.valueOf(
+						LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(new Date())).getMonthValue()));
+				itemsBase.setYear(String
+						.valueOf(LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(new Date())).getYear()));
+				tempItemBase = salesHibernateDao.saveInvoiceBasicDetails(itemsBase);
+				if (tempItemBase.getSalesId() != null) {
+					for (SalesDetailsBean itemDetail : itemsDetails) {
+						if (itemDetail != null && itemDetail.getProductId().getProductId() != null) {
+							itemDetail.setSalesId(new SalesBaseBean());
+							itemDetail.getSalesId().setSalesId(tempItemBase.getSalesId());
+							salesHibernateDao.savesalesdetails(itemDetail);
+						}
 					}
+					invoiceAmount.setSalesId(new SalesBaseBean());
+					invoiceAmount.getSalesId().setSalesId(tempItemBase.getSalesId());
+					salesHibernateDao.savesalesnetamt(invoiceAmount);
 				}
-				invoiceAmount.setSalesId(new SalesBaseBean());
-				invoiceAmount.getSalesId().setSalesId(tempItemBase.getSalesId());
-				salesHibernateDao.savesalesnetamt(invoiceAmount);
+//				reportAction = new ReportAction();
+//				reportAction.setSalesBaseBean(new SalesBaseBean());
+//				reportAction.getSalesBaseBean().setSalesId(tempItemBase.getSalesId());
+//				reportAction.generateSalesReport();
+				resultArray = new ArrayList<Object>();
+				resultArray.add("SUCCESS");
+				resultArray.add(tempItemBase.getSalesId());
+			} else {
+				resultArray = new ArrayList<Object>();
+				resultArray.add("Invoice Already Saved!");
 			}
-			setProcessFlag("SUCCESS");
-		}else {
-			setProcessFlag("FAILED");
+
+		} else {
 		}
 		return SUCCESS;
 	}
@@ -325,12 +340,12 @@ public class SalesAction extends ActionSupport {
 		this.invoiceAmount = invoiceAmount;
 	}
 
-	public String getProcessFlag() {
-		return processFlag;
+	public Collection<Object> getResultArray() {
+		return resultArray;
 	}
 
-	public void setProcessFlag(String processFlag) {
-		this.processFlag = processFlag;
+	public void setResultArray(Collection<Object> resultArray) {
+		this.resultArray = resultArray;
 	}
 
 }

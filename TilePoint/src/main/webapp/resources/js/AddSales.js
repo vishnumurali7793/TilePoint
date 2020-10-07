@@ -220,17 +220,34 @@ function enableGstSplit(element) {
 }
 
 function addSalesBill(type) {
-	if (type == "S") {
-		$.ajax({
-			url: 'saveAndGenerateSalesInvoice',
-			data: $('#addSales').serialize(),
-			success: function(data) {
-				alert(data);
-			},
-			error: function() {
-				alert('Error occured');
-			}
-		});
+	var isValidated = validateNullorEmpty();
+	if (isValidated) {
+		if (type == "S") {
+			$.ajax({
+				type: "POST",
+				url: 'saveAndGenerateSalesInvoice',
+				data: $('#addSales').serialize(),
+				success: function(data) {
+					if (data != null) {
+						var salesId = data[1];
+						var alertMessage = data[0];
+						if (alertMessage === 'SUCCESS') {
+							$('#salesIdHidden').val(salesId);
+							if (confirm('Saved Successfully! Do you want to print the invoice now?')) {
+								window.open("generateSalesReport?salesBaseBean.salesId=" + salesId);
+							}
+						} else {
+							alert(alertMessage);
+						}
+
+					}
+					//					alert(data);
+				},
+				error: function() {
+					alert('Error occured');
+				}
+			});
+		}
 	}
 }
 
@@ -357,21 +374,25 @@ function addExtraCharge(element) {
 
 }
 
-function validateNullorEmpty(param) {
-	var flag = false;
+function validateNullorEmpty() {
+	var isValidatedSuccessfully = true;
 	$('.validateImportant').each(function() {
 		var value = $(this).val();
 		var label = $(this).attr('placeholder');
 		if (value == undefined || value == "") {
 			alert(label + ' is mandatory');
-			flag = false;
+			isValidatedSuccessfully = false;
 			return false;
-		} else {
-			flag = true;
 		}
 	});
-	if (flag) {
-		addSalesBill(param);
+	var netAmount = $('#netAmount').val();
+	if (netAmount == "" || netAmount == undefined) {
+		alert('Product(s) not selected/Net Amount is blank!');
+		isValidatedSuccessfully = false;
+		return false;
+	}
+	if (isValidatedSuccessfully) {
+		return true;
 	}
 }
 
@@ -397,7 +418,6 @@ function enableTaxFields(element) {
 }
 
 function setGstTaxPercentages(element) {
-	debugger;
 	var taxPercentage = element.value;
 	var elementId = element.id;
 	var totalGstTaxPercentage = elementId === 'igst' ? Number(taxPercentage) : Number(taxPercentage) * 2;
@@ -405,6 +425,7 @@ function setGstTaxPercentages(element) {
 	taxableAmount = parseFloat(taxableAmount);
 	var netAmount = $('#netAmount').val();
 	netAmount = parseFloat(netAmount);
+	var govtTaxAmount = (taxableAmount * 1) / 100;
 
 	if (elementId === 'cgst') {
 		$('#sgst').val(taxPercentage);
@@ -419,7 +440,7 @@ function setGstTaxPercentages(element) {
 		} else if (elementId === 'igst') {
 			$('#igstAmount').val(taxAmount);
 		}
-		netAmount += taxAmount;
+		netAmount = taxAmount + taxableAmount + govtTaxAmount;
 		$('#netAmount').val(netAmount.toFixed(3));
 	} else {
 		alert('Taxable amount value is null/empty');

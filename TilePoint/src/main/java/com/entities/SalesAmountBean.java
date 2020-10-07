@@ -52,6 +52,9 @@ public class SalesAmountBean {
 	@Column(name = "igstamt")
 	private Double igstamt=0.00;
 	
+	@Column(name = "govt_tax")
+	private Double govtTaxAmount = 0.0;
+	
 	@Column(name = "loadingcharge")
 	private Double loadingcharge=0.00;
 
@@ -157,6 +160,14 @@ public class SalesAmountBean {
 
 	public void setNetamount(Double netamount) {
 		this.netamount = netamount;
+	}
+
+	public Double getGovtTaxAmount() {
+		return govtTaxAmount;
+	}
+
+	public void setGovtTaxAmount(Double govtTaxAmount) {
+		this.govtTaxAmount = govtTaxAmount;
 	}
 	
 	

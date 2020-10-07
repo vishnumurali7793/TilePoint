@@ -201,7 +201,7 @@
 		<action name="saveAndGenerateSalesInvoice" class="com.tilepoint.SalesAction" 
 				method="saveAndGenerateSalesInvoice">
 			<result type="json">
-				<param name="root">processFlag</param>
+				<param name="root">resultArray</param>
 			</result>
 		</action>
 	</package>
