@@ -54,8 +54,9 @@
 
 
 	<div class="container-fluid">
-		<form id="addSales" action="saveAndGenerateSalesInvoice">
+		<form id="addSales" action="generateSalesReport">
 			<s:hidden name="itemsBase.salesId" id="salesIdHidden" />
+			<s:hidden name="salesStatus" id="salesStatusHidden" />
 			<div class="row">
 				<div class="col-md-12 col-sm-12">
 					<div class="panel panel-default form-panel-primary">
@@ -253,7 +254,7 @@
 			  							<div class="row">
 			  								<div class="col-md-3 col-lg-3 col-sm-6">
 			  									<label>Tax Type :</label>&emsp;
-			  									<label for="enableGST">GST <span class="font-10 font-italic">(CGST & SGST)</span></label>
+			  									<label for="enableGST">GST <span class="font-10 font-italic">(CGST &amp; SGST)</span></label>
 			  									<input type="checkbox" id="enableGST" checked="checked" value="GST" onclick="enableTaxFields(this)" />&emsp;
 			  									<label for="enableIGST">IGST</label>
 			  									<input type="checkbox" id="enableIGST" value="IGST" onclick="enableTaxFields(this)" />
@@ -374,7 +375,7 @@
 									<button type="button" class="btn btn-default btn-sm form-btn-success form-btn-large" onclick="addSalesBill('S');">
 										<span class="glyphicon glyphicon-floppy-save"></span>&nbsp;Add Bill
 									</button> &emsp;
-									<button type="button" class="btn btn-default btn-sm form-btn-danger form-btn-large" disabled="disabled" onclick="addSalesBill('G');">
+									<button type="button" class="btn btn-default btn-sm form-btn-danger form-btn-large" onclick="addSalesBill('G');">
 										<span class="glyphicon glyphicon-print"></span>&nbsp;Generate Invoice
 									</button>
 								</div>

@@ -38,6 +38,8 @@ public class SalesAction extends ActionSupport {
 	private List<SalesDetailsBean> itemsDetails;
 	private SalesAmountBean invoiceAmount;
 	
+	private String salesStatus; //to check whether the bill needs to be saved. (S-> saved, G-> generate invoice only
+	
 	private Collection<Object> resultArray;
 
 	public List<ProductBean> getProdList() {
@@ -196,8 +198,8 @@ public class SalesAction extends ActionSupport {
 				itemsBase.getCustomerId().setCustomerId(customerId);
 				itemsBase.setMonth(String.valueOf(
 						LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(new Date())).getMonthValue()));
-				itemsBase.setYear(String
-						.valueOf(LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(new Date())).getYear()));
+				itemsBase.setYear(String.valueOf(
+						LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(new Date())).getYear()));
 				tempItemBase = salesHibernateDao.saveInvoiceBasicDetails(itemsBase);
 				if (tempItemBase.getSalesId() != null) {
 					for (SalesDetailsBean itemDetail : itemsDetails) {
@@ -211,10 +213,6 @@ public class SalesAction extends ActionSupport {
 					invoiceAmount.getSalesId().setSalesId(tempItemBase.getSalesId());
 					salesHibernateDao.savesalesnetamt(invoiceAmount);
 				}
-//				reportAction = new ReportAction();
-//				reportAction.setSalesBaseBean(new SalesBaseBean());
-//				reportAction.getSalesBaseBean().setSalesId(tempItemBase.getSalesId());
-//				reportAction.generateSalesReport();
 				resultArray = new ArrayList<Object>();
 				resultArray.add("SUCCESS");
 				resultArray.add(tempItemBase.getSalesId());
@@ -346,6 +344,14 @@ public class SalesAction extends ActionSupport {
 
 	public void setResultArray(Collection<Object> resultArray) {
 		this.resultArray = resultArray;
+	}
+
+	public String getSalesStatus() {
+		return salesStatus;
+	}
+
+	public void setSalesStatus(String salesStatus) {
+		this.salesStatus = salesStatus;
 	}
 
 }

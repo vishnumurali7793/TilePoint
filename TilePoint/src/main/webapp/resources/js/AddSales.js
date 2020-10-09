@@ -3,25 +3,16 @@
  */
 
 $(document).ready(function() {
-	//	$('#enableTax').prop('checked', true);
 	$('#enableGST').prop('checked', true);
 	$('#enableIGST').prop('checked', false);
 	$('#gstDiv').show();
 	$('.igstTaxAmount').hide();
 	$('.gstTaxAmount').show();
-	//	$('#taxGroup').show();
 	$('#datetimepicker1').datetimepicker({
 		minView: 2,
 		pickTime: false,
 		autoclose: true,
 	});
-	//	$('#enableTax').click(function() {
-	//		if ($('#enableTax').prop('checked')) {
-	//			$('#taxGroup').show();
-	//		} else {
-	//			$('#taxGroup').hide();
-	//		}
-	//	});
 	$("#itemTable").on('click', '.removeRow', function() {
 		$(this).parent().parent().remove();
 		calculateTotalAmount();
@@ -241,12 +232,17 @@ function addSalesBill(type) {
 						}
 
 					}
-					//					alert(data);
 				},
 				error: function() {
 					alert('Error occured');
 				}
 			});
+		}
+		if (type == "G") {
+			$('#salesStatusHidden').val(type);
+			if (confirm('This process will not save the bill to the database, but still you can generate an Invoice. Do you want to continue?')) {
+				$('#addSales').submit();
+			}
 		}
 	}
 }
@@ -275,11 +271,9 @@ function calculateTotalAmount() {
 			totalAmount = totalAmount + grossAmount;
 			$('#totalAmount').text(totalAmount.toFixed(3));
 			$('#totalAmountHidden').val(totalAmount.toFixed(3));
-			//			$('#netAmount').val(totalAmount.toFixed(3));
 		} else if (grossAmount != "") {
 			$('#totalAmount').text(totalAmount.toFixed(3));
 			$('#totalAmountHidden').val(totalAmount.toFixed(3));
-			//			$('#netAmount').val(totalAmount.toFixed(3));
 		}
 	});
 	govtTaxAmount = (totalAmount * 1) / 100;
@@ -385,14 +379,16 @@ function validateNullorEmpty() {
 			return false;
 		}
 	});
-	var netAmount = $('#netAmount').val();
-	if (netAmount == "" || netAmount == undefined) {
-		alert('Product(s) not selected/Net Amount is blank!');
-		isValidatedSuccessfully = false;
-		return false;
-	}
 	if (isValidatedSuccessfully) {
-		return true;
+		var netAmount = $('#netAmount').val();
+		if (netAmount == "" || netAmount == undefined) {
+			alert('Product(s) not selected/Net Amount is blank!');
+			isValidatedSuccessfully = false;
+			return false;
+		}
+		if (isValidatedSuccessfully) {
+			return true;
+		}
 	}
 }
 

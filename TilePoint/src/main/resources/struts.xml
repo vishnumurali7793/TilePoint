@@ -168,7 +168,7 @@
 		<action name="generateSalesReport"
 				class="com.report.ReportAction" method="generateSalesReport">
 			<result name="success" type="stream">
-				<param name="contentDisposition">inline;filename=${fileName}</param>
+				<param name="contentDisposition">attachment;filename=${fileName}</param>
 				<param name="contentType">${documentContentType}</param>
 				<param name="inputName">fileInputStream</param>
 				<param name="bufferSize">1024</param>

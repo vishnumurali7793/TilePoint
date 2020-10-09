@@ -5,14 +5,20 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts2.ServletActionContext;
 
+import com.entities.CustomerBean;
+import com.entities.ProductBean;
 import com.entities.SalesAmountBean;
 import com.entities.SalesBaseBean;
 import com.entities.SalesDetailsBean;
@@ -39,14 +45,22 @@ public class ReportAction extends ActionSupport {
 	private List<SalesBaseBean> salbeanList;
 	private List<SalesDetailsBean> saldetList;
 	private SalesAmountBean samtbean;
+	private Collection<ProductBean> itemList;
+	private SalesBaseBean itemsBase;
+	private List<SalesDetailsBean> itemsDetails;
+	private SalesAmountBean invoiceAmount;
+	private CustomerBean customer;
 	private SalesHibernateDao salesHibernateDao = new SalesHibernateDao();
+	
+	private String salesStatus; //to check whether the bill needs to be saved. (S-> saved, G-> generate invoice only
+	
 	String documentContentType;
 	String documentFormat;
 	String fileName;
 	FileInputStream fileInputStream;
 	DateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
 
-	public String generateSalesReport() throws DocumentException, IOException {
+	public String generateSalesReport() throws DocumentException, IOException, IllegalAccessException, InvocationTargetException {
 		ServletContext servletContext = ServletActionContext.getServletContext();
 		String fileLocation;
 		String destinationPath = null;
@@ -54,12 +68,43 @@ public class ReportAction extends ActionSupport {
 		ByteArrayOutputStream baos = null;
 		FileOutputStream fos = null;
 		String temp = "";
+		
+		if(salesStatus != null && !salesStatus.equals("")) {
+			if(salesStatus.equals("G")) {
+				salesBaseBean = new SalesBaseBean();
+				saldetList = new ArrayList<SalesDetailsBean>();
+				samtbean = new SalesAmountBean();
+				customer = new CustomerBean();
+				customer = salesHibernateDao.getCustomerDetailsByCode(itemsBase.getCustomerId().getCustomerCode());
+				if(customer != null && customer.getCustomerId() != null) {
+					itemsBase.setCustomerId(customer);
+				}
+				BeanUtils.copyProperties(salesBaseBean, itemsBase);
+				for(SalesDetailsBean details : itemsDetails) {
+					if(details != null && details.getTotalamount() != null) {
+						ProductBean product = new ProductBean();
+						product = salesHibernateDao.getProductDetailsById(details.getProductId().getProductId());
+						if(product != null && product.getProductName() != null) {
+							details.setProductId(product);
+						}
+						saldetList.add(details);
+					}
+				}
+				BeanUtils.copyProperties(samtbean, invoiceAmount);
+			}
+			
+		}
 
-		if (salesBaseBean.getSalesId() != null) {
+		if (salesBaseBean != null) {
 			SalesBaseBean sbb = new SalesBaseBean();
-			sbb = salesHibernateDao.getsalesbase(salesBaseBean.getSalesId());
-			saldetList = salesHibernateDao.getsalesDetailsList(salesBaseBean.getSalesId());
-			samtbean = salesHibernateDao.getsalestotamt(salesBaseBean.getSalesId());
+			if(salesStatus == null || salesStatus.equals("")) {
+				sbb = salesHibernateDao.getsalesbase(salesBaseBean.getSalesId());
+				saldetList = salesHibernateDao.getsalesDetailsList(salesBaseBean.getSalesId());
+				samtbean = salesHibernateDao.getsalestotamt(salesBaseBean.getSalesId());
+			} else {
+				BeanUtils.copyProperties(sbb, salesBaseBean);
+			}
+			
 			setDocumentContentType("application/pdf");
 			setDocumentFormat("pdf");
 			// *****LOCATION-OF-DOWNLOAD-FILE*****//
@@ -284,7 +329,7 @@ public class ReportAction extends ActionSupport {
 				inlineCell.setPaddingTop(5);
 				insideTable.addCell(inlineCell);
 
-				temp = samtbean.getVehicleno();
+				temp = (samtbean.getVehicleno() != null && !samtbean.getVehicleno().equals("")) ? samtbean.getVehicleno() : "N/A";
 				inlineCell = new PdfPCell(new Phrase(temp, new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
 				inlineCell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				inlineCell.setBorder(Rectangle.BOTTOM);
@@ -814,6 +859,54 @@ public class ReportAction extends ActionSupport {
 
 	public void setFileInputStream(FileInputStream fileInputStream) {
 		this.fileInputStream = fileInputStream;
+	}
+
+	public Collection<ProductBean> getItemList() {
+		return itemList;
+	}
+
+	public void setItemList(Collection<ProductBean> itemList) {
+		this.itemList = itemList;
+	}
+
+	public SalesBaseBean getItemsBase() {
+		return itemsBase;
+	}
+
+	public void setItemsBase(SalesBaseBean itemsBase) {
+		this.itemsBase = itemsBase;
+	}
+
+	public List<SalesDetailsBean> getItemsDetails() {
+		return itemsDetails;
+	}
+
+	public void setItemsDetails(List<SalesDetailsBean> itemsDetails) {
+		this.itemsDetails = itemsDetails;
+	}
+
+	public SalesAmountBean getInvoiceAmount() {
+		return invoiceAmount;
+	}
+
+	public void setInvoiceAmount(SalesAmountBean invoiceAmount) {
+		this.invoiceAmount = invoiceAmount;
+	}
+
+	public String getSalesStatus() {
+		return salesStatus;
+	}
+
+	public void setSalesStatus(String salesStatus) {
+		this.salesStatus = salesStatus;
+	}
+
+	public CustomerBean getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(CustomerBean customer) {
+		this.customer = customer;
 	}
 
 }

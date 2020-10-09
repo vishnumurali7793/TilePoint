@@ -92,6 +92,30 @@
 			<version>1.18.12</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils-core -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils-core</artifactId>
+			<version>1.8.3</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils-bean-collections -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils-bean-collections</artifactId>
+			<version>1.8.3</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.4</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.sun.commons/beanutils -->
+		<dependency>
+			<groupId>com.sun.commons</groupId>
+			<artifactId>beanutils</artifactId>
+			<version>1.6.1-20070314</version>
+		</dependency>
 	</dependencies>
 
 	<build>

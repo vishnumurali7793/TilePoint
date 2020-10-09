@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import com.entities.CustomerBean;
 import com.entities.ProductBean;
 import com.entities.SalesAmountBean;
 import com.entities.SalesBaseBean;
@@ -284,5 +285,37 @@ public class SalesHibernateDao {
 		}
 		return itemsBase;
 		
+	}
+
+	public CustomerBean getCustomerDetailsByCode(String customerCode) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+
+		try {
+			String query = "FROM CustomerBean where customerName=:vencode";
+			return (CustomerBean) session.createQuery(query).setParameter("vencode", customerCode).uniqueResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+			sessionFactory.close();
+		}
+	}
+
+	public ProductBean getProductDetailsById(Integer productId) {
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+		Session session = sessionFactory.openSession();
+
+		try {
+			String query = "FROM ProductBean where productId=:productId";
+			return (ProductBean) session.createQuery(query).setParameter("productId", productId).uniqueResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+			sessionFactory.close();
+		}
 	}
 }
