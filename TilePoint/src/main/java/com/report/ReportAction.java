@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.swing.text.StyleConstants.ColorConstants;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts2.ServletActionContext;
@@ -29,6 +30,7 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
@@ -151,14 +153,21 @@ public class ReportAction extends ActionSupport {
 				cell.setBorder(0);
 				table.addCell(cell);
 
-				phrase = new Phrase(
-						new Chunk("TILE POINT", new Font(FontFamily.TIMES_ROMAN, 25, Element.ALIGN_CENTER)));
-				cell.addElement(phrase);
-				phrase = new Phrase(new Chunk("Kurumkutty, Parassala P.O.-695122",
-						new Font(FontFamily.TIMES_ROMAN, 10, Element.ALIGN_LEFT)));
-				cell.addElement(phrase);
-				cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
-				cell.setPaddingLeft(30);
+				/*
+				 * phrase = new Phrase( new Chunk("TILE POINT", new Font(FontFamily.TIMES_ROMAN,
+				 * 25, Element.ALIGN_CENTER))); cell.addElement(phrase); phrase = new Phrase(new
+				 * Chunk("Kurumkutty, Parassala P.O.-695122", new Font(FontFamily.TIMES_ROMAN,
+				 * 10, Element.ALIGN_LEFT))); cell.addElement(phrase);
+				 * cell.setHorizontalAlignment(Element.ALIGN_RIGHT); cell.setPaddingLeft(30);
+				 * cell.setBorder(0); table.addCell(cell);
+				 */
+				
+				String fname = "resources/images/logo.jpg";
+				String imagePath = servletContext.getRealPath(fname);
+				Image image = Image.getInstance(imagePath);
+				cell.addElement(image);
+				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+				//cell.setFixedHeight(50);
 				cell.setBorder(0);
 				table.addCell(cell);
 
@@ -166,7 +175,7 @@ public class ReportAction extends ActionSupport {
 						new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
 				cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				cell.setPaddingTop(15);
-				cell.setBorder(0);
+				 cell.setBorder(0); 
 				table.addCell(cell);
 				document.add(table);
 
@@ -399,6 +408,8 @@ public class ReportAction extends ActionSupport {
 				cell.addElement(insideTable);
 				table.addCell(cell);
 
+				
+				
 				cell = new PdfPCell(new Phrase("#", new Font(FontFamily.HELVETICA, 8, Element.ALIGN_CENTER)));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				table.addCell(cell);
@@ -594,7 +605,6 @@ public class ReportAction extends ActionSupport {
 				amtHeadCell = new PdfPCell();
 
 				temp = (samtbean.getIgstamt() != null) ? samtbean.getIgstamt().toString() : "0.0";
-
 				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
 				amtHeadCell.addElement(chunk);
 				amtHeadCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
@@ -602,14 +612,21 @@ public class ReportAction extends ActionSupport {
 				amtTable.addCell(amtHeadCell);
 
 				amtHeadCell = new PdfPCell();
-				chunk = new Chunk("Add: Govt. TAX @ 1.0%", new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
+				temp = (samtbean.getGovtTaxAmount() != null) ? samtbean.getGovtTaxAmount().toString() : "0.0";
+				chunk = new Chunk("Add: Chess. TAX @"+temp+"%", new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
 				amtHeadCell.addElement(chunk);
 				amtHeadCell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				amtHeadCell.setBorder(Rectangle.BOTTOM | Rectangle.RIGHT);
 				amtTable.addCell(amtHeadCell);
 
 				amtHeadCell = new PdfPCell();
-				temp = (samtbean.getGovtTaxAmount() != null) ? samtbean.getGovtTaxAmount().toString() : "0.0";
+				Double d=0D;
+				if(samtbean.getGovtTaxAmount()!=null) {
+					d=(double) Math.round(samtbean.getGovtTaxAmount()/100);
+				}else {
+					d=0D;
+				}
+				temp=String.valueOf(d);
 				chunk = new Chunk(temp, new Font(FontFamily.HELVETICA, 8, Font.NORMAL));
 				amtHeadCell.addElement(chunk);
 				amtHeadCell.setHorizontalAlignment(Element.ALIGN_RIGHT);

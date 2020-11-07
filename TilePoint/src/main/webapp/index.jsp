@@ -71,9 +71,28 @@
   }
 }
 
+.bg{
+background-image: url('resources/images/tilePoint.jpeg'); 
+ background-repeat: no-repeat; 
+ background-size: auto;
+ }
+
+
+
 </style>
 </head>
-<body style="background-color: #1abc9c;">
+
+
+
+<body  class="bg">
+	
+	
+	<!-- <div align="center" style=" padding-top: 100px"> 
+	
+	<img  src="resources/images/logo.jpg">
+	</div> -->
+	 
+	<br>
 	<div class="row">
 		<div class="spinner">
 			<div class="rect1 rec"></div>
@@ -83,6 +102,8 @@
 			<div class="rect5 rec"></div>
 		</div>
 	</div>
+	
+	
 </body>
 <script type="text/javascript">
 	$(document).ready(function move() {
